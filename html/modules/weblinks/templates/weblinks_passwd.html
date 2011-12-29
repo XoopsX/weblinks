@@ -1,0 +1,65 @@
+<{* $Id: weblinks_passwd.html,v 1.1 2011/12/29 14:32:36 ohwada Exp $ *}>
+
+<{$weblinks_module_header}>
+
+&nbsp;
+<a href="<{$xoops_url}>/"><{$lang_home}></a>
+ &gt;&gt; 
+<a href="<{$xoops_url}>/modules/<{$dirname}>/"><{$module_name}></a>
+ &gt;&gt; 
+<a href="<{$xoops_url}>/modules/<{$dirname}>/singlelink.php?lid=<{$lid}>"><{$link_title}></a>
+ &gt;&gt; 
+<span class="weblinks_bold"><{$lang_requestmod}></span>
+<br /><br />
+
+<{if $incorrect_show}>
+  <div class="errorMsg"><{$lang_password_incorrect}></div><br />
+<{/if}>
+
+<div class="weblinks_password_frame">
+<span class="weblinks_subtitle"><{$lang_submitter}></span><br /><br />
+
+<span class="weblinks_bold"><{$lang_pleasepassword}></span><br /><br />
+
+<form action="<{$xoops_url}>/modules/<{$dirname}>/modlink.php" method="post">
+<{$lang_password}> <input type="password" name="passwd_old" size="20" maxlength="20" />&nbsp;&nbsp;
+<input type="hidden" name="lid" value="<{$lid}>" />
+<input type="hidden" name="request" value="password" />
+<input type="hidden" name="<{$token_name}>" value="<{$token_value}>" />
+<input type="submit" value="<{$lang_password}>" />
+</form>
+<br />
+
+<span class="weblinks_bold"><{$lang_lostpassword}></span><br /><br />
+<{$lang_noproblem}><br /><br />
+
+<form action="<{$xoops_url}>/modules/<{$dirname}>/lostpass.php" method="post">
+<{$lang_youremail}> <input type="text" name="email" size="30" maxlength="60" />&nbsp;&nbsp;
+<input type="hidden" name="lid" value="<{$lid}>" />
+<input type="hidden" name="<{$token_name}>" value="<{$token_value}>" />
+<input type="submit" value="<{$lang_sendpassword}>" />
+</form>
+<br />
+
+<form action="<{$xoops_url}>/modules/<{$dirname}>/modlink.php" method="post">
+<input type="button" value="<{$lang_cancel}>" onclick="javascript:history.go(-1)" />
+</form>
+
+</div><br />
+
+<{if $request_show}>
+  <div class="weblinks_password_frame">
+  <span class="weblinks_subtitle"><{$lang_anonymous}></span><br /><br />
+
+  <{$lang_registered_dsc}>
+  <br /><br />
+
+  <form action="<{$xoops_url}>/modules/<{$dirname}>/modlink.php" method="post">
+  <input type="hidden" name="lid" value="<{$lid}>" />
+  <input type="hidden" name="request" value="modify" />
+  <input type="hidden" name="<{$token_name}>" value="<{$token_value}>" />
+  <input type="submit" value="<{$lang_modify}>" />
+  </form>
+
+  </div>
+<{/if}>

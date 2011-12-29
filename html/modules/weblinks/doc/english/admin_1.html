@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE>WebLinks Administrator's Manual</TITLE>
+<style type="text/css">
+<!--
+h3.SoftwareHead {text-align: center; background-color: #FFFFE0;} /* LightYellow */
+
+div.cyan {
+  background-color: #E0FFFF;  /* LightCyan */
+  border-color:     #808080;  /* */
+  border-width:     1px;
+  border-style:     solid;
+  width:            500px;
+  padding:          2px;
+}
+-->
+</style>
+</HEAD>
+<BODY>
+<h3 class="SoftwareHead">WebLinks Administrator's Manual</h3>
+This page explain how to use WebLinks which is different from other module, <br />
+and some matter unclear just for a moment.
+<H4>1. the link method to a map site</H4>
+1.1 US <br />
+<br />The US map site is http://maps.yahoo.com/ .<br />
+This site requires ZIP code, state, city, address.<br />
+<br />The template is set up as follows.<br />
+<div class='cyan'> 
+&lt;form action=&quot;http ://us.rd.yahoo.com/maps/home/submit_a/*-http://maps.yahoo.com/maps&quot; target=&quot;_blank&quot; method=get&gt;<br />
+&lt;input type=&quot;hidden&quot; name=&quot;addr&quot; value=&quot;&lt;{$link.address}&gt;&quot;&gt;<br />
+&lt;input type=&quot;hidden&quot; name=&quot;csz&quot; value=&quot;&lt;{$link.city}&gt;, &lt;{$link.state}&gt; &lt;{$link.zip}&gt;&quot;&gt;<br />
+&lt;input type=&quot;hidden&quot; name=&quot;country&quot; value=&quot;us&quot;&gt;<br />
+&lt;input type=hidden name=srchtype value=a&gt;<br />
+&lt;input type=submit name=&quot;getmap&quot; value=&quot;Map&quot;&gt;<br />
+&lt;/form&gt;<br />
+</div>
+<br />
+<A href="http://help.yahoo.com/help/us/maps/maps-24.html" target="_blank">Yahoo! Maps Terms of Use</A><br />
+<br />
+1.2 others<br />
+<br />the author of WebLinks does not know the map sites without U.S and Japan.<br />
+When you hack it, <br />
+please have a look <A href="lang_diff.html">The difference by the country or the language. <br />
+</A>
+<h4>2. RSS/ATOM related block </h4>
+2.1 Latest RSS/ATOM feeds of Web links<br />
+<br />This is a similar function to viewfeed.php. <br />
+It displays RSS/ATOM feeds which stored in atomfeed table from the latest
+order of date.<br />
+It only displays, dont get a new RSS/ATOM feeds.<br />
+Please look at &quot;How to get RSS/ATOM feeds&quot;.<br />
+<br />2.2 Show blog of Web links <br />
+<br />It displays the specific link's RSS/ATOM feeds which stored in atomfeed table from the latest order of date.<br />
+It only displays, dont get a new RSS/ATOM feeds same as 2.1 .<br />
+<br />
+When show this block,<br />
+click edit of &quot;Show blog of Web links&quot; at &quot;Blocks Administration&quot;, <br />
+and fill in &quot;Link ID&quot; which is 0 in default.<br />
+<br />2.3  show blog in custom block. <br />
+<br />
+This is a similar function to 2.2. <br />
+There are two differences to 2.2. <br />
+(1) you can show two or more blogs in individual. <br />
+(2) it get new RSS feeds, when show this block.<br />
+<br />
+select PHP script in Content Type of custom block.<br />
+and fill in as follows.<br />
+<br />
+<div class='cyan'> 
+include_once XOOPS_ROOT_PATH.&quot;/modules/weblinks/include/atomfeed.inc.php&quot;;<br />
+weblinks_view_blog(???);<br />
+</div>
+??? is Link ID<br />
+
+<H4>3. Check of broken link</H4>
+What trigger start to check broken link ?<br />
+There are three methods. <br />
+<br />
+3.1  When the user has noticed, report a broken link. <br />
+It is same as mylinks. <br />
+<br />
+3.2 Admin check manually. <br />
+<br />
+3.3  Check periodically in the command line mode. <br />
+<br />
+The setting method..<br />
+(1) be writable in cache directory<br />
+(2) From the administrator page of Weblinks, <br />
+click &quot;other functions&quot;.<br />
+and click and excute &quot;create config file for bin&quot;.<br />
+(3) change $XOOPS_ROOT_PATH in bin/link_check.php,<br />
+united your environment. <br />
+<br />
+(4) added to crontab as follows.<br />
+<div class='cyan'> 
+11 2 * * 0 /usr/bin/php4 -q -f /home/***/html/modules/weblinks/bin/link_check.php
+</div>
+
+<H4>4. How to get RSS/ATOM feeds</H4>
+What trigger start to get new RSS/ATOM feeds ?<br />
+There are four methods. <br />
+<br />4.1 When show a link detail in singlelink.php, get from this link. <br />
+<br />
+It excute automatically, even if not set up.<br />
+Admin can set up &quot;Cache time of RSS/ATOM feeds&quot; from admin page.<br />
+default is 24 hours. <br />
+<br />
+4.2 When show a blog in custom block, get from this blog.<br />
+<br />
+4.3 Admin get from all links manually. <br />
+<br />
+4.4 Get periodically in the command line mode.<br />
+<br />
+The setting method.<br />
+(1) be writable in cache directory<br />
+(2) From the administrator page of Weblinks,<br />
+click &quot;other functions&quot;.<br />
+and click and excute &quot;create config file for bin&quot;.<br />
+(3) change $XOOPS_ROOT_PATH in rss_refresh_link.php,<br />
+united your environment.<br />
+<br />
+(4) added to crontab as follows.<br />
+<br />
+<div class='cyan'> 
+22 3 * * * /usr/bin/php4 -q -f /home/***/html/modules/weblinks/bin/rss_refresh.php
+</div>
+<br />In addition, bin/rss_refresh_site.php is <br />
+the command which updates the sites set up at &quot;RSS search site&quot; in &quot;Module Configuration 2&quot; .<br />
+<br />
+4.5 another one<br />
+When show &quot;Latest RSS/ATOM feeds of Web links&quot; block, get from all links. <br />
+It is not supporting. <br />
+It maybe carries out a timeout, if there are many RSS/ATOM links <br />
+<br />
+<hr>
+<div align="center"><a href="index.html">INDEX</a></div>
+$Id: admin_1.html,v 1.1 2011/12/29 14:33:03 ohwada Exp $
+</BODY>
+</HTML>

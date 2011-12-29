@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE>WebLinks マニュアル</TITLE>
+<style type="text/css">
+<!--
+h3.SoftwareHead {text-align: center; background-color: #FFFFE0;} /* LightYellow */
+
+div.cyan {
+  background-color: #E0FFFF;  /* LightCyan */
+  border-color:     #808080;  /* */
+  border-width:     1px;
+  border-style:     solid;
+  width:            500px;
+  padding:          2px;
+}
+-->
+</style>
+</HEAD>
+<BODY>
+<h3 class="SoftwareHead">WebLinks マニュアル</h3>
+他のモジュールと使い方が違うものや、ちょっと分かりにくいところを、説明しています。<br>
+<h4>１．RSS/ATOM関係のブロック</h4>
+１．１ リンク集の新着RSS/ATOM記事<BR>
+viewfeed.php と類似の機能です。<BR>
+テーブル atomfeed に格納されたRSS/ATOM記事を日付の新しい順から表示します。<BR>
+このブロックを表示しても、新しいRSS/ATOM記事の取得は行いません。<BR>
+取得に関しては「RSS/ATOM記事の取得」をご覧ください。<BR>
+<BR>
+１．２ リンク集のblog表示<BR>
+テーブル atomfeed に格納されたRSS/ATOM記事から、特定のリンクの記事を日付の新しい順から表示します。<BR>
+１．１と同様に、このブロックを表示しても、新しいRSS/ATOM記事の取得は行いません。<BR>
+<BR>
+ブロック管理より「リンク集のblog表示」の編集画面を開き、<BR>
+表示するblogのリンクIDを設定します。<BR>
+<BR>
+１．３ カスタム・ブロックにてblogを表示する<BR>
+１．２と類似の機能です。<BR>
+違いは、２つあります。<BR>
+(1) 複数のリンクに対して、それぞれblogを表示できます。<BR>
+(2) このブロックを表示するときに、新しいRSS/ATOM記事の取得を行います。<BR>
+<BR>
+カスタム・ブロックをPHPモードで作成し、下記を記入する。<BR>
+<div class='cyan'> 
+include_once XOOPS_ROOT_PATH.&quot;/modules/weblinks/include/atomfeed.inc.php&quot;;<BR>
+weblinks_view_blog(???);<BR>
+</div>
+??? はリンクID<BR>
+<H4>２．リンク切れの検査</H4>
+どういう契機でリンク切れを検査するか。<BR>
+３つの方法があります。<BR>
+<BR>
+２．１ 利用者が気が付いたときに、リンク切れの報告をする。<BR>
+mylinks から継承した方法です。<BR>
+<BR>
+２．２ 管理者が手動で検査する。<BR>
+<BR>
+２．３ コマンドラインモードで、定期的に検査する。<BR>
+<BR>
+cache ディレクトリィ を書き込み可能にする。<BR>
+Weblinksの管理者画面より、「その他の機能」 -&gt; 「create config file for bin」 を実行する。<BR>
+bin/link_check.php の $XOOPS_ROOT_PATH を自分の環境に合わせて変更する。<BR>
+<BR>
+crontab に下記のような設定を加える。<BR>
+<div class='cyan'> 
+11 2 * * 0 /usr/bin/php4 -q -f /home/***/html/modules/weblinks/bin/link_check.php
+</div>
+<H4>３．RSS/ATOM記事の取得</H4>
+どういう契機でRSS/ATOM記事を取得するか。<BR>
+４つの方法があります。<BR>
+<BR>
+３．１ singlelink.php にてリンク詳細を表示するときに、そのリンクから取得する<BR>
+何も設定しなくとも、実行されます。<BR>
+管理者画面からキャッシュ時間を設定できます。<BR>
+初期値は24時間です。<BR>
+<BR>
+３．２ カスタム・ブロックにてblogを表示するときに、そのリンクから取得する。<BR>
+<BR>
+３．３ 管理者が手動で全てのリンクから取得する<BR>
+<BR>
+３．４ コマンドラインモードで、定期的に全てのリンクから取得する。<BR>
+<BR>
+cache ディレクトリィ を書き込み可能にする。<BR>
+Weblinksの管理者画面より、「その他の機能」 -&gt; 「create config file for bin」 を実行する。<BR>
+bin/rss_refresh.php の $XOOPS_ROOT_PATH を自分の環境に合わせて変更する。<BR>
+<BR>
+crontab に下記のような設定を加える。<BR>
+<div class='cyan'> 
+22 3 * * * /usr/bin/php4 -q -f /home/***/html/modules/weblinks/bin/rss_refresh.php
+</div>
+<BR>
+３．５ 「リンク集の新着RSS/ATOM記事」のブロックを表示するときに、全てのリンクから取得する。<BR>
+サポートしていない。<BR>
+RSS/ATOM対応のリンクが多いと、タイムアウトする可能性あり。<BR>
+<H4>４．地域依存性</H4>
+４．地域依存性<BR>
+４．１ 地図サイト（yahoo）へのリンク<BR>
+日本と米国では方式が異なる。<BR>
+<BR>
+(1) 日本では、yahooへ住所を渡すだけを、検索できる。<BR>
+<div class='cyan'> 
+&lt;a href=&quot;http：//search.map.yahoo.co.jp/search?p=&lt;{$link.addr_encode}&gt;&quot; target=_blank&gt;<BR>
+&lt;img src=&quot;&lt;{$module_url}&gt;/images/map.png&quot; board=&quot;0&quot; alt=&quot;map&quot;&gt;&lt;/a&gt;<BR>
+</div>
+
+<BR>
+(2) 米国では、住所以外に、郵便番号、州、市 を渡す必要がある。<BR>
+<div class='cyan'> 
+&lt;form action=&quot;http：//us.rd.yahoo.com/maps/home/submit_a/*-http://maps.yahoo.com/maps&quot; target=&quot;_blank&quot; method=get&gt;<BR>
+&lt;input type=&quot;hidden&quot; name=&quot;addr&quot; value=&quot;&lt;{$link.address}&gt;&quot;&gt;<BR>
+&lt;input type=&quot;hidden&quot; name=&quot;csz&quot; value=&quot;&lt;{$link.city}&gt;, &lt;{$link.state}&gt; &lt;{$link.zip}&gt;&quot;&gt;<BR>
+&lt;input type=&quot;hidden&quot; name=&quot;country&quot; value=&quot;us&quot;&gt;<BR>
+&lt;input type=hidden name=srchtype value=a&gt;<BR>
+&lt;input type=submit name=&quot;getmap&quot; value=&quot;Map&quot;&gt;<BR>
+&lt;/form&gt;<BR>
+</div>
+<BR>
+(3) 違いの吸収<BR>
+これは、テンプレート weblinks_link.html に埋め込まれている。<BR>
+現状は、日本用のものしかない。<BR>
+<BR>
+４．２ 検索サイト（googole）へのリンク<BR>
+日本と米国ではgogoleのURLが異なる。<BR>
+<BR>
+(1) 日本<BR>
+http：//www.google.co.jp/search?hl=ja&amp;amp;q=<BR>
+<BR>
+(2) 米国<BR>
+http：//www.google.com/search?hl=en&amp;amp;q=<BR>
+<BR>
+(3) 違いの吸収<BR>
+URLを 言語別ファイルの admin.php にて設定している。<BR>
+<BR>
+４．３ 友達に教える<BR>
+日本固有の事情がある。<BR>
+文字コードが SJIS,JIS,EUC-JP と複数ある。<BR>
+サーバーの文字コードとクライアントPCの文字コードが異なると、<BR>
+「友達に教える」が文字化けする。<BR>
+さらに、クライアントPCにて使用しているメール・アプリ・ソフトも関係しており、複雑な現象を起こしている。<BR>
+<BR>
+ひとまずの対策として、<BR>
+クライアントPCのOSが、Windows か MAC であれば、<BR>
+文字コードを SJIS に変換している。<BR>
+<BR>
+違いの吸収<BR>
+この処理は、言語別処理ファイルの language_convert.php にて実装している。<BR>
+<BR>
+<hr>
+<div align="center"><a href="index.html">目次</a></div>
+$Id: manual_1_jp.html,v 1.1 2011/12/29 14:33:02 ohwada Exp $
+</BODY>
+</HTML>

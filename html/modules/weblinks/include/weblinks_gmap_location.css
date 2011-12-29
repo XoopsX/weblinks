@@ -1,0 +1,60 @@
+/* $Id: weblinks_gmap_location.css,v 1.1 2011/12/29 14:32:34 ohwada Exp $ */
+
+body
+{
+	background-color: #ffffff;	/* white */
+	color: #000000;	/* black */
+	font-size: 12px;
+}
+
+a
+{
+	background-color: transparent;
+	color: #000080;	/* navy */
+	text-decoration: none; 
+}
+
+a:hover 
+{
+	background-color: transparent;
+	color: #800080;	/* purple */
+	text-decoration: underline; 
+}
+
+ul 
+{
+	margin: 2px; 
+	padding: 2px; 
+	list-style: decimal inside; 
+	text-align: left;
+}
+
+li 
+{
+	margin-left: 2px; 
+	list-style: disc inside;
+}
+
+input 
+{
+	background-color : transparent;
+	color: #000000;	/* black */ 
+	font-weight : normal;
+	border-color : #000000;	/* black */
+	border-top-width : 1px; 
+	border-right-width : 1px; 
+	border-bottom-width : 1px; 
+	border-left-width : 1px;
+	text-indent : 2px;  
+}
+
+.weblinks_small
+{
+	font-size: 80%;
+}
+
+.weblinks_error
+{
+	background-color: transparent;
+	color: #ff0000;	/* red */
+}

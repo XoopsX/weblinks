@@ -1,0 +1,142 @@
+<{* $Id: weblinks_guidance.html,v 1.1 2011/12/29 14:32:37 ohwada Exp $ *}>
+
+<{* -- rss icon -- *}>
+<a href="<{$xoops_url}>/modules/<{$dirname}>/rdf.php" target='_blank'>
+<img src="<{$xoops_url}>/modules/<{$dirname}>/images/rdf.png" border="0" alt="rdf" /></a>&nbsp;
+<a href="<{$xoops_url}>/modules/<{$dirname}>/rss.php" target='_blank'>
+<img src="<{$xoops_url}>/modules/<{$dirname}>/images/rss.png" border="0" alt="rss" /></a>&nbsp;
+<a href="<{$xoops_url}>/modules/<{$dirname}>/atom.php" target='_blank'>
+<img src="<{$xoops_url}>/modules/<{$dirname}>/images/atom.png" border="0" alt="atom" /></a>&nbsp;
+<br /><br />
+
+<{* -- guidance bar -- *}>
+<div class="weblinks_guidance">
+&nbsp;
+
+<{if $keywords != '' }>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/index.php?keywords=<{$keywords}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/index.php">
+<{/if}>
+<{$lang_main}></a>
+&nbsp;|&nbsp;
+
+<{if $show_submit }>
+  <{if $cid }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/submit.php?cid=<{$cid}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/submit.php">
+  <{/if}>
+  <{$lang_submitlink}></a>
+  &nbsp;|&nbsp;
+<{/if}>
+
+<{if $show_site_popular }>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/topten.php?hit=1&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/topten.php?hit=1">
+  <{/if}>
+  <{$lang_site_popular}></a> (<{$total_site_topten}>)
+  &nbsp;|&nbsp;
+<{/if}>
+
+<{if $show_site_higtrate }>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/topten.php?rate=1&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/topten.php?rate=1">
+  <{/if}>
+  <{$lang_site_highrate}></a> (<{$total_site_topten}>)
+  &nbsp;|&nbsp;
+<{/if}>
+
+<{if $show_site_pagerank }>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/topten.php?rate=2&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/topten.php?rate=2">
+  <{/if}>
+  <{$lang_site_pagerank}></a> (<{$total_site_topten}>)
+  &nbsp;|&nbsp;
+<{/if}>
+
+&nbsp;
+</div><br />
+
+<{* -- second guidance bar -- *}>
+<div class="weblinks_guidance">
+&nbsp;
+
+<{if $keywords != '' }>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/catlist.php?keywords=<{$keywords}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/catlist.php">
+<{/if}>
+<{$lang_catlist}></a>
+&nbsp;|&nbsp;
+
+<{if $show_site_recommend }>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=recommend&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=recommend">
+  <{/if}>
+  <{$lang_site_recommend}></a> (<{$total_site_recommend}>)
+  &nbsp;|&nbsp;
+<{/if}>
+
+<{if $show_site_mutual }>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=mutual&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=mutual">
+  <{/if}>
+  <{$lang_site_mutual}></a> (<{$total_site_mutual}>)
+  &nbsp;|&nbsp;
+<{/if}>
+
+<{if $show_site_gmap }>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=gmap&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=gmap">
+  <{/if}>
+  <{$lang_site_gmap}></a> (<{$total_site_gmap}>)
+  &nbsp;|&nbsp;
+<{/if}>
+
+&nbsp;
+</div><br />
+
+<{* -- third guidance bar -- *}>
+<div class="weblinks_guidance">
+&nbsp;
+
+<a href="<{$xoops_url}>/modules/<{$dirname}>/random.php" target="_blank"><{$lang_site_random}></a>
+&nbsp;|&nbsp;
+
+<{if $show_site_rss }>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=rss&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=rss">
+  <{/if}>
+  <{$lang_site_rss}></a> (<{$total_site_rss}>)
+  &nbsp;|&nbsp;
+<{/if}>
+
+<{if $show_atomfeed }>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewfeed.php?keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewfeed.php">
+  <{/if}>
+  <{$lang_atomfeed}></a> (<{$total_atomfeed}>)
+  &nbsp;|&nbsp;
+<{/if}>
+
+&nbsp;
+</div><br />
+
+<br />

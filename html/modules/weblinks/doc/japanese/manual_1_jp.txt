@@ -1,0 +1,139 @@
+$Id: manual_1_jp.txt,v 1.1 2011/12/29 14:33:02 ohwada Exp $
+
+=================================================
+Date:   2004-12-23
+Author: Kenichi OHWADA
+URL:    http://linux.ohwada.jp/
+Email:  webmaster@ohwada.jp
+=================================================
+
+WebLinks マニュアル
+
+他のモジュールと使い方が違うものや、ちょっと分かりにくいところを、説明しています。
+
+１．RSS/ATOM関係のブロック
+
+１．１ リンク集の新着RSS/ATOM記事
+viewfeed.php と類似の機能です。
+テーブル atomfeed に格納されたRSS/ATOM記事を日付の新しい順から表示します。
+このブロックを表示しても、新しいRSS/ATOM記事の取得は行いません。
+取得に関しては「RSS/ATOM記事の取得」をご覧ください。
+
+１．２ リンク集のblog表示
+テーブル atomfeed に格納されたRSS/ATOM記事から、特定のリンクの記事を日付の新しい順から表示します。
+１．１と同様に、このブロックを表示しても、新しいRSS/ATOM記事の取得は行いません。
+
+ブロック管理より「リンク集のblog表示」の編集画面を開き、
+表示するblogのリンクIDを設定します。
+
+１．３ カスタム・ブロックにてblogを表示する
+１．２と類似の機能です。
+違いは、２つあります。
+(1) 複数のリンクに対して、それぞれblogを表示できます。
+(2) このブロックを表示するときに、新しいRSS/ATOM記事の取得を行います。
+
+カスタム・ブロックをPHPモードで作成し、下記を記入する。
+---
+include_once XOOPS_ROOT_PATH."/modules/weblinks/include/atomfeed.inc.php";
+weblinks_view_blog(???);
+---
+??? はリンクID
+
+
+２．リンク切れの検査
+どういう契機でリンク切れを検査するか。
+３つの方法があります。
+
+２．１ 利用者が気が付いたときに、リンク切れの報告をする。
+mylinks から継承した方法です。
+
+２．２ 管理者が手動で検査する。
+
+２．３ コマンドラインモードで、定期的に検査する。
+
+cache ディレクトリィ を書き込み可能にする。
+Weblinksの管理者画面より、「その他の機能」 -> 「create config file for bin」 を実行する。
+bin/link_check.php の $XOOPS_ROOT_PATH を自分の環境に合わせて変更する。
+
+crontab に下記のような設定を加える。
+11 2 * * 0 /usr/bin/php4 -q -f /home/***/html/modules/weblinks/bin/link_check.php
+
+
+３．RSS/ATOM記事の取得
+どういう契機でRSS/ATOM記事を取得するか。
+４つの方法があります。
+
+３．１ singlelink.php にてリンク詳細を表示するときに、そのリンクから取得する
+何も設定しなくとも、実行されます。
+管理者画面からキャッシュ時間を設定できます。
+初期値は24時間です。
+
+３．２ カスタム・ブロックにてblogを表示するときに、そのリンクから取得する。
+
+３．３ 管理者が手動で全てのリンクから取得する
+
+３．４ コマンドラインモードで、定期的に全てのリンクから取得する。
+
+cache ディレクトリィ を書き込み可能にする。
+Weblinksの管理者画面より、「その他の機能」 -> 「create config file for bin」 を実行する。
+bin/rss_refresh.php の $XOOPS_ROOT_PATH を自分の環境に合わせて変更する。
+
+crontab に下記のような設定を加える。
+22 3 * * * /usr/bin/php4 -q -f /home/***/html/modules/weblinks/bin/rss_refresh.php
+
+３．５ 「リンク集の新着RSS/ATOM記事」のブロックを表示するときに、全てのリンクから取得する。
+サポートしていない。
+RSS/ATOM対応のリンクが多いと、タイムアウトする可能性あり。
+
+
+４．地域依存性
+４．１ 地図サイト（yahoo）へのリンク
+日本と米国では方式が異なる。
+
+(1) 日本では、yahooへ住所を渡すだけを、検索できる。
+---
+<a href="http://search.map.yahoo.co.jp/search?p=<{$link.addr_encode}>" target=_blank>
+<img src="<{$module_url}>/images/map.png" board="0" alt="map"></a>
+----
+
+(2) 米国では、住所以外に、郵便番号、州、市 を渡す必要がある。
+----
+<form action="http://us.rd.yahoo.com/maps/home/submit_a/*-http://maps.yahoo.com/maps" target="_blank" method=get>
+<input type="hidden" name="addr" value="<{$link.address}>">
+<input type="hidden" name="csz" value="<{$link.city}>, <{$link.state}> <{$link.zip}>">
+<input type="hidden" name="country" value="us">
+<input type=hidden name=srchtype value=a>
+<input type=submit name="getmap" value="Map">
+</form>
+---
+
+(3) 違いの吸収
+これは、テンプレート weblinks_link.html に埋め込まれている。
+現状は、日本用のものしかない。
+
+４．２ 検索サイト（googole）へのリンク
+日本と米国ではgogoleのURLが異なる。
+
+(1) 日本
+http://www.google.co.jp/search?hl=ja&amp;q=
+
+(2) 米国
+http://www.google.com/search?hl=en&amp;q=
+
+(3) 違いの吸収
+URLを 言語別ファイルの admin.php にて設定している。
+
+４．３ 友達に教える
+日本固有の事情がある。
+文字コードが SJIS,JIS,EUC-JP と複数ある。
+サーバーの文字コードとクライアントPCの文字コードが異なると、
+「友達に教える」が文字化けする。
+さらに、クライアントPCにて使用しているメール・アプリ・ソフトも関係しており、複雑な現象を起こしている。
+
+ひとまずの対策として、
+クライアントPCのOSが、Windows か MAC であれば、
+文字コードを SJIS に変換している。
+
+違いの吸収
+この処理は、言語別処理ファイルの language_convert.php にて実装している。
+

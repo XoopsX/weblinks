@@ -1,0 +1,51 @@
+<?php
+// $Id: mailusers.php,v 1.1 2011/12/29 14:32:45 ohwada Exp $
+
+//=========================================================
+// WebLinks Module
+// 2007-07-16 K.OHWADA
+//=========================================================
+
+//---------------------------------------------------------
+// this file is for XC 2.1
+// dont use this in XOOPS 2.0.x
+// same as modules/system/language/english/admin/mailusers.php
+//---------------------------------------------------------
+
+//%%%%%%        Admin Module Name  MailUsers        %%%%%
+define("_AM_DBUPDATED",_MD_AM_DBUPDATED);
+
+//%%%%%%        mailusers.php         %%%%%
+define("_AM_SENDTOUSERS","ÃÑÓá ÇáÑÓÇáÉ Åáì ÇáÃÚÖÇÁ ÇáÐíä:");
+define("_AM_SENDTOUSERS2","ÅÑÓÇá Åáì:");
+define("_AM_GROUPIS","ÇáãÌãæÚÉ (ÅÎÊíÇÑíÉ)");
+define("_AM_TIMEFORMAT", "(ÕíÛÉ yyyy-mm-dd, ÅÎÊíÇÑí)");
+define("_AM_LASTLOGMIN","ÇáÏÎæá ÇáÃÎíÑ ßÇä ÈÚÏ");
+define("_AM_LASTLOGMAX","ÇáÏÎæá ÇáÃÎíÑ ßÇä ÞÈá");
+define("_AM_REGDMIN","ÊÇÑíÎ ÇáÊÓÌíá ÈÚÏ");
+define("_AM_REGDMAX","ÊÇÑíÎ ÇáÊÓÌíá ÞÈá");
+define("_AM_IDLEMORE","ÇáÏÎæá ÇáÃÎíÑ ßÇä ÃßËÑ ãä X ÞÈá ÃíÇã (ÅÎÊíÇÑí)");
+define("_AM_IDLELESS","ÇáÏÎæá ÇáÃÎíÑ ßÇä ÃßËÑ ãä X ÈÚÏ ÃíÇã (ÅÎÊíÇÑí)");
+define("_AM_MAILOK","ÃÑÓá ÑÓÇáÉ ÝÞØ Åáì ÇáÃÚÖÇÁ ÇáÐí íÞÈáæä ÑÓÇÆá ÇáÅÎØÇÑ (ÅÎÊíÇÑí)");
+define("_AM_INACTIVE","ÃÑÓá ÇáÑÓÇáÉ Åáì ÇáÃÚÖÇÁ ÇáÛíÑ äÔØíä ÝÞØ (ÅÎÊíÇÑí)");
+define("_AMIFCHECKD", "ÇÐÇ Êã ÇáÊÍÏíÏ , ÓæÝ íÊã ÊÎØí ÌãíÚ ÇáÑÓÇÆá ÇáÎÇÕÉ");
+define("_AM_MAILFNAME","ãä ÇáÇÓã (ÈÑíÏ ÅáßÊÑæäí ÝÞØ)");
+define("_AM_MAILFMAIL","ãä ÇáÈÑíÏ ÇáÅáßÊÑæäí (ÈÑíÏ ÅáßÊÑæäí ÝÞØ)");
+define("_AM_MAILSUBJECT","ÇáÚäæÇä");
+define("_AM_MAILBODY","ÇáÔßá");
+define("_AM_MAILTAGS","ÇáÊÇÛ:");
+define("_AM_MAILTAGS1","{X_UID} ÓæÝ íØÈÚ ÑÞã ÇáÚÖæ");
+define("_AM_MAILTAGS2","{X_UNAME} ÓæÝ íØÈÚ ÇÓã ÇáÚÖæ");
+define("_AM_MAILTAGS3","{X_UEMAIL} ÓæÝ íØÈÚ ÈÑíÏ ÇáÚÖæ");
+define("_AM_MAILTAGS4","{X_UACTLINK} ÓæÝ íØÈÚ ÑÇÈØ ÊÝÚíá ÇáÚÖæ");
+define("_AM_SENDTO","ÃÑÓá Åáì");
+define("_AM_EMAIL","ÇáÈÑíÏ");
+define("_AM_PM","ÑÓÇáÉ ÎÇÕÉ");
+define("_AM_SENDMTOUSERS", "ÅÑÓÇá ÑÓÇáÉ Åáí ÚÖæ");
+define("_AM_SENT", "ÃÑÓá ÇáÃÚÖÇÁ");
+define("_AM_SENTNUM", "%s - %s (ãÌãæÚ: %s ÇáÃÚÖÇÁ)");
+define("_AM_SENDNEXT", "ÇáÊÇáí");
+define("_AM_NOUSERMATCH", "áÇ íæÌÏ ÃÚÖÇÁ");
+define("_AM_SENDCOMP", "ÅÑÓÇá ÇáÑÓÇáÉ ÃßÊãá");
+
+?>

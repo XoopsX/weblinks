@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE>RSSの文字コード</TITLE>
+<style type="text/css">
+<!--
+h3.SoftwareHead {text-align: center; background-color: #FFFFE0;} /* LightYellow */
+
+div.cyan {
+  background-color: #E0FFFF;  /* LightCyan */
+  border-color:     #808080;  /* */
+  border-width:     1px;
+  border-style:     solid;
+  width:            500px;
+  padding:          2px;
+}
+-->
+</style>
+</HEAD>
+<BODY>
+<h3 class="SoftwareHead">WebLinks 開発者向け 文書</h3>
+<h4>RSSの文字コード</h4>
+RSSの文字コードはUTF-8が主流である。<br />
+<br />
+XOOPSでは言語により採用している文字コードが異なる。<br />
+日本では、EUC-JP を採用している。<br />
+英語圏では、US-ASCII を採用している。<br />
+さらに、UTF-8以外の文字コードを出力するRSSサイトもある。<br />
+<br />
+また、PHPのXMLパーサー関数は US-ASCII あるいは UTF-8 しか使用できない。<br />
+<H4>RSSの表示の処理</H4>
+次のステップで取得したRSSを表示している。<br />
+(1) 取得したRSSをUTF-8 に変換する<br />
+<br />XMLの encoding により 文字コードを判別する。<br />
+設定されていないものは、UTF-8と見なす。<br />
+<div class="cyan">&lt;? xml version=&quot;1.0&quot; encoding=&quot;***&quot; ?&gt;</div>
+<br />(2) PHPのXMLパーサーで構文解析する<br />
+<br />(3) 解析された結果を UTF-8 から　XOOPSの文字コードに変換する。<br />
+<br />
+(4) XOOPSの文字コードで表示する。<br />
+
+<H4>RSSの出力の処理</H4>
+(1) XOOPSの文字コードから UTF-8 に変換する<br />
+(2) UTF-8 で出力する。<br />
+<H4>文字コードの変換</H4>
+文字コードの変換には PHPのマルチバイト関数を使用している。<br />
+しかし、英語圏ではマルチバイト関数が組み込まれていないことが多い。<br />
+<br />
+そこで、デフォルトは マルチバイト関数を使用しない方法とした。<br />
+ただし、英語以外の言語では文字化けする。<br />
+<br />
+日本語環境では、マルチバイト関数が組み込まれていることが前提となっている。<br />
+組み込まれいなければ、文字化けする。<br />
+<br />
+マルチバイト関数を使用するか否かは、<br />
+言語別ファイル (language/xxx/language_convert.php ) で設定する。<br />
+<H4>文字化けすることがある</H4>
+日本語環境で、マルチバイト関数が組み込まれていても、文字化けすることがある。<br />
+ドイツ語やフランス語の<B><FONT color="#ff00ff">ウムラウト</FONT></B>などは文字化けする。<br />
+これは、日本語の文字コードと重複しているためである。<br />
+<br />
+現時点では、何の対策も行っていない。<br />
+諦めてください。<br />
+<br />
+<hr>
+$Id: rss_code.html,v 1.1 2011/12/29 14:33:02 ohwada Exp $
+</BODY>
+</HTML>

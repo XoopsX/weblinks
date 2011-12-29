@@ -1,0 +1,117 @@
+<?php
+// $Id: blocks.php,v 1.1 2011/12/29 14:32:44 ohwada Exp $
+
+// 2007-10-10 K.OHWADA
+// _MB_WEBLINKS_GM_MARKER_WIDTH
+
+// 2007-08-01 K.OHWADA
+// _MB_WEBLINKS_CAT_TITLE_LENGTH
+
+// 2007-04-08
+// _MB_WEBLINKS_PHOTOS
+
+// 2007-03-25 K.OHWADA
+// google map
+
+// 2006-11-03 hiro
+// random block
+
+// 2006-01-01 K.OHWADA
+// weblinks ver 1.0
+// module depulication
+
+//=========================================================
+// WebLinks Module
+// language for Blocks
+//=========================================================
+
+// --- define language begin ---
+if( !defined('WEBLINKS_LANG_BL_LOADED') )
+{
+
+define('WEBLINKS_LANG_BL_LOADED', 1);
+// top.html
+define("_MB_WEBLINKS_DISP","ÚÑÖ");
+define("_MB_WEBLINKS_LINKS","ÇáÑæÇÈØ");
+define("_MB_WEBLINKS_CHARS","Øæá ÇáÃÓã");
+define("_MB_WEBLINKS_LENGTH"," ÇáÍÑæÝ");
+define("_MB_WEBLINKS_NEWDAYS","ÃíÇã ÇáÑÇÈØ ÇáÌÏíÏ");
+define("_MB_WEBLINKS_DAYS","ÇáÃíÇã");
+define("_MB_WEBLINKS_POPULAR","ÒíÇÑÇÊ ÇáÑæÇÈØ ÇáÃßËÑ ÒíÇÑÉ");
+define("_MB_WEBLINKS_HITS"," ÇáÒÈÇÑÇÊ");
+define("_MB_WEBLINKS_PIXEL"," ÈßÓá");
+define("_MB_WEBLINKS_RATING","ÇáÊÞííã");
+define("_MB_WEBLINKS_VOTES","ÇáÊÕæíÊÇÊ");
+define("_MB_WEBLINKS_COMMENTS","ÇáÊÚáíÞÇÊ");
+
+// catlist.html
+define('_MB_WEBLINKS_TOTAL_LINKS',"ÇáãÌãæÚ");
+define("_MB_WEBLINKS_IMAGE_MODE","ÃÎÊÑ ÕæÑÉ ÇáÞÓã");
+define("_MB_WEBLINKS_IMAGE_MODE_0","áÇ ÔíÆ");
+define("_MB_WEBLINKS_IMAGE_MODE_1","folder.gif");
+define("_MB_WEBLINKS_IMAGE_MODE_2","ÎíÇÑÇÊ ÇáÕæÑÉ");
+define('_MB_WEBLINKS_MAX_WIDTH',"ÇáÍÏ ÇáÃÞÕì áÚÑÖ ÇáÕæÑÉ");
+define('_MB_WEBLINKS_WIDTH_DEFAULT',"ÚÑÖ ÇáÕæÑÉ ÇáÃÝÊÑÇÖí");
+define("_MB_WEBLINKS_DISPSUB","ÃÞÕì ÚÏÏ ãä ÇáÃÞÓÇã ÇáÝÑÚíÉ");
+
+// atom feed
+define("_MB_WEBLINKS_NUM_FEED","ÚÏÏ feeds");
+define("_MB_WEBLINKS_NUM_TITLE","Øæá ÇáÚäæÇä");
+define("_MB_WEBLINKS_NUM_SUMMARY","Øæá ÇáÎáÇÕÉ");
+define("_MB_WEBLINKS_NUM_CONTENT","ÚÏÏ feeds ÇáÊí ÊÚÑÖ ãÚ ÇáãÍÊæì");
+define("_MB_WEBLINKS_LINK_ID","ÑÞã ÇáÑÇÈØ");
+define("_MB_WEBLINKS_NO_LINK_ID","áÞÏ äÓíÊ Çä ÊßÊÈ ÑÞã ÇáÑÇÈØ");
+define("_MB_WEBLINKS_NO_ATOMFEED","áíÓ åäÇß feed ãØÇÈÞ");
+define("_MB_WEBLINKS_MORE","ãÒíÏ ãä ÇáÊÝÇÕíá");
+
+// 2006-11-03
+// random block
+define('_MB_WEBLINKS_MAX_DESC','ÃÞÕì Øæá ááæÕÝ');
+define('_MB_WEBLINKS_SHOW_DATE', 'ÚÑÖ ÇáÊÇÑíÎ');
+define('_MB_WEBLINKS_MODE_URL','ÚÑÖ ÇÓÊÇíá ÚäæÇä ÇáãæÞÚ');
+define('_MB_WEBLINKS_MODE_URL_SINGLE','singlelink.php');
+define('_MB_WEBLINKS_MODE_URL_VISIT','visit.php');
+define('_MB_WEBLINKS_MODE_URL_DIRECT','ÚÑÖ ÇáãæÞÚ ãÈÇÔÑÉ');
+define('_MB_WEBLINKS_URL_EMPTY','ÚäæÇä ÝÇÑÛ');
+define('_MB_WEBLINKS_URL_EMPTY_INCLUDE','íÊÖãä ÇáÚäæÇä ÇáÝÇÑÛ');
+define('_MB_WEBLINKS_URL_EMPTY_EXCLUDE','íÓÊËäí ÇáÚäæÇä ÇáÝÇÑÛ');
+define('_MB_WEBLINKS_CATEGORY','ÇáÞÓã');
+define('_MB_WEBLINKS_WITH_SUBCAT','ãÚ ÇáÃÞÓÇã ÇáÝÑÚíÉ');
+define('_MB_WEBLINKS_MODE','äãØ ÇáÑÇÈØ');
+define('_MB_WEBLINKS_RECOMMEND','ãæÞÚ íäÕÍ ÈÉ');
+define('_MB_WEBLINKS_MUTUAL','ãæÞÚ ãÊÈÇÏá ÑæÇÈØ');
+define('_MB_WEBLINKS_RANDOM','ÊÑÊíÈ ÚÔæÇÆí');
+define('_MB_WEBLINKS_ORDER','ÍÓÈ');
+define('_MB_WEBLINKS_ORDER_DESC','ÕÍíÍ ÚäÏãÇ íßæä "ÇáÊÑÊíÈ ÇáÚÔæÇÆí" áÇ');
+define('_MB_WEBLINKS_TIME_UPDATE','æÞÊ ÇáÊÌÏíÏ');
+define('_MB_WEBLINKS_TIME_CREATE','æÞÊ ÇáÃäÔÇÁ');
+define('_MB_WEBLINKS_TITLE','ÇáÚäæÇä');
+define('_MB_WEBLINKS_ASC', 'ÊÑÊíÈ ÊÕÇÚÏí');
+define('_MB_WEBLINKS_DESC','ÊÑÊíÈ  ÊäÇÒáí');
+
+// === 2007-03-25 ===
+// google map
+define('_MB_WEBLINKS_GM_MODE','äãØ ÎÑíØÉ ÌæÌá');
+define('_MB_WEBLINKS_GM_MODE_DSC','0:ÚÏã ÚÑÖ, 1:ÇáÃÝÊÑÇÖí, 2:ÍÓÈ ÇáÇÑÞÇã');
+define('_MB_WEBLINKS_GM_LATITUDE','ÎØø ÇáÚÑÖ');
+define('_MB_WEBLINKS_GM_LONGITUDE','ÎØø ÇáØæá');
+define('_MB_WEBLINKS_GM_ZOOM','ÇáÊÞÑíÈ');
+define('_MB_WEBLINKS_GM_HEIGHT','Øæá ãÞÇÓ ÇáÎÑíØÉ');
+define('_MB_WEBLINKS_GM_TIMEOUT','Delay time for drawing');
+define('_MB_WEBLINKS_GM_TIMEOUT_DSC','msec  -1:window.onload');
+
+// 2007-04-08
+define('_MB_WEBLINKS_PHOTOS', 'ÚÏÏ ÇáÕæÑ');
+
+// === 2007-08-01 ===
+define('_MB_WEBLINKS_CAT_TITLE_LENGTH','Øæá ÚäæÇä ÇáÞÓã');
+define('_MB_WEBLINKS_GM_DESC_LENGTH','Øæá ÇáãÍÊæì Ýí ÚáÇãÉ ÇáÎÑíØÉ');
+define('_MB_WEBLINKS_GM_WORDWRAP','Øæá wordwrap Ýí ÚáÇãÉ ÇáÎÑíØÉ');
+
+// === 2007-10-10 ===
+define('_MB_WEBLINKS_GM_MARKER_WIDTH','Width of map marker');
+
+}
+// --- define language end ---
+
+?>

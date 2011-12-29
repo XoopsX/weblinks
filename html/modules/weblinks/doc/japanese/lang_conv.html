@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE>language_base.php と language_convert.php の説明</TITLE>
+<style type="text/css">
+<!--
+h3.SoftwareHead {
+  text-align: center; background-color: #FFFFE0;  /* LightYellow */
+}
+
+div.cyan {
+  background-color: #E0FFFF;  /* LightCyan */
+  border-color:     #808080;  /* */
+  border-width:     1px;
+  border-style:     solid;
+  width:            500px;
+  padding:          2px;
+}
+
+-->
+</style>
+</HEAD>
+<BODY>
+<h3 class="SoftwareHead">WebLinks 開発者向け 文書</h3>
+<h4>国や言語による違い</h4>
+<h4>language_base.php と language_convert.php の説明</h4>
+<P>共通の<B><FONT color="#0000ff">language_base.php</FONT></B> と 言語パック毎の<B><FONT color="#0000ff">language_convert.php</FONT></B> で吸収している。<BR>
+language_convert.php は language_base.php からクラスを継承している。<BR>
+関数の説明を下記に示す。</P>
+<H4>機能と用途</H4>
+<TABLE class="main" border="1">
+  <TBODY>
+    <TR>
+      <TD width="20%" align="center">関数名</TD>
+      <TD width="40%" align="center">機能</TD>
+      <TD width="40%" align="center">用途</TD>
+    </TR>
+    <TR>
+      <TD colspan="3">マルチバイト関数を使用するもの</TD>
+    </TR>
+    <TR>
+      <TD>convert_encode_to_utf8<BR>
+      ($text, $encode)</TD>
+      <TD>テキスト($text)を指定した文字コード($encode)からUTF-8に変換する</TD>
+      <TD>取得したRSSをUTF-8に変換する。<BR>
+       RSSの文字コードは、XMLのencodingから判断している。<BR>
+      ここが設定されていないものは、UTF-8と見なしている。<BR>
+      </TD>
+    </TR>
+    <TR>
+      <TD>convert_from_utf8($text)</TD>
+      <TD>テキスト($text)をUTF-8から内部の文字コードに変換する</TD>
+      <TD>取得したRSSを解析した結果を内部コードに変換する</TD>
+    </TR>
+    <TR>
+      <TD>convert_to_utf8($text)</TD>
+      <TD>テキスト($text)を内部の文字コードからUTF-8に変換する</TD>
+      <TD>RSSを出力するときに、UTF-8に変換する</TD>
+    </TR>
+    <TR>
+      <TD>shorten_text($text,$max)</TD>
+      <TD>テキスト($text)を指定した文字数（$max）で丸める</TD>
+      <TD>要約を作成する</TD>
+    </TR>
+    <TR>
+      <TD>send_mail<BR>
+      ($mailto, $subject, $body, $header)</TD>
+      <TD>メールを送信する<BR>
+      引数はPHPのmail関数と同じ</TD>
+      <TD>コマンドラインで使用する<BR>
+      </TD>
+    </TR>
+  
+    <TR>
+      <TD colspan="3">マルチバイト関数を使用する（日本語環境に特有なもの）</TD>
+    </TR>
+    <TR>
+      <TD>convert_telafriend_subject($text)</TD>
+      <TD>テキスト($text)を内部の文字コードから別の文字コードに変換する</TD>
+      <TD>「友達に報告」の文字化け対策</TD>
+    </TR>
+    <TR>
+      <TD>convert_telafriend_body($text)</TD>
+      <TD>同上</TD>
+      <TD>同上</TD>
+    </TR>
+    <TR>
+      <TD>convert_download_filename($text)</TD>
+      <TD>同上</TD>
+      <TD>「ダウンロードファイル名」の文字化け対策<BR>
+      今は使用していない</TD>
+    </TR>
+    <TR>
+      <TD>convert_sjis_win_mac($text)</TD>
+      <TD>クライアントPC が Windows あるいは MAC のとき、<br />
+      テキスト($text)を EUC-JP から SJIS へ変換する</TD>
+      <TD>「友達に報告」の文字化け対策</TD>
+    </TR>
+    <TR>
+      <TD>convert_space_zen_to_han($text)</TD>
+      <TD>テキスト($text)の全角空白を半角空白に変換する</TD>
+      <TD>検索時に全角空白を単語の区切りとする</TD>
+    </TR>
+  
+    <TR>
+      <TD colspan="3">
+      <P>マルチバイト関数を使用しないもの</P>
+</TD>
+    </TR>
+    <TR>
+      <TD>get_google_url()</TD>
+      <TD>この関数で設定した<BR>
+      googleサイトのURLを取得する<BR>
+      </TD>
+      <TD>このURLが、<BR>
+      リンク情報を検索するサイトとなる</TD>
+    </TR>
+    <TR>
+      <TD>get_country()</TD>
+      <TD>この関数で設定した<BR>
+      国名を取得する</TD>
+      <TD>この国名を元に、<BR>
+      地図サイトのリンク方法を選択する</TD>
+    </TR>
+    <TR>
+      <TD>get_happy_linux_url()</TD>
+      <TD>この関数で設定した<BR>
+      開発元のサイトのURLを取得する</TD>
+      <TD>このURLが<BR>
+      Powered by のリンク先となる</TD>
+    </TR>
+    <TR>
+      <TD>presume_agent()</TD>
+      <TD>ブラウザの agent を推測する</TD>
+      <TD>「友達に報告」の文字化け対策</TD>
+    </TR>
+  </TBODY>
+</TABLE>
+<h4>言語と国による処理の違い</h4>
+<TABLE class="main" border="1">
+  <TBODY>
+    <TR>
+      <TD width="20%" align="center">関数名</TD>
+      <TD width="30%" align="center">デフォルト（英語）<BR>
+      language_base.php</TD>
+      <TD width="30%" align="center">日本語<BR>language_convert.php</TD>
+      <TD width="20%" align="center">その他の言語</TD>
+    </TR>
+    <TR>
+      <TD colspan="4">マルチバイト関数を使用する</TD>
+    </TR>
+    <TR>
+      <TD>convert_encode_to_utf8($text, $encode)</TD>
+      <TD>指定された文字コードからUTF-8に変換する<BR>
+      utf8_encode関数を使用する</TD>
+      <TD>指定された文字コードからUTF-8に変換する <BR>
+      mb_convert_encoding関数を使用する</TD>
+      <TD>指定された文字コードからUTF-8に変換する</TD>
+    </TR>
+    <TR>
+      <TD>convert_from_utf8($text)</TD>
+      <TD>UTF-8からUS-ASCIIに変換する<BR>
+      utf8_decode関数を使用する</TD>
+      <TD>UTF-8からEUC-JPに変換する<BR>
+      mb_convert_encoding関数を使用する</TD>
+      <TD>UTF-8からその国の文字コードに変換する</TD>
+    </TR>
+    <TR>
+      <TD>convert_to_utf8($text)</TD>
+      <TD>US-ASCIIからからUTF-8に変換する<BR>
+      utf8_encode関数を使用する</TD>
+      <TD>EUC-JPからからUTF-8に変換する <BR>
+      mb_convert_encoding関数を使用する</TD>
+      <TD>その国の文字コードからUTF-8に変換する </TD>
+    </TR>
+    <TR>
+      <TD>shorten_text($text,$max)</TD>
+      <TD>substr関数を使用する<BR>
+      </TD>
+      <TD>mb_strimwidth関数を使用する</TD>
+      <TD>その国の文字コードに合わせて、文字列を丸める</TD>
+    </TR>
+    <TR>
+      <TD>send_mail($mailto, $subject, $body, $header)</TD>
+      <TD>mail関数のラッパー</TD>
+      <TD>mb_send_mail関数のラッパー<BR>
+      </TD>
+      <TD>その国の文字コードに合わせて、メール関数を設定する</TD>
+    </TR>
+    <TR>
+      <TD colspan="4">マルチバイト関数を使用する（日本語環境に特有なもの）</TD>
+    </TR>
+    <TR>
+      <TD>convert_telafriend_subject($text)</TD>
+      <TD>何もしない</TD>
+      <TD>EUC-JPをSJISに変換する<BR>
+      convert_sjis_win_mac() を呼び出す</TD>
+      <TD>特に必要なし</TD>
+    </TR>
+    <TR>
+      <TD>convert_telafriend_body($text)</TD>
+      <TD>同上</TD>
+      <TD>同上</TD>
+      <TD>同上</TD>
+    </TR>
+    <TR>
+      <TD>convert_download_filename($text)</TD>
+      <TD>同上</TD>
+      <TD>同上</TD>
+      <TD>同上</TD>
+    </TR>
+    <TR>
+      <TD>convert_sjis_win_mac($text)</TD>
+      <TD>---</TD>
+      <TD>EUC-JPをSJISに変換する<BR>mb_convert_encoding関数を使用する</TD>
+      <TD>同上</TD>
+    </TR>
+    <TR>
+      <TD>convert_space_zen_to_han($text)</TD>
+      <TD>何もしない</TD>
+      <TD>全角空白を半角空白に変換する<BR>mb_convert_kana関数を使用する</TD>
+      <TD>同上</TD>
+    </TR>
+  
+    <TR>
+      <TD colspan="4">マルチバイト関数を使用しないもの</TD>
+    </TR>
+    <TR>
+      <TD>get_google_url()</TD>
+      <TD>http://www.google.com/search?<BR>
+      hl=en&amp;amp;q=<BR>
+      </TD>
+      <TD>http://www.google.co.jp/search?<BR>
+      hl=ja&amp;amp;q=</TD>
+      <TD>その国に合わせてサイトを設定する</TD>
+    </TR>
+    <TR>
+      <TD>get_country()</TD>
+      <TD>usa</TD>
+      <TD>japan</TD>
+      <TD>特に必要なし<BR>
+      米国と異なるときは、テンプレートを変更する必要あり</TD>
+    </TR>
+    <TR>
+      <TD>get_happy_linux_url()</TD>
+      <TD>http://linux2.ohwada.net/</TD>
+      <TD>http://linux.ohwada.jp/</TD>
+      <TD>特に必要なし</TD>
+    </TR>
+    <TR>
+      <TD>presume_agent()</TD>
+      <TD>ブラウザのagentを推測する</TD>
+      <TD>---</TD>
+      <TD>---</TD>
+    </TR>
+  </TBODY>
+</TABLE>
+<br />
+<hr>
+<div align="center"><a href="index.html">目次</a></div>
+$Id: lang_conv.html,v 1.1 2011/12/29 14:33:02 ohwada Exp $
+</BODY>
+</HTML>

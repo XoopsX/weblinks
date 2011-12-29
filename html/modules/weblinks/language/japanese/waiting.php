@@ -1,0 +1,25 @@
+<?php
+// $Id: waiting.php,v 1.1 2011/12/29 14:32:46 ohwada Exp $
+
+//=========================================================
+// WebLinks Module
+// for waiting plugin
+// 2007-09-01 K.OHWADA
+// EUC-JP Í­Êþ¼«±óÊýÍè
+//=========================================================
+
+// --- define language begin ---
+if( !defined('WEBLINKS_LANG_PI_WAITING_LOADED') ) 
+{
+
+define('WEBLINKS_LANG_PI_WAITING_LOADED', 1);
+
+define('_WEBLINKS_PI_WAITING_WAITINGS', '¾µÇ§ÂÔ¤Á');
+define('_WEBLINKS_PI_WAITING_BROKENS',  'ÇËÂ»Êó¹ð');
+define('_WEBLINKS_PI_WAITING_MODREQS',  '½¤Àµ¿½ÀÁ');
+define('_WEBLINKS_PI_WAITING_DELREQS',  'ºï½ü¿½ÀÁ');
+
+}
+// --- define language end ---
+
+?>

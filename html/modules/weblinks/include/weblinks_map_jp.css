@@ -1,0 +1,138 @@
+/* $Id: weblinks_map_jp.css,v 1.1 2011/12/29 14:32:34 ohwada Exp $ */
+
+table.weblinks_map_jp
+{
+	width: 500px;
+	border-style: none;
+}
+table.weblinks_map_jp td
+{
+	font-size: 80%;
+	text-align: center;
+}
+tr.weblinks_map_jp
+{
+	height: 25px;
+}
+tr.weblinks_map_tsugaru
+{
+	height: 10px;
+}
+td.weblinks_map_hokkaido
+{
+	height: 30px;
+	width:  60px;
+	background-color: #99ff99;	/* light green */
+}
+td.weblinks_map_tohoku
+{
+	height: 25px;
+	width:  30px;
+	background-color: #ffff00;	/* yellow */
+}
+td.weblinks_map_aomori
+{
+	height: 25px;
+	width:  30px;
+	background-color: #ffff00;	/* yellow */
+}
+td.weblinks_map_fukushima
+{
+	height: 25px;
+	width:  30px;
+	background-color: #ffff00;	/* yellow */
+}
+td.weblinks_map_hokuriku
+{
+	height: 25px;
+	width:  30px;
+	background-color: #ccccff;	/* violet */
+}
+td.weblinks_map_kanto
+{
+	height: 25px;
+	width:  30px;
+	background-color: #ccffff;	/* cyan */
+}
+td.weblinks_map_kanagawa
+{
+	height: 25px;
+	width:  45px;
+	background-color: #ccffff;
+}
+td.weblinks_map_tokyo
+{
+	height: 30px;
+	width:  35px;
+	background-color: #ffccff;	/* pink */
+}
+td.weblinks_map_chubu
+{
+	height: 25px;
+	width:  30px;
+	background-color: #00ff00;	/* lime */
+}
+td.weblinks_map_nagano
+{
+	height: 50px;
+	width:  30px;
+	background-color: #00ff00;
+}
+td.weblinks_map_kansai
+{
+	height: 25px;
+	width:  30px;
+	background-color: #00ffff;	/* aqua */
+}
+td.weblinks_map_wakayama
+{
+	height: 25px;
+	width:  45px;
+	background-color: #00ffff;
+}
+td.weblinks_map_hyogo
+{
+	height: 50px;
+	width:  30px;
+	background-color: #00ffff;
+}
+td.weblinks_map_chugoku
+{
+	height: 25px;
+	width:  30px;
+	background-color: #ffaa00;	/* orenge */
+}
+td.weblinks_map_yamaguchi
+{
+	height: 50px;
+	width:  30px;
+	background-color: #ffaa00;
+}
+td.weblinks_map_shikoku
+{
+	height: 25px;
+	width:  30px;
+	background-color: #99cc33;	/* yellow green */
+}
+td.weblinks_map_kanmon
+{
+	width:  10px;
+}
+td.weblinks_map_kyushu
+{
+	height: 25px;
+	width:  30px;
+	background-color: #ffff99;	/* light yellow */
+}
+td.weblinks_map_kagoshima
+{
+	height: 25px;
+	width:  45px;
+	background-color: #ffff99;
+}
+td.weblinks_map_okinawa
+{
+	height: 25px;
+	width:  30px;
+	background-color: #00cccc;	/* light blue */
+}

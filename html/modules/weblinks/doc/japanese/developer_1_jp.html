@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<!-- $Id: developer_1_jp.html,v 1.1 2011/12/29 14:33:02 ohwada Exp $ -->
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE>WebLinks 管理者向け マニュアル</TITLE>
+<style type="text/css">
+<!--
+h3.SoftwareHead {text-align: center; background-color: #FFFFE0;} /* LightYellow */
+
+div.cyan {
+  background-color: #E0FFFF;  /* LightCyan */
+  border-color:     #808080;  /* */
+  border-width:     1px;
+  border-style:     solid;
+  width:            500px;
+  padding:          2px;
+}
+-->
+</style>
+</HEAD>
+<BODY><h3 class="SoftwareHead">WebLinks 管理者向け マニュアル</h3>
+内部仕様や実装に関するところを、説明しています。<br>
+<H4>１．RSS/ATOM情報の格納と生成</H4>
+<H4>１．２ RSS/ATOM情報の格納</H4>
+atomfeed テーブルに RSS/ATOM情報を格納する場合の対応<br>
+<br>
+<TABLE border="1">
+    <tr>
+  <th>テーブルの項目名</th>
+      <th colspan="3">RSSの項目名</th>
+      <th colspan=2>ATOMの項目名</th>
+    </tr>
+    <tr>
+  <td>　</td>
+      <TD colspan="3" align="center">channel</TD>
+      <TD colspan="2" align="center">feed</TD>
+    </tr>
+    <tr>
+  <td>site_title</td>
+  <td>○</td>
+  <td>title</td>
+  <td>　</td>
+  <td>○</td>
+  <td>title</td>
+    </tr>
+    <tr>
+  <td>site_url</td>
+  <td>○</td>
+  <td>link</td>
+  <td>　</td>
+  <td>○</td>
+  <td>link</td>
+    </tr>
+    <tr>
+  <td>　</td>
+      <TD colspan="3" align="center">item</TD>
+      <TD colspan="2" align="center">entry</TD>
+    </tr>
+    <tr>
+  <td>title</td>
+  <td>○</td>
+  <td>title</td>
+  <td>　</td>
+  <td>○</td>
+  <td>title</td>
+    </tr>
+    <tr>
+  <td>url</td>
+  <td>○</td>
+  <td>link</td>
+  <td>　</td>
+  <td>○</td>
+  <td>link</td>
+    </tr>
+    <tr>
+  <td>entry_id</td>
+  <td>　</td>
+      <TD align="center">---</TD>
+      <td>　</td>
+  <td>○</td>
+  <td>id</td>
+    </tr>
+    <tr>
+  <td>guid</td>
+  <td>　</td>
+  <td>guid</td>
+   <td>　</td>
+  <td>　</td>
+      <TD align="center">---</TD>
+    </tr>
+    <tr>
+  <td>time_modified</td>
+  <td>　</td>
+  <td>pubdate</td>
+  <td>date</td>
+  <td>○</td>
+  <td>modified</td>
+    </tr>
+    <tr>
+  <td>time_issued</td>
+  <td>　</td>
+  <td>pubdate</td>
+  <td>date</td>
+  <td>○</td>
+  <td>issued</td>
+    </tr>
+    <tr>
+  <td>time_created</td>
+  <td>　</td>
+      <TD align="center">---</TD>
+      <td>　</td>
+  <td>　</td>
+  <td>created</td>
+    </tr>
+    <tr>
+  <td>author name</td>
+  <td>　</td>
+  <td>creator</td>
+  <td>　</td>
+  <td>○</td>
+      <td >author name</td>
+    </tr>
+    <tr>
+  <td>author url</td>
+  <td>　</td>
+      <TD align="center">---</TD>
+      <td>　</td>
+  <td>　</td>
+  <td>author url</td>
+    </tr>
+    <tr>
+  <td>author email</td>
+  <td>　</td>
+  <td>author</td>
+      <td>　</td>
+      <td>　</td>
+      <td >author email</td>
+    </tr>
+    <tr>
+  <td>content</td>
+  <td>○</td>
+  <td>description</td>
+  <td>encoded</td>
+  <td>　</td>
+  <td>content</td>
+    </tr>
+    <tr>
+      <TD align="center">---</TD>
+      <td>　</td>
+      <td>　</td>
+      <td>　</td>
+  <td>　</td>
+  <td>summary</td>
+    </tr>
+    <tr>
+      <TD align="center">---</TD>
+      <td>　</td>
+  <td>category</td>
+      <td>　</td>
+      <td>　</td>
+      <td>　</td>
+    </tr>
+    <tr>
+      <TD align="center">---</TD>
+      <td>　</td>
+  <td>comments</td>
+      <td>　</td>
+      <td>　</td>
+      <td>　</td>
+    </tr>
+    <tr>
+      <TD align="center">---</TD>
+      <td>　</td>
+  <td>source</td>
+      <td>　</td>
+      <td>　</td>
+      <td>　</td>
+    </tr>
+    <tr>
+      <TD align="center">---</TD>
+      <td>　</td>
+  <td>enclosure</td>
+      <td>　</td>
+      <td>　</td>
+      <td>　</td>
+    </tr>
+    <tr>
+      <TD align="center">---</TD>
+      <td>　</td>
+      <td>　</td>
+      <td>　</td>
+      <td>　</td>
+      <td>contributor</td>
+    </tr>
+</TABLE>
+<br>○ はRSS/ATOMの必須項目<br>
+<H4>１．２ RSS/ATOM情報の生成</H4>
+<P>atomfeed テーブルから RSS/ATOM情報を生成する場合の対応</P>
+<br>
+<TABLE border="1">
+ <tr>
+  <th>テーブルの項目名</th>
+      <th colspan="3" align="center">RSSの項目名</th>
+      <th colspan="3" align="center">ATOMの項目名</th>
+    </tr>
+    <tr>
+  <td>　</td>
+      <TD colspan="3" align="center">item</TD>
+      <TD colspan="3" align="center">entry</TD>
+    </tr>
+ <tr>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>無い場合の処理</td>
+  <td>　</td>
+  <td>　</td>
+  <td>無い場合の処理</td>
+ </tr>
+ <tr>
+  <td>site_title</td>
+  <td>　</td>
+  <td>(dc:subject）</td>
+  <td>未使用</td>
+  <td>　</td>
+  <td>dc:subject</td>
+  <td>&lt;--</td>
+ </tr>
+ <tr>
+  <td>site_url</td>
+  <td>　</td>
+  <td>　</td>
+  <td>未使用</td>
+  <td>　</td>
+  <td>　</td>
+  <td>未使用</td>
+ </tr>
+ <tr>
+  <td>title</td>
+  <td>○</td>
+  <td>title</td>
+  <td>&lt;--</td>
+  <td>○</td>
+  <td>title</td>
+  <td>&lt;--</td>
+ </tr>
+ <tr>
+  <td>url</td>
+  <td>○</td>
+  <td>link</td>
+  <td>&lt;--</td>
+  <td>○</td>
+  <td>link</td>
+  <td>&lt;--</td>
+ </tr>
+ <tr>
+  <td>entry_id</td>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>○</td>
+  <td>id</td>
+  <td>無ければ、サイト名より生成</td>
+ </tr>
+ <tr>
+  <td>guid</td>
+  <td>　</td>
+  <td>guid</td>
+  <td>無ければ、URLで代用</td>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+ </tr>
+ <tr>
+  <td>time_modified</td>
+  <td>　</td>
+  <td>pubDate</td>
+  <td>無ければ省略</td>
+  <td>○</td>
+  <td>modified</td>
+  <td>無ければ、現在日時で代用</td>
+ </tr>
+ <tr>
+  <td>time_issued</td>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>○</td>
+  <td>issued</td>
+  <td>無ければ、現在日時で代用</td>
+ </tr>
+ <tr>
+  <td>time_created</td>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>created</td>
+  <td>無ければ省略</td>
+ </tr>
+ <tr>
+  <td>author name</td>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>○</td>
+  <td>author name</td>
+  <td>無ければ、サイト管理者で代用</td>
+ </tr>
+ <tr>
+  <td>author url</td>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>author url</td>
+  <td>無ければ省略</td>
+ </tr>
+ <tr>
+  <td>author email</td>
+  <td>　</td>
+  <td>(author)</td>
+  <td>未使用</td>
+  <td>　</td>
+  <td>author email</td>
+  <td>無ければ省略</td>
+ </tr>
+ <tr>
+  <td>content</td>
+  <td>○</td>
+  <td>description</td>
+  <td>無ければ省略</td>
+  <td>　</td>
+  <td>content</td>
+  <td>無ければ省略</td>
+ </tr>
+ <tr>
+      <TD align="center">---</TD>
+      <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>　</td>
+  <td>summary</td>
+  <td>content より生成</td>
+ </tr>
+  </TABLE>
+  <br>
+  ○ はRSS/ATOMの必須項目<br>
+<H4>２．実装</H4>
+<H4>２．１ クラス関数の関連</H4>
+クラスの継承を多段に使ったため、ちょっと複雑になっています。<br>
+<br>
+<A href="../class_map.gif"><IMG src="../class_map.gif" width="320" height="240" border="1"></A><br>
+<br>
+<H4>補足</H4>
+さらに詳しい情報は、<A href="http://linux.ohwada.jp/modules/bwiki/index.php?WebLinks">雑記帳 WebLinks</A> をご覧ください。<BR>
+<br>
+<hr>
+<div align="center"><a href="index.html">目次</a></div>
+$Id: developer_1_jp.html,v 1.1 2011/12/29 14:33:02 ohwada Exp $
+</BODY>
+</HTML>

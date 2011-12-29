@@ -1,0 +1,42 @@
+<{* $Id: weblinks_search_form.html,v 1.1 2011/12/29 14:32:37 ohwada Exp $ *}>
+
+<div class="weblinks_search_form">
+<form action="<{$xoops_url}>/modules/<{$dirname}>/search.php" method="get">
+<input type="text" id="query" name="query" size="50" maxlength="255" value="<{$search_query}>" />
+
+<{if $show_br1 }>
+  <br />
+<{/if}>
+
+<select id="andor" name="andor" size="1">
+<option value="AND"   <{$search_selected.and}>   ><{$lang_search_all}></option>
+<option value="OR"    <{$search_selected.or}>    ><{$lang_search_any}></option>
+<option value="exact" <{$search_selected.exact}> ><{$lang_search_exact}></option>
+</select>
+
+<{if $show_br2 }>
+  <br />
+<{/if}>
+
+<{if $show_mark }>
+  <select id="mark" name="mark" size="1">
+  <option value="0"                                        ><{$lang_search_not_select}></option>
+  <option value="recommend" <{$search_selected.recommend}> ><{$lang_site_recommend}></option>
+  <option value="mutual"    <{$search_selected.mutual}>    ><{$lang_site_mutual}></option>
+  </select>
+  <br />
+<{/if}>
+
+<{if $show_cat }>
+  <{$search_cat_selbox}>
+  <br />
+  <input type="checkbox" name="subcat" id="subcat" value="1" <{$search_checked.subcat}> /> 
+  <{$lang_search_with_subcat}>
+  <br />
+<{/if}>
+
+<input type="hidden" name="action" value="results" />
+<input type="submit" value="<{$lang_search_search}>" />
+</form>
+</div>
+<br />

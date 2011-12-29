@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE>国や言語による違い</TITLE>
+<style type="text/css">
+<!--
+h3.SoftwareHead {text-align: center; background-color: #FFFFE0;} /* LightYellow */
+
+div.cyan {
+  background-color: #E0FFFF;  /* LightCyan */
+  border-color:     #808080;  /* */
+  border-width:     1px;
+  border-style:     solid;
+  width:            500px;
+  padding:          2px;
+}
+-->
+</style>
+</HEAD>
+<BODY>
+<h3 class="SoftwareHead">WebLinks 開発者向け 文書</h3>
+<h4>国や言語による違い</h4>
+<h4>(1) 住所の並び</h4>
+日本式と英国式で異なる。<br />
+日本式は 都道府県など大きい方から表示する。<br />
+英語式は ストリ−トなど小さい方から表示する。<br />
+<br />
+テンプレートに２種類を記述して使用言語で選択した。<br />
+<h4>(2) 地図サイトへのリンク方法</h4>
+国より異なる。<br />
+<br />
+日本の地図サイト <A href="http://search.map.yahoo.co.jp/" target="_blank">http://search.map.yahoo.co.jp/</A> では、<br />
+住所を渡すだけを、検索できる。<br />
+<div class='cyan'> 
+&lt;a href=&quot;http：//search.map.yahoo.co.jp/search?p=&lt;{$link.addr_encode}&gt;&quot; target=_blank&gt;<br />
+&lt;img src=&quot;&lt;{$module_url}&gt;/images/map.png&quot; board=&quot;0&quot; alt=&quot;map&quot;&gt;&lt;/a&gt;<br />
+</div>
+<br />
+米国の地図サイト <A href="http://maps.yahoo.com/" target="_blank">http://maps.yahoo.com/</A> では、<br />
+住所以外に、郵便番号、州、市 を渡す必要がある。<br />
+<div class='cyan'> 
+&lt;form action=&quot;http：//us.rd.yahoo.com/maps/home/submit_a/*-http://maps.yahoo.com/maps&quot; target=&quot;_blank&quot; method=get&gt;<br />
+&lt;input type=&quot;hidden&quot; name=&quot;addr&quot; value=&quot;&lt;{$link.address}&gt;&quot;&gt;<br />
+&lt;input type=&quot;hidden&quot; name=&quot;csz&quot; value=&quot;&lt;{$link.city}&gt;, &lt;{$link.state}&gt; &lt;{$link.zip}&gt;&quot;&gt;<br />
+&lt;input type=&quot;hidden&quot; name=&quot;country&quot; value=&quot;us&quot;&gt;<br />
+&lt;input type=hidden name=srchtype value=a&gt;<br />
+&lt;input type=submit name=&quot;getmap&quot; value=&quot;Map&quot;&gt;<br />
+&lt;/form&gt;<br />
+</div>
+<br />
+テンプレートに２種類を記述して国名で選択した。<br />
+国名は、言語別ファイル (language/xxx/language_convert.php ) で設定する。<br />
+<h4>(3) 検索サイト</h4>
+言語により異なる。<br />
+日本は、<A href="http://googole.co.jp/" target="_blank">http://googole.co.jp/</A> を使用する。<br />
+英語圏は、 <A href="http://googole.com/" target="_blank">http://googole.com/</A> を使用する。<br />
+<br />
+サイトのURLは、言語別ファイル (language/xxx/language_convert.php ) で設定する。<br />
+<h4>(4) RSS検索サイト</h4>
+日本では、<A href="http://bulkfeeds.net/" target="_blank">BulkFeed</A> 
+など検索結果をRSS配信するサイトがある。<br />英語では、その種のものが見つからなかった。<br />
+<br />初期値は空欄である。<br />
+デフォルト値を選択したときに、使用言語で設定するようにした。<br />
+<H4>(5) 「友達に報告」の文字化け</H4>
+日本特有の問題である。<br />
+サーバーと クライアントPCで採用している文字コードの違いに起因する。<br />
+サーバーは EUC-JP であるが、クライアント PC は&nbsp;SJIS である。<br />
+文字コードが異なるため、文字化けする。<br />
+さらに、クライアントPCにて使用しているメール・アプリ・ソフトも関係しており、複雑な現象を起こしている。<br />
+
+<br />
+ひとまずの対策として、<br />
+クライアント PC が Windows か MAC のときは、<br />
+EUC-JP から SJIS へ変換する。<br />
+<br />
+言語別ファイル (language/xxx/language_convert.php ) で対応した。<br />
+<br />
+<hr>
+<div align="center"><a href="index.html">目次</a></div>
+$Id: lang_diff.html,v 1.1 2011/12/29 14:33:02 ohwada Exp $
+</BODY>
+</HTML>

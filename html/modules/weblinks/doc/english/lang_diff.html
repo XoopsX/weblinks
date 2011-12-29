@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE>The difference by the country or the language</TITLE>
+<style type="text/css">
+<!--
+h3.SoftwareHead {text-align: center; background-color: #FFFFE0;} /* LightYellow */
+
+div.cyan {
+  background-color: #E0FFFF;  /* LightCyan */
+  border-color:     #808080;  /* */
+  border-width:     1px;
+  border-style:     solid;
+  width:            500px;
+  padding:          2px;
+}
+-->
+</style>
+</HEAD>
+<BODY>
+<h3 class="SoftwareHead">WebLinks Developer's Document</h3>
+<h4>The difference by the country or the language</h4>
+<H4>(1) the order of address.</H4>
+In English style, from small to big, like street town city.<br />
+In Japanese style, from big to small, like city town street.<br />
+<br />
+I described the template &quot;weblinks_link.html&quot; which heve two
+address style.<br />
+It is selected by language code, Japanese or others.<br />
+
+<H4>(2) the link method to a map site</H4>
+The US map site is http://maps.yahoo.com/ .<br />
+This site requires ZIP code, state, city, address.<br />
+<div class='cyan'> 
+&lt;form action=&quot;http ://us.rd.yahoo.com/maps/home/submit_a/*-http://maps.yahoo.com/maps&quot; target=&quot;_blank&quot; method=get&gt;<br />
+&lt;input type=&quot;hidden&quot; name=&quot;addr&quot; value=&quot;&lt;{$link.address}&gt;&quot;&gt;<br />
+&lt;input type=&quot;hidden&quot; name=&quot;csz&quot; value=&quot;&lt;{$link.city}&gt;, &lt;{$link.state}&gt; &lt;{$link.zip}&gt;&quot;&gt;<br />
+&lt;input type=&quot;hidden&quot; name=&quot;country&quot; value=&quot;us&quot;&gt;<br />
+&lt;input type=hidden name=srchtype value=a&gt;<br />
+&lt;input type=submit name=&quot;getmap&quot; value=&quot;Map&quot;&gt;<br />
+&lt;/form&gt;<br />
+</div>
+<br />
+The Japanese map site is http://search.map.yahoo.co.jp/. <br />
+This site requires only address.<br />
+<div class='cyan'> 
+&lt;a href=&quot;http ://search.map.yahoo.co.jp/search?p=&lt;{$link.addr_encode}&gt;&quot; target=_blank&gt;<br />
+&lt;img src=&quot;&lt;{$module_url}&gt;/images/map.png&quot; board=&quot;0&quot; alt=&quot;map&quot;&gt;&lt;/a&gt;<br />
+</div>
+<br />
+I described the template &quot;weblinks_link.html&quot; which heve two
+link method.<br />
+It is selected by language code, Japanese or others.<br />
+<br />
+the author of WebLinks does not know the map sites without U.S and Japan.<br />
+Please teach me other county's infomation. <br />
+
+<H4>(3) the search site</H4>
+The English area use http://googole.com/ .<br />
+The Japanese area use http://googole.co.jp/ .<br />
+<br />
+It is selected by language code, Japanese or others.<br />
+I described in language/xxx/language_convert.php 
+<H4>(4) the RSS search site </H4>
+In Japan, there is the RSS search site which carries out RSS feeds of the
+search results, <br />
+such as<br />
+http://sf.livedoor.com/<br />
+http://bulkfeeds.net/<br />
+<br />
+I dont find same site in English. <br />
+If you know, please teach me.<br />
+<br />
+It was setup, when admin choice &quot;set default&quot; button in Module Configuration 2.
+<br />
+I described this choice in the PHP file &quot;admin/config.php&quot;.<br />
+It is selected by language code, Japanese or others.<br />
+<br />
+<H4>(5) Tel a friend. </H4>
+There is a situation peculiar to Japanese. <br />
+There are many character code such as SJIS, JIS, EUC-JP, UTF-8. <br />
+Many servers use EUC-JP.<br />
+Most of client PCs use SJIS.<br />
+It causes character garble.<br />
+<br />
+Therefore it encode from EUC-JP to SJIS. <br />
+<br />
+It is selected by language code, Japanese or others.<br />
+I described in language/xxx/language_convert.php <br />
+<br>
+<hr>
+<div align="center"><a href="index.html">INDEX</a></div>
+$Id: lang_diff.html,v 1.1 2011/12/29 14:33:03 ohwada Exp $
+</BODY>
+</HTML>

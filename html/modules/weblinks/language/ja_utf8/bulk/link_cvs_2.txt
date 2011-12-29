@@ -1,0 +1,213 @@
+title,url,description,state,city,addr,zip,tel
+---
+東京都
+東京都庁,http://www.metro.tokyo.jp/,東京都庁\nTOKYO METROPOLITAN GOVERNMENT\n都知事：石原 慎太郎\n人口：1206万人,東京都,新宿区,西新宿2-8-1,163-8001,03-5321-1111
+警視庁,http://www.keishicho.metro.tokyo.jp/,警視庁\nMetropolitan Police Department,東京都,千代田区,霞が関2-1-1,100-8929
+東京消防庁,http://www.tfd.metro.tokyo.jp/,東京消防庁\nTokyo Fire Department,東京都,千代田区,大手町1-3-5,100-8119,03-3212-2111
+---
+北海道
+北海道庁,http://www.pref.hokkaido.lg.jp/,
+---
+青森県
+青森県庁,http://www.pref.aomori.lg.jp/,
+---
+岩手県
+岩手県庁,http://www.pref.iwate.jp/,
+---
+秋田県
+秋田県庁,http://www.pref.akita.lg.jp/,
+---
+宮城県
+宮城県庁,http://www.pref.miyagi.jp/,
+---
+山形県
+山形県庁,http://www.pref.yamagata.jp/,
+---
+福島県
+福島県庁,http://www.pref.fukushima.jp/,
+---
+新潟県
+新潟県庁,http://www.pref.niigata.jp/,
+---
+富山県
+富山県庁,http://www.pref.toyama.jp/,
+---
+石川県
+石川県庁,http://www.pref.ishikawa.jp/,
+---
+福井県
+福井県庁,http://www.pref.fukui.jp/,
+---
+茨城県
+茨城県庁,http://www.pref.ibaraki.jp/,
+---
+栃木県
+栃木県庁,http://www.pref.tochigi.jp/,
+---
+群馬県
+群馬県庁,http://www.pref.gunma.jp/,
+---
+千葉県
+千葉県庁,http://www.pref.chiba.jp/
+---
+埼玉県
+埼玉県庁,http://www.pref.saitama.lg.jp/,
+---
+山梨県
+山梨県庁,http://www.pref.yamanashi.jp/
+---
+神奈川県
+神奈川県庁,http://www.pref.kanagawa.jp/,
+---
+長野県
+長野県庁,http://www.pref.nagano.jp/,
+---
+岐阜県
+岐阜県庁,http://www.pref.gifu.lg.jp/,
+---
+静岡県
+静岡県庁,http://www.pref.shizuoka.jp/,
+---
+愛知県
+愛知県庁,http://www.pref.aichi.jp/,
+---
+三重県
+三重県庁,http://www.pref.mie.jp/,
+---
+滋賀県
+滋賀県庁,http://www.pref.shiga.jp/,
+---
+京都府
+京都府庁,http://www.pref.kyoto.jp/,
+---
+奈良県
+奈良県庁,http://www.pref.nara.jp/,
+---
+大阪府
+大阪府庁,http://www.pref.osaka.jp/,
+---
+和歌山県
+和歌山県庁,http://www.pref.wakayama.lg.jp/,
+---
+兵庫県
+兵庫県庁,http://web.pref.hyogo.jp/,
+---
+鳥取県
+鳥取県庁,http://www.pref.tottori.jp/,
+---
+島根県
+島根県庁,http://www.pref.shimane.lg.jp/,
+---
+岡山県
+岡山県庁,http://www.pref.okayama.jp/,
+---
+広島県
+広島県庁,http://www.pref.hiroshima.lg.jp/,
+---
+山口県
+山口県庁,http://www.pref.yamaguchi.jp/,
+---
+香川県
+香川県庁,http://www.pref.kagawa.jp/,
+---
+愛媛県
+愛媛県庁,http://www.pref.ehime.jp/,
+---
+徳島県
+徳島県庁,http://www.pref.tokushima.jp/,
+---
+高知県
+高知県庁,http://www.pref.kochi.jp/,
+---
+福岡県
+福岡県庁,http://www.pref.fukuoka.lg.jp/,
+---
+佐賀県
+佐賀県庁,http://www.pref.saga.jp/,
+---
+長崎県
+長崎県庁,http://www.pref.nagasaki.jp/,
+---
+大分県
+大分県庁,http://www.pref.oita.jp/,
+---
+熊本県
+熊本県庁,http://www.pref.kumamoto.jp/,
+---
+宮崎県
+宮崎県庁,http://www.pref.miyazaki.lg.jp/,
+---
+鹿児島県
+鹿児島県庁,http://www.pref.kagoshima.jp/,
+---
+沖縄県
+沖縄県庁,http://www.pref.okinawa.jp/,
+---
+千代田区
+千代田区役所,http://www.city.chiyoda.tokyo.jp/,千代田区役所\n区長：石川 雅己\n人口：4.3万人,東京都,千代田区,九段南1-6-11,102-8688,03-3264-2111
+---
+中央区
+中央区役所,http://www.city.chuo.lg.jp/,中央区役所\n区長：矢田 美英\n人口：9.6万人,東京都,中央区,築地1-1-1,104-8404,03-3543-0211
+---
+港区
+港区役所,http://www.city.minato.tokyo.jp/,港区役所\n区長：武井 雅昭\n人口：17万人,東京都,港区,芝公園1-5-25,105-8511,03-3578-2111\n
+---
+新宿区
+新宿区役所,http://www.city.shinjuku.tokyo.jp/,新宿区役所\n区長：中山 弘子\n人口：26万人,東京都,新宿区,歌舞伎町1-4-1,160-8484.03-3209-1111
+---
+文京区
+文京区役所,http://www.city.bunkyo.lg.jp/,文京区役所\n区長：煙山 力\n人口：17万人,東京都,文京区,春日1-16-21,112-8555,03-3812-7111
+---
+台東区
+台東区役所,http://www.city.taito.tokyo.jp/,台東区役所\n区長：吉住 弘\n人口：15万人,東京都,台東区,東上野4-5-6,110-8615,03-5246-1111
+---
+墨田区
+墨田区役所,http://www.city.sumida.lg.jp/,墨田区役所\n区長：山崎 昇\n人口：21万人,東京都,墨田区,吾妻橋1-23-20,130-8640,03-5608-1111
+---
+江東区
+江東区役所,http://www.city.koto.lg.jp/,江東区役所\n区長：室橋 昭\n人口：38万人,東京都,江東区,東陽 4-11-28,135-8383,03-3647-9111
+---
+品川区
+品川区役所,http://www.city.shinagawa.tokyo.jp/,品川区役所\n区長：高橋 久二\n人口：32万人,東京都,品川区,広町2-1-36,140-8715,03-3777-1111
+---
+目黒区
+目黒区役所,http://www.city.meguro.tokyo.jp/,目黒区役所\n区長：薬師寺 克一\n人口：24万人,東京都,目黒区,上目黒2-19-15,153-8573,03-3715-1111
+---
+大田区
+大田区役所,http://www.city.ota.tokyo.jp/,大田区役所\n区長：西野 善雄\n人口：64万人,東京都,大田区,蒲田5-13-14,144-8621,03-5744-1111
+---
+世田谷区
+世田谷区役所,http://www.city.setagaya.tokyo.jp/,世田谷区役所\n区長：熊本 哲之\n人口：78万人,東京都,世田谷区,世田谷4-21-27,154-8504,03-5432-1111
+---
+渋谷区
+渋谷区役所,http://www.city.shibuya.tokyo.jp/,渋谷区役所\n区長：桑原 敏武\n人口：29万人,東京都,渋谷区,宇田川町1-1,150-8010,03-3463-1211
+---
+中野区
+中野区役所,http://www.city.tokyo-nakano.lg.jp/,中野区役所\n区長：田中 大輔\n人口：29万人,東京都,中野区,中野4-8-1,164-8501,03-3389-1111
+---
+杉並区
+杉並区役所,http://www.city.suginami.tokyo.jp/,杉並区役所\n区長：山田 宏\n人口：51万人,東京都,杉並区,阿佐谷南1-15-1,166-8570,03-3312-2111
+---
+豊島区
+豊島区役所,http://www.city.toshima.tokyo.jp/,豊島区役所\n区長：高野 之夫\n人口：24万人,東京都,豊島区,東池袋1-18-1,170-8422,03-3981-1111
+---
+北区
+北区役所,http://www.city.kita.tokyo.jp/,北区役所\n区長：花川 与惣太\n人口：32万人,東京都,北区,王子本町1-15-22,114-8508,03-3908-1111
+---
+荒川区
+荒川区役所,http://www.city.arakawa.tokyo.jp/,荒川区役所\n区長：藤澤 志光\n人口：17万人,東京都,荒川区,荒川2-2-3,116-8501,03-3802-3111
+---
+板橋区
+板橋区役所,http://www.city.itabashi.tokyo.jp/,板橋区役所\n区長：石塚 輝雄\n人口：50万人,東京都,板橋区,板橋2-66-1,173-8501,03-3964-1111
+---
+練馬区
+練馬区役所,http://www.city.nerima.tokyo.jp/,練馬区役所\n区長：志村 豊志郎\n人口：65万人,東京都,練馬区,豊玉北6-12-1,176-8501,03-3993-1111
+---
+足立区
+足立区役所,http://www.city.adachi.tokyo.jp/,足立区役所\n区長：鈴木 恒年\n人口：62万人,東京都,足立区,中央本町1-17-1,120-8510,03-3880-5111
+---
+葛飾区
+葛飾区役所,http://www.city.katsushika.tokyo.jp/,葛飾区役所\n区長：青木 勇\n人口：42万人,東京都,葛飾区,立石5-13-1,124-8555,03-3695-1111
+---
+江戸川区
+江戸川区役所,http://www.city.edogawa.tokyo.jp/,江戸川区役所\n区長：多田 正見\n人口：62万人,東京都,江戸川区,中央1-4-1,132-8501,03-3652-1151

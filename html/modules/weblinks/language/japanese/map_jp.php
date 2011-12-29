@@ -1,0 +1,73 @@
+<?php
+// $Id: map_jp.php,v 1.1 2011/12/29 14:32:46 ohwada Exp $
+
+//=========================================================
+// WebLinks Module
+// 2007-08-01 K.OHWADA
+// EUC-JP Í­Êþ¼«±óÊýÍè
+//=========================================================
+
+// --- define language begin ---
+if( !defined('WEBLINKS_LANG_MP_LOADED') ) 
+{
+
+define('WEBLINKS_LANG_MP_LOADED', 1);
+
+define('_AM_WEBLINKS_MAP_JP_MANAGE_DESC', 'ÆüËÜ¤Ç¤Î¤ßÍ­¸ú<br />ÆüËÜÃÏ¿Þ¤È¥«¥Æ¥´¥ê¤Î´ØÏ¢ÉÕ¤±¤ò¤¹¤ë');
+define('_AM_WEBLINKS_MAP_JP_LABEL', '¥é¥Ù¥ë');
+define('_AM_WEBLINKS_MAP_JP_PREF', 'ÃÏ¿Þ¾å¤Î¸©Ì¾');
+define('_AM_WEBLINKS_MAP_JP_SHOW_INDEX', '¥È¥Ã¥×¥Ú¡¼¥¸¤ËÆüËÜÃÏ¿Þ¤òÉ½¼¨¤¹¤ë');
+define('_AM_WEBLINKS_MAP_JP_SHOW_CAT', '¥«¥Æ¥´¥ê¥Ú¡¼¥¸¤ËÆüËÜÃÏ¿Þ¤òÉ½¼¨¤¹¤ë');
+
+define('_WEBLINKS_JP_HOKKAIDO', 'ËÌ³¤Æ»');
+define('_WEBLINKS_JP_AOMORI',   'ÀÄ¿¹');
+define('_WEBLINKS_JP_AKITA',    '½©ÅÄ');
+define('_WEBLINKS_JP_IWATE',    '´ä¼ê');
+define('_WEBLINKS_JP_YAMAGATA', '»³·Á');
+define('_WEBLINKS_JP_MIYAGI',   'µÜ¾ë');
+define('_WEBLINKS_JP_FUKUSHIMA','Ê¡Åç');
+define('_WEBLINKS_JP_ISHIKAWA', 'ÀÐÀî');
+define('_WEBLINKS_JP_TOYAMA',   'ÉÙ»³');
+define('_WEBLINKS_JP_NIIGATA',  '¿·³ã');
+define('_WEBLINKS_JP_FUKUI',    'Ê¡°æ');
+define('_WEBLINKS_JP_SHIGA',    '¼¢²ì');
+define('_WEBLINKS_JP_TOKYO',    'Åìµþ');
+define('_WEBLINKS_JP_KANAGAWA', '¿ÀÆàÀî');
+define('_WEBLINKS_JP_GUNMA',    '·²ÇÏ');
+define('_WEBLINKS_JP_TOCHIGI',  'ÆÊÌÚ');
+define('_WEBLINKS_JP_IBARAKI',  '°ñ¾ë');
+define('_WEBLINKS_JP_YAMANASHI','»³Íü');
+define('_WEBLINKS_JP_SAITAMA',  'ºë¶Ì');
+define('_WEBLINKS_JP_CHIBA',    'ÀéÍÕ');
+define('_WEBLINKS_JP_NAGANO',   'Ä¹Ìî');
+define('_WEBLINKS_JP_GIFU',     '´ôÉì');
+define('_WEBLINKS_JP_MIE',      '»°½Å');
+define('_WEBLINKS_JP_AICHI',    '°¦ÃÎ');
+define('_WEBLINKS_JP_SHIZUOKA', 'ÀÅ²¬');
+define('_WEBLINKS_JP_HYOGO',    'Ê¼¸Ë');
+define('_WEBLINKS_JP_KYOTO',    'µþÅÔ');
+define('_WEBLINKS_JP_OSAKA',    'Âçºå');
+define('_WEBLINKS_JP_NARA',     'ÆàÎÉ');
+define('_WEBLINKS_JP_WAKAYAMA', 'ÏÂ²Î»³');
+define('_WEBLINKS_JP_YAMAGUCHI','»³¸ý');
+define('_WEBLINKS_JP_SHIMANE',  'Åçº¬');
+define('_WEBLINKS_JP_TOTTORI',  'Ä»¼è');
+define('_WEBLINKS_JP_HIROSHIMA','¹­Åç');
+define('_WEBLINKS_JP_OKAYAMA',  '²¬»³');
+define('_WEBLINKS_JP_EHIME',    '°¦É²');
+define('_WEBLINKS_JP_KAGAWA',   '¹áÀî');
+define('_WEBLINKS_JP_KOCHI',    '¹âÃÎ');
+define('_WEBLINKS_JP_TOKUSHIMA','ÆÁÅç');
+define('_WEBLINKS_JP_FUKUOKA',  'Ê¡²¬');
+define('_WEBLINKS_JP_NAGASAKI', 'Ä¹ºê');
+define('_WEBLINKS_JP_SAGA',     'º´²ì');
+define('_WEBLINKS_JP_KUMAMOTO', '·§ËÜ');
+define('_WEBLINKS_JP_OITA',     'ÂçÊ¬');
+define('_WEBLINKS_JP_KAGOSHIMA','¼¯»ùÅç');
+define('_WEBLINKS_JP_MIYAZAKI', 'µÜºê');
+define('_WEBLINKS_JP_OKINAWA',  '²­Æì');
+
+}
+// --- define language end ---
+
+?>
