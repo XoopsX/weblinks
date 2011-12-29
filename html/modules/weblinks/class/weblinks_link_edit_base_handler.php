@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_link_edit_base_handler.php,v 1.1 2011/12/29 14:33:06 ohwada Exp $
+// $Id: weblinks_link_edit_base_handler.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+// 2011-12-29 K.OHWADA
+// PHP 5.3 : Assigning the return value of new by reference is now deprecated.
 
 // 2008-02-17 K.OHWADA
 // _get_flag_pagerank()
@@ -318,19 +321,19 @@ function &_create()
 
 function &_create_view()
 {
-	$view_obj =& new weblinks_link_view( $this->_DIRNAME );
+	$view_obj = new weblinks_link_view( $this->_DIRNAME );
 	return $view_obj;
 }
 
 function &_create_edit()
 {
-	$edit_obj =& new weblinks_link_edit( $this->_DIRNAME );
+	$edit_obj = new weblinks_link_edit( $this->_DIRNAME );
 	return $edit_obj;
 }
 
 function &_create_link_save($isNew = true)
 {
-	$obj =& new weblinks_link_save( $this->_DIRNAME );
+	$obj = new weblinks_link_save( $this->_DIRNAME );
 	if ($isNew)
 	{	$obj->setNew();	}
 	return $obj;

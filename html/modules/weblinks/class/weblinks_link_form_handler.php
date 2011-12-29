@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_link_form_handler.php,v 1.1 2011/12/29 14:33:09 ohwada Exp $
+// $Id: weblinks_link_form_handler.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+// 2011-12-29 K.OHWADA
+// PHP 5.3 : Assigning the return value of new by reference is now deprecated.
 
 // 2008-03-12 K.OHWADA
 // BUG: guest cannot set new password when use password reminder
@@ -447,7 +450,7 @@ function _build_button( $submit_value, $button_name, $button_value )
 //---------------------------------------------------------
 function &create_edit()
 {
-	$edit_obj =& new weblinks_link_edit( $this->_DIRNAME );
+	$edit_obj = new weblinks_link_edit( $this->_DIRNAME );
 	return $edit_obj;
 }
 

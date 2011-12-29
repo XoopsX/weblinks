@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_link_req_handler.php,v 1.1 2011/12/29 14:33:04 ohwada Exp $
+// $Id: weblinks_link_req_handler.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+// 2011-12-29 K.OHWADA
+// PHP 5.3 : Assigning the return value of new by reference is now deprecated.
 
 // 2007-11-01 K.OHWADA
 // modify_handler
@@ -117,7 +120,7 @@ function _add_modify_record( $mode=0 )
 
 function &_create_modify_save($isNew = true)
 {
-	$obj =& new weblinks_modify_save( $this->_DIRNAME );
+	$obj = new weblinks_modify_save( $this->_DIRNAME );
 	if ($isNew)
 	{	$obj->setNew();	}
 	return $obj;

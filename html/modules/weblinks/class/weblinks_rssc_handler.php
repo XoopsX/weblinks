@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_rssc_handler.php,v 1.1 2011/12/29 14:33:03 ohwada Exp $
+// $Id: weblinks_rssc_handler.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+// 2011-12-29 K.OHWADA
+// PHP 5.3 : Assigning the return value of new by reference is now deprecated.
 
 // 2007-11-01 K.OHWADA
 // WEBLINKS_RSSC_USE 
@@ -333,7 +336,7 @@ function weblinks_rssc_handler( $dirname )
 //---------------------------------------------------------
 function &create()
 {
-	$obj =& new weblinks_rssc();
+	$obj = new weblinks_rssc();
 	return $obj;
 }
 

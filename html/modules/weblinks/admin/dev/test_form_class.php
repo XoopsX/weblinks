@@ -1,34 +1,32 @@
 <?php
-// $Id: test_form_class.php,v 1.1 2011/12/29 14:32:58 ohwada Exp $
-
-// 2008-02-17 K.OHWADA
-// disable pagerank
-// check_config_rss_use()
-// print_error()
-
-// 2007-10-30 K.OHWADA
-// divid to test_form_guest_class.php
-
-// 2007-09-20 K.OHWADA
-// geust modify link
-
-// 2007-09-01 K.OHWADA
-// get_form_values()
-
-// 2007-05-18 K.OHWADA
-// XC 2.1
-
-// 2007-02-20 K.OHWADA
-// admin_add_cat_add_cat()
-// performance mode
-
-// 2006-12-10 K.OHWADA
-// use build_link_record
+// $Id: test_form_class.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
 
 //=========================================================
 // WebLinks Module
 // 2006-09-20 K.OHWADA
 //=========================================================
+
+// ---------------------------------------------------------------
+// 2011-12-29 K.OHWADA
+// PHP 5.3 : ereg
+// 2008-02-17 K.OHWADA
+// disable pagerank
+// check_config_rss_use()
+// print_error()
+// 2007-10-30 K.OHWADA
+// divid to test_form_guest_class.php
+// 2007-09-20 K.OHWADA
+// geust modify link
+// 2007-09-01 K.OHWADA
+// get_form_values()
+// 2007-05-18 K.OHWADA
+// XC 2.1
+// 2007-02-20 K.OHWADA
+// admin_add_cat_add_cat()
+// performance mode
+// 2006-12-10 K.OHWADA
+// use build_link_record
+// ---------------------------------------------------------------
 
 include_once 'htmlparser.inc.php';
 include_once 'test_form_parser_class.php';
@@ -334,8 +332,8 @@ function get_body( $result=null )
 		$result = $this->_snoopy->results;
 	}
 
-	$str = eregi_replace("^.*<body[^>]*>", "", $result);
-	$str = eregi_replace("</body>.*$",     "", $str);
+	$str = preg_replace("/^.*<body[^>]*>/i", "", $result);
+	$str = preg_replace("/</body>.*$/i",     "", $str);
 	return $str;
 }
 

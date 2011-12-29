@@ -1,14 +1,19 @@
 <?php
-// $Id: gen_all_table.php,v 1.1 2011/12/29 14:32:58 ohwada Exp $
+// $Id: gen_all_table.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
 
 //================================================================
 // WebLinks Module
 // 2006-09-20 K.OHWADA
 //================================================================
 
+// ---------------------------------------------------------------
+// 2011-12-29 K.OHWADA
+// PHP 5.3 : Assigning the return value of new by reference is now deprecated.
+// ---------------------------------------------------------------
+
 include_once 'dev_header.php';
 
-$genarete =& new weblinks_gen_record();
+$genarete = new weblinks_gen_record();
 
 dev_header();
 

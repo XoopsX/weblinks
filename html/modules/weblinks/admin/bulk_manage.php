@@ -1,5 +1,8 @@
 <?php
-// $Id: bulk_manage.php,v 1.1 2011/12/29 14:32:55 ohwada Exp $
+// $Id: bulk_manage.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+// 2010-04-28 K.OHWADA
+// $_FLAG_LINK_INSERT;
 
 // 2008-03-04 K.OHWADA
 // set time_publish
@@ -75,6 +78,11 @@ class admin_bulk_manage extends happy_linux_error
 
 	var $_FIELD_NAME_ADDTIONAL_ARRAY = 
 			array('str_time_publish', 'str_time_expire');
+
+// debug
+	var $_FLAG_LINK_INSERT     = true;
+	var $_FLAG_CATLINK_INSERT  = true;
+	var $_FLAG_CAT_TITLE_CHECK = true;
 
 //---------------------------------------------------------
 // constructor
@@ -493,15 +501,9 @@ function _get_cid_by_title($title)
 	$count   = count($cid_arr);
 	$title_s = $this->_str_trim_html($title);
 
-	if ( !is_array($cid_arr) || ($count == 0))
+	if ( is_array($cid_arr) && ($count == 1))
 	{
-// BUG: cannot register in TOP when exist
-		if ( $title == WEBLINKS_C_CAT_TOP )
-		{	return 0;	}
-
-		$this->_print_error( _NO_MATCH_RECORD.": ".$title_s );
-//		echo "$err_html <br />\n";
-		return -1;
+		return $cid_arr[0];
 	}
 	elseif ($count > 1)
 	{
@@ -510,7 +512,31 @@ function _get_cid_by_title($title)
 		return -1;
 	}
 
-	return $cid_arr[0];
+	if ( !is_array($cid_arr) || ($count == 0))
+	{
+		$cid_arr2 =& $this->_category_handler->get_cid_array_by_title_like($title);
+		$count2   = count($cid_arr2);
+
+		if ( is_array($cid_arr2) && ($count2 == 1))
+		{
+			return $cid_arr2[0];
+		}
+		elseif ($count2 > 1)
+		{
+			$this->_print_error( _MANY_MATCH_RECORD.": ".$title_s );
+//			echo "$err_html <br />\n";
+			return -1;
+		}
+	}
+
+// BUG: cannot register in TOP when exist
+	if ( $title == WEBLINKS_C_CAT_TOP )
+	{	return 0;	}
+
+	$this->_print_error( _NO_MATCH_RECORD.": ".$title_s );
+//	echo "$err_html <br />\n";
+	return -1;
+
 }
 
 function _build_selbox_top()
@@ -557,7 +583,7 @@ function _proc_link($line_arr)
 			}
 
 			$cid = $this->_get_cid_by_title($category_title);
-			if ( $cid == -1 )
+			if ( $this->_FLAG_CAT_TITLE_CHECK && ( $cid == -1 ))
 			{
 				return false;
 			}
@@ -681,22 +707,27 @@ function _insert_link($cid, $arr)
 		}
 	}
 
-	$newid = $this->_link_handler->insert($link_obj);
-	if ( !$newid )
-	{
-		$this->_print_errors( $this->_link_handler->getErrors(1) );
-		return false;
+	if ( $this->_FLAG_LINK_INSERT ) {
+		$newid = $this->_link_handler->insert($link_obj);
+		if ( !$newid )
+		{
+			$this->_print_errors( $this->_link_handler->getErrors(1) );
+			return false;
+		}
 	}
 
 // catlink_obj
 	$catlink_obj =& $this->_catlink_handler->create();
 	$catlink_obj->setVar('cid', $cid );
 	$catlink_obj->setVar('lid', $newid );
-	$ret = $this->_catlink_handler->insert($catlink_obj);
-	if ( !$ret )
-	{
-		$this->_print_error( $this->_catlink_handler->getErrors(1) );
-		return false;
+
+	if ( $this->_FLAG_CATLINK_INSERT ) {
+		$ret = $this->_catlink_handler->insert($catlink_obj);
+		if ( !$ret )
+		{
+			$this->_print_error( $this->_catlink_handler->getErrors(1) );
+			return false;
+		}
 	}
 
  	return true;

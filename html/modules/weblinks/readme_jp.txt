@@ -1,11 +1,39 @@
-$Id: readme_jp.txt,v 1.1 2011/12/29 14:32:31 ohwada Exp $
+$Id: readme_jp.txt,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1098&post_id=4081#forumpost4081
+要望：子カテゴリの表示
+
+リンク切れ一覧にて、broken の多い順にする。
+
+
+=================================================
+Version: 2.00
+Date:   2011-12-29
+Author: Kenichi OHWADA
+URL:    http://linux.ohwada.jp/
+Email:  webmaster@ohwada.jp
+=================================================
+
+● 変更内容
+1. PHP 5.3 対応
+PHP 5.3.x で推奨されない機能 を修正した
+http://www.php.net/manual/ja/migration53.deprecated.php
+(1) ereg
+(2) new の返り値を参照で代入すること
+
+2. MySQL 5.5 対応
+(1) TYPE=MyISAM -> ENGINE=MyISAM
+
+3. リンク切れ一覧にて、broken の多い順にする。
+
+4. バグ修正
+(1) typo in weblinks_link_single.html
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?post_id=4035&topic_id=1085&forum=5#forumpost4035
+
 
 =================================================
 Version: 1.95
 Date:   2009-04-02
-Author: Kenichi OHWADA
-URL:    http://linux.ohwada.jp/
-Email:  webmaster@ohwada.jp
 =================================================
 
 ● 変更内容

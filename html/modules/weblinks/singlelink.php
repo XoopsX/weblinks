@@ -1,5 +1,5 @@
 <?php
-// $Id: singlelink.php,v 1.1 2011/12/29 14:32:31 ohwada Exp $
+// $Id: singlelink.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
 
 // 2010-01-24 K.OHWADA
 // Notice [PHP]: Only variables should be assigned by reference

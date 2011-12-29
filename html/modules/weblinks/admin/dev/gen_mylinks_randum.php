@@ -1,18 +1,22 @@
 <?php
-// $Id: gen_mylinks_randum.php,v 1.1 2011/12/29 14:32:58 ohwada Exp $
-
-// 2007-03-07 K.OHWADA
-// divid to gen_mylinks_class.php
+// $Id: gen_mylinks_randum.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
 
 //================================================================
 // WebLinks Module
 // 2006-09-20 K.OHWADA
 //================================================================
 
+// ---------------------------------------------------------------
+// 2011-12-29 K.OHWADA
+// PHP 5.3 : Assigning the return value of new by reference is now deprecated.
+// 2007-03-07 K.OHWADA
+// divid to gen_mylinks_class.php
+// ---------------------------------------------------------------
+
 include_once 'dev_header.php';
 include_once 'gen_mylinks_class.php';
 
-$genarete =& new weblinks_gen_mylinks();
+$genarete = new weblinks_gen_mylinks();
 
 dev_header();
 

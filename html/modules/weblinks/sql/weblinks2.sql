@@ -1,4 +1,7 @@
-# $Id: weblinks2.sql,v 1.1 2011/12/29 14:32:31 ohwada Exp $
+# $Id: weblinks2.sql,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+# 2011-12-29 K.OHWADA
+# TYPE=MyISAM -> ENGINE=MyISAM
 
 # 2008-02-17 K.OHWADA
 # pagerank, pagerank_update in link, modify
@@ -93,7 +96,7 @@ CREATE TABLE weblinks2_category (
   KEY orders (orders),
   KEY tree_order (tree_order),
   KEY title (title(10))
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `weblinks2_link`
@@ -183,7 +186,7 @@ CREATE TABLE weblinks2_link (
   KEY mutual (mutual),
   KEY rssc_lid (rssc_lid),
   KEY exclude (broken, time_publish, time_expire)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `weblinks2_modify`
@@ -267,7 +270,7 @@ CREATE TABLE weblinks2_modify (
   pagerank     tinyint(2) NOT NULL default '0',
   pagerank_update int(5) default '0',
   PRIMARY KEY  (mid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `weblinks2_catlink`
@@ -280,7 +283,7 @@ CREATE TABLE weblinks2_catlink (
   PRIMARY KEY  (jid),
   KEY lid (lid),
   KEY cid (cid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `weblinks2_broken`
@@ -296,7 +299,7 @@ CREATE TABLE weblinks2_broken (
   KEY lid (lid),
   KEY sender (sender),
   KEY ip (ip)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `weblinks2_votedata`
@@ -313,7 +316,7 @@ CREATE TABLE weblinks2_votedata (
   PRIMARY KEY  (ratingid),
   KEY ratinguser (ratinguser),
   KEY ratinghostname (ratinghostname)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `weblinks2_atomfeed`
@@ -338,7 +341,7 @@ CREATE TABLE weblinks2_atomfeed (
   PRIMARY KEY  (aid),
   KEY url (url),
   KEY modified (time_modified)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `weblinks2_config`
@@ -391,7 +394,7 @@ CREATE TABLE weblinks2_config (
   cat_img_mode   tinyint(4) unsigned NOT NULL default '0',
   cat_img_width  int(10) unsigned NOT NULL default '0',
   cat_img_height int(10) unsigned NOT NULL default '0'
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `weblinks2_config2`
@@ -410,7 +413,7 @@ CREATE TABLE weblinks2_config2 (
   aux_text_2 varchar(255) default '',
   PRIMARY KEY (id),
   KEY conf_id (conf_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 #
 # Table structure for table `weblinks2_linkitem`
@@ -429,5 +432,5 @@ CREATE TABLE weblinks2_linkitem (
   description text NOT NULL,
   PRIMARY KEY (id),
   KEY item_id (item_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 

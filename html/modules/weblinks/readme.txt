@@ -1,11 +1,27 @@
-$Id: readme.txt,v 1.1 2011/12/29 14:32:28 ohwada Exp $
+$Id: readme.txt,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+=================================================
+Version: 2.00
+Date:   2011-12-29
+Author: Kenichi OHWADA
+URL:    http://linux2.ohwada.net/
+Email:  webmaster@ohwada.net
+=================================================
+
+* Changes *
+1. Migrating to PHP 5.3
+Deprecated features in PHP 5.3.x
+http://www.php.net/manual/en/migration53.deprecated.php
+(1) ereg
+(2) Assigning the return value of new by reference is now deprecated.
+
+2. Migrating to MySQL 5.5
+(1) TYPE=MyISAM -> ENGINE=MyISAM
+
 
 =================================================
 Version: 1.95
 Date:   2009-04-02
-Author: Kenichi OHWADA
-URL:    http://linux2.ohwada.net/
-Email:  webmaster@ohwada.net
 =================================================
 
 * Changes *

@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_category_handler.php,v 1.1 2011/12/29 14:33:07 ohwada Exp $
+// $Id: weblinks_category_handler.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+// 2010-10-28 K.OHWADA
+// get_cid_array_by_title_like()
 
 // 2007-12-16 K.OHWADA
 // build_selbox_top()
@@ -450,6 +453,15 @@ function &get_objects_by_title($title)
 	return $objs;
 }
 
+function &get_objects_by_title_like($title)
+{
+	$title = addslashes($title);
+	$criteria = new CriteriaCompo();
+	$criteria->add( new criteria('title', '%'.$title.'%', 'LIKE') );
+	$objs =& $this->getObjects($criteria);
+	return $objs;
+}
+
 function &get_objects_tree($limit=0, $start=0)
 {
 	$limit = intval($limit);
@@ -478,6 +490,23 @@ function &get_cid_array_by_title($title)
 	$cid_arr = array();
 
 	$objs =& $this->get_objects_by_title($title);
+
+	if (count($objs) > 0)
+	{
+		foreach ($objs as $obj)
+		{
+			$cid_arr[] = $obj->get('cid');
+		}
+	}
+
+	return $cid_arr;
+}
+
+function &get_cid_array_by_title_like($title)
+{
+	$cid_arr = array();
+
+	$objs =& $this->get_objects_by_title_like($title);
 
 	if (count($objs) > 0)
 	{

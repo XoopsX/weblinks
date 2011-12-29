@@ -1,10 +1,15 @@
 <?php
-// $Id: gen_for_export_rssc.php,v 1.1 2011/12/29 14:32:58 ohwada Exp $
+// $Id: gen_for_export_rssc.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
 
 //================================================================
 // WebLinks Module
 // 2006-09-20 K.OHWADA
 //================================================================
+
+// ---------------------------------------------------------------
+// 2011-12-29 K.OHWADA
+// PHP 5.3 : Assigning the return value of new by reference is now deprecated.
+// ---------------------------------------------------------------
 
 include_once 'dev_header.php';
 
@@ -410,7 +415,7 @@ function insert_rssc_feed($lid, $site_title, $title='', $updated_unix=0)
 //=========================================================
 // main
 //=========================================================
-$genarete =& new weblinks_genarate_rssc();
+$genarete = new weblinks_genarate_rssc();
 
 dev_header();
 

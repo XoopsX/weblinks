@@ -1,17 +1,20 @@
 <?php
-// $Id: test_class_class.php,v 1.1 2011/12/29 14:32:57 ohwada Exp $
-
-// 2007-11-01 K.OHWADA
-// approve_new
-
-// 2007-03-01 K.OHWADA
-// user can use textarea1
-// user & admin can not change hits
+// $Id: test_class_class.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
 
 //=========================================================
 // WebLinks Module
 // 2006-09-20 K.OHWADA
 //=========================================================
+
+// ---------------------------------------------------------------
+// 2011-12-29 K.OHWADA
+// PHP 5.3 : Assigning the return value of new by reference is now deprecated.
+// 2007-11-01 K.OHWADA
+// approve_new
+// 2007-03-01 K.OHWADA
+// user can use textarea1
+// user & admin can not change hits
+// ---------------------------------------------------------------
 
 //---------------------------------------------------------
 // $mode_passwd
@@ -51,7 +54,7 @@ function &getInstance()
 //---------------------------------------------------------
 function &create_link_save($isNew = true)
 {
-	$obj =& new weblinks_link_save( WEBLINKS_DIRNAME );
+	$obj = new weblinks_link_save( WEBLINKS_DIRNAME );
 	if ($isNew)
 	{	$obj->setNew();	}
 	return $obj;
@@ -59,7 +62,7 @@ function &create_link_save($isNew = true)
 
 function &create_modify_save($isNew = true)
 {
-	$obj =& new weblinks_modify_save( WEBLINKS_DIRNAME );
+	$obj = new weblinks_modify_save( WEBLINKS_DIRNAME );
 	if ($isNew)
 	{	$obj->setNew();	}
 	return $obj;

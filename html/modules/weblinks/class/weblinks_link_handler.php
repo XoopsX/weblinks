@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_link_handler.php,v 1.1 2011/12/29 14:33:04 ohwada Exp $
+// $Id: weblinks_link_handler.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+
+// 2010-03-31 K.OHWADA
+// get_objects_broken()
 
 // 2008-02-17 K.OHWADA
 // pagerank, pagerank_update in link, modify
@@ -613,6 +616,18 @@ function &get_objects_non_url($limit=0, $start=0)
 }
 
 function &get_objects_broken($limit=0, $start=0)
+{
+// broken DESC
+	$criteria = new CriteriaCompo();
+	$criteria->add( new criteria('broken', '0', '>') );
+	$criteria->setSort( 'broken DESC' );
+	$criteria->setStart($start);
+	$criteria->setLimit($limit);
+	$objs =& $this->getObjects($criteria);
+	return $objs;
+}
+
+function &get_objects_broken_lid($limit=0, $start=0)
 {
 // BUG: dont work limit 
 	$where = 'broken > 0';
