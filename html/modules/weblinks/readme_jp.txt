@@ -1,4 +1,4 @@
-$Id: readme_jp.txt,v 1.3 2011/12/29 20:57:11 ohwada Exp $
+$Id: readme_jp.txt,v 1.4 2011/12/29 20:57:52 ohwada Exp $
 
 =================================================
 Version: 2.00
@@ -22,7 +22,7 @@ http://www.php.net/manual/ja/migration53.deprecated.php
 
 4. ¥Ð¥°½¤Àµ
 (1) typo in weblinks_link_single.html
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?post_id=4035&topic_id=1085&forum=5#forumpost4035
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1085&forum=5
 
 
 =================================================

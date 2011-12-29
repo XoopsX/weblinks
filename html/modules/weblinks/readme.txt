@@ -1,4 +1,4 @@
-$Id: readme.txt,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+$Id: readme.txt,v 1.3 2011/12/29 20:57:11 ohwada Exp $
 
 =================================================
 Version: 2.00
@@ -17,6 +17,12 @@ http://www.php.net/manual/en/migration53.deprecated.php
 
 2. Migrating to MySQL 5.5
 (1) TYPE=MyISAM -> ENGINE=MyISAM
+
+3. link sort by much broken in broken link
+
+4. bug fix
+(1) typo in weblinks_link_single.html
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1085&forum=5
 
 
 =================================================
