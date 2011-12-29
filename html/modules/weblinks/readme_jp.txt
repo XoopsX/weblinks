@@ -1,10 +1,4 @@
-$Id: readme_jp.txt,v 1.2 2011/12/29 19:54:56 ohwada Exp $
-
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1098&post_id=4081#forumpost4081
-要望：子カテゴリの表示
-
-リンク切れ一覧にて、broken の多い順にする。
-
+$Id: readme_jp.txt,v 1.3 2011/12/29 20:57:11 ohwada Exp $
 
 =================================================
 Version: 2.00
