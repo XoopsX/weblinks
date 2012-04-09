@@ -1,5 +1,10 @@
 <?php
-// $Id: weblinks_install.php,v 1.1 2011/12/29 14:33:05 ohwada Exp $
+// $Id: weblinks_install.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// _update_category_210()
+// _update_link_210()
+// _update_modify_210()
 
 // 2008-12-07 K.OHWADA
 // title in category, varchar(255) or varbinary(255)
@@ -125,6 +130,11 @@ function check_update()
 		return false;
 	}
 
+	if ( !$this->_check_category_210() ) {
+		$this->_set_error( 'NOT category 210' );
+		return false;
+	}
+
 	if ( !$this->_check_category_190() ) {
 		$this->_set_error( 'NOT category 190' );
 		return false;
@@ -142,6 +152,11 @@ function check_update()
 
 	if ( !$this->_check_category_140() ) {
 		$this->_set_error( 'NOT category 140' );
+		return false;
+	}
+
+	if ( !$this->_check_link_210() ) {
+		$this->_set_error( 'NOT link 210' );
 		return false;
 	}
 
@@ -177,6 +192,11 @@ function check_update()
 
 	if ( !$this->_check_link_110() ) {
 		$this->_set_error( 'NOT link 110' );
+		return false;
+	}
+
+	if ( !$this->_check_modify_210() ) {
+		$this->_set_error( 'NOT modify 210' );
 		return false;
 	}
 
@@ -255,11 +275,13 @@ function update()
 		$this->set_msg( $this->build_update_msg( $this->_linkitem_table ) );
 	}
 
+	$this->check_and_update_table( 'category', '210' );
 	$this->check_and_update_table( 'category', '140' );
 	$this->check_and_update_table( 'category', '141' );
 	$this->check_and_update_table( 'category', '142' );
 	$this->check_and_update_table( 'category', '190' );
 
+	$this->check_and_update_table( 'link', '210' );
 	$this->check_and_update_table( 'link', '110' );
 	$this->check_and_update_table( 'link', '120' );
 	$this->check_and_update_table( 'link', '130' );
@@ -268,6 +290,7 @@ function update()
 	$this->check_and_update_table( 'link', '142' );
 	$this->check_and_update_table( 'link', '190' );
 
+	$this->check_and_update_table( 'modify', '210' );
 	$this->check_and_update_table( 'modify', '110' );
 	$this->check_and_update_table( 'modify', '120' );
 	$this->check_and_update_table( 'modify', '130' );
@@ -528,6 +551,11 @@ $sql = "
 //---------------------------------------------------------
 // category table
 //---------------------------------------------------------
+function _check_category_210()
+{
+	return $this->exists_column( $this->_category_table, 'gm_icon' );
+}
+
 function _check_category_190()
 {
 	return $this->preg_match_column_type_array( 
@@ -547,6 +575,17 @@ function _check_category_141()
 function _check_category_140()
 {
 	return $this->exists_column( $this->_category_table, 'forum_id' );
+}
+
+function _update_category_210()
+{
+$sql = "
+  ALTER TABLE ".$this->_category_table." ADD COLUMN (
+  gm_icon     int(5) default '0',
+  gm_location varchar(255) default ''
+)";
+
+	return $this->query($sql);
 }
 
 function _update_category_190()
@@ -614,6 +653,11 @@ $sql = "
 //---------------------------------------------------------
 // link table
 //---------------------------------------------------------
+function _check_link_210()
+{
+	return $this->exists_column( $this->_link_table, 'gm_icon' );
+}
+
 function _check_link_190()
 {
 	return $this->exists_column( $this->_link_table, 'pagerank' );
@@ -647,6 +691,23 @@ function _check_link_120()
 function _check_link_110()
 {
 	return $this->exists_column( $this->_link_table, 'dohtml' );
+}
+
+function _update_link_210()
+{
+$sql1 = "
+  ALTER TABLE ".$this->_link_table." ADD COLUMN (
+  gm_icon int(5) default '0'
+)";
+	$ret1 = $this->query($sql1);
+
+$sql2 = "
+  ALTER TABLE ".$this->_link_table." MODIFY
+    url text NOT NULL
+";
+	$ret2 = $this->query($sql2);
+
+	return ($ret1 && $ret2);
 }
 
 function _update_link_190()
@@ -772,6 +833,11 @@ $sql1 = "
 //---------------------------------------------------------
 // modify table
 //---------------------------------------------------------
+function _check_modify_210()
+{
+	return $this->exists_column( $this->_modify_table, 'gm_icon' );
+} 
+
 function _check_modify_190()
 {
 	return $this->exists_column( $this->_modify_table, 'pagerank' );
@@ -805,6 +871,22 @@ function _check_modify_120()
 function _check_modify_110()
 {
 	return $this->exists_column( $this->_modify_table, 'dohtml' );
+}
+
+function _update_modify_210()
+{
+$sql1 = "
+  ALTER TABLE ".$this->_modify_table." ADD COLUMN (
+  gm_icon int(5) default '0'
+)";
+	$ret1 = $this->query($sql1);
+
+$sql2 = "
+  ALTER TABLE ".$this->_modify_table." MODIFY
+    url text NOT NULL
+";
+	$ret2 = $this->query($sql2);
+	return ($ret1 && $ret2);
 }
 
 function _update_modify_190()

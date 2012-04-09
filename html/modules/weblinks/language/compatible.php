@@ -1,5 +1,5 @@
 <?php
-// $Id: compatible.php,v 1.1 2011/12/29 14:32:40 ohwada Exp $
+// $Id: compatible.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
 
 // 2008-02-17 K.OHWADA
 // pagerank, pagerank_update
@@ -50,6 +50,54 @@
 // WebLinks Module
 // 2006-05-15 K.OHWADA
 //=========================================================
+
+//---------------------------------------------------------
+// compatible for v2.10
+//---------------------------------------------------------
+if( !defined('_WEBLINKS_WEBMAP3_NOT_INSTALLED') ) 
+{
+
+// webmap3
+define('_WEBLINKS_WEBMAP3_NOT_INSTALLED', 'NOT installed WEBMAP3 module ( %s ) ');
+define('_WEBLINKS_WEBMAP3_INSTALLED',     'Installed WEBMAP3 module ( %s ) ver %s ');
+define('_WEBLINKS_WEBMAP3_REQUIRE',       'Require WEBMAP3 module ver %s or later');
+
+// google map
+define('_WEBLINKS_GM_LOCATION', 'Location');
+define('_WEBLINKS_GM_ICON', 'Google Icon');
+
+}
+
+if( !defined('_AM_WEBLINKS_VIEW_URL_SUMMARY') ) 
+{
+
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY','Select URL');
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY_DSC','apply when select summary in category, recommended site, etc.');
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY_0','url of original site');
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY_1','singlelink of Weblinks');
+
+define('_AM_WEBLINKS_RSSC_MANAGE','RSSC Manage');
+define('_AM_WEBLINKS_RSSC_ARCHIVE','RSSC Archive Manage');
+define('_AM_WEBLINKS_RSSC_ADD','Add RSS URL in Link');
+
+define('_AM_WEBLINKS_BULK_COMMENT','Bulk Registation of Comment');
+define('_AM_WEBLINKS_BULK_COMMENT_DSC1','describe the title of link, uid, the title of comment, and the text of commentwith comma(,) separate<br />uid is omissible. substitute with uid of administrator.<br/ >the title of comment is omissible. substitute with the title of link.');
+define('_AM_WEBLINKS_NO_COMMENT','No comment');
+define('_AM_WEBLINKS_COMMENT_ADDED','Added comment');
+define('_AM_WEBLINKS_BULK_DSC1','<br />describe \2c instead of comma.<br/ >describe \n instead of new-line.');
+
+define('_AM_WEBLINKS_TITLE_LINK_GEOCODING','List of latitude & longitude');
+define('_AM_WEBLINKS_TITLE_LINK_GEOCODING_DSC','Search latitude & longitude from address<br />Dont search link which registed lat & lng<br />Show result in <span style="color:#0000ff">Blue</span><br />Show in <span style="color:#ff0000">Red</span> if cannot search');
+define('_AM_WEBLINKS_SEARCHED_ADDRESS','Searched Address');
+define('_AM_WEBLINKS_GOTO_NEXT_PAGE','Goto Next Page');
+define('_AM_WEBLINKS_LAST_PAGE','This is last page');
+define('_AM_WEBLINKS_GEO_ADD','Add lat & lng into link');
+
+define('_AM_WEBLINKS_TITLE_LINK_CSV','Download links with CSV format');
+
+define('_AM_WEBLINKS_GM_LOCATION_DSC', 'Memo which notes place');
+
+}
 
 //---------------------------------------------------------
 // compatible for v1.90

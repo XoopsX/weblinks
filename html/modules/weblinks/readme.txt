@@ -1,11 +1,65 @@
-$Id: readme.txt,v 1.3 2011/12/29 20:57:11 ohwada Exp $
+$Id: readme.txt,v 1.4 2012/04/09 10:20:04 ohwada Exp $
+
+=================================================
+Version: 2.10
+Date:   2012-04-02
+Author: Kenichi OHWADA
+URL:    http://linux2.ohwada.net/
+Email:  webmaster@ohwada.net
+=================================================
+
+* Changes *
+1. Supprt Google Maps API V3
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1271&forum=5
+
+(1) Require WEBMAP3 module
+
+(2) The admin can set the icon of a marker in eahc category and each link. 
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1150
+
+The admin can set the icon of a marker in eahc category and each link. 
+
+(3) The admin can set favorite icon.
+This is feature of WEBMAP3 module.
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=848
+
+2. Added "Select url" in admin page
+Admin can choice the original site url or singlelink.php of Weblinks
+in the hyperlink of a title .
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1198
+
+3. Expand the number of URL characters from 255 bytes to 64 K bytes.
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1279
+
+4. Addeed following in bulk registration.
+(1) Register the comments by form entry
+(2) Register RSS URL from URL of registered link automatically.
+(3) Register latitude and longitude of registered link semiautomatically.
+(4) Describe \2c instead of comma.
+(5) Describe \n instead of new-line in textarea1, 2.
+
+4. Langauge pack
+(1) Added Russian ( CP1251 & UTF-8 )
+Files in language directory and extra directory.
+Special thanks, Anthony xoops-org.ru .
+
+
+* DB table structure *
+1. link, modify table
+(1) added fields 
+- gm_icon : Google Maps Icon
+(2) modify attribute varchar to text
+- url 
+
+2. category table
+(1) added fields 
+- gm_icon : Google Maps Icon
+- gm_location : memo of location
+
 
 =================================================
 Version: 2.00
 Date:   2011-12-29
-Author: Kenichi OHWADA
-URL:    http://linux2.ohwada.net/
-Email:  webmaster@ohwada.net
 =================================================
 
 * Changes *

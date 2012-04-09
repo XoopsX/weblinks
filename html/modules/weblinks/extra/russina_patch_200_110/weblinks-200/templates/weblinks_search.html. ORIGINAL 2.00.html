@@ -1,0 +1,116 @@
+<{* $Id: weblinks_search.html.\040ORIGINAL\0402.00.html,v 1.1 2012/04/09 10:21:09 ohwada Exp $ *}>
+
+<{$weblinks_module_header}>
+
+&nbsp;
+<a href="<{$xoops_url}>/"><{$lang_home}></a> &gt;&gt; 
+<{if $search_merged_urlencode != '' }>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/index.php?keywords=<{$search_merged_urlencode}>">
+<{else}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/index.php">
+<{/if}>
+<{$module_name}></a> &gt;&gt; 
+<span class="weblinks_bold"><{$lang_search_search}></span>
+<br /><br />
+
+<{$weblinks_header}>
+<{$weblinks_guidance}>
+
+<center>
+<{$weblinks_search_form}>
+</center>
+<br /><br />
+
+<{if ($search_google_server != "") && ($search_query_utf8_urlencode != "") }>
+  <a href="<{$search_google_server}>search?hl=<{$xoops_langcode}>&amp;q=<{$search_query_utf8_urlencode}>" target="_blank"><{$lang_search_google}>: 
+  <{foreach item=keyword from=$search_keywords}>
+    <{$keyword}> 
+  <{/foreach}>
+  </a><br /><br />
+<{/if}>
+
+<{if $search_show != 1}>
+  <span class="weblinks_error"><{$search_not_show_result}></span><br />
+<{else}>
+  <div class="weblinks_title"><{$lang_search_result}></div>
+ 
+  <{$lang_search_keyword}>
+  <{foreach item=keyword from=$search_keywords}>
+    <strong><{$keyword}></strong> 
+  <{/foreach}>
+  <br />
+
+  <{if $search_show_candidate }>
+    <br />
+    <{$lang_search_candidate}>:<br />
+    <{foreach item=candidate from=$search_candidates}>
+      <strong><{$candidate.keyword}></strong>(<{$candidate.lang}>) 
+    <{/foreach}>
+    <br />
+  <{/if}>
+
+  <{if $search_show_ignore }>
+    <br />
+    <{$lang_search_ignore}><br />
+    <{foreach item=ignore from=$search_ignores}>
+    <strong><{$ignore}></strong> 
+    <{/foreach}>
+    <br />
+  <{/if}>
+
+  <{if $search_found_show != 1}>
+    <br />
+    <span class="weblinks_error"><{$search_not_found_result}></span><br />
+  <{else}>
+    <br />
+    <{$search_found}><br /><br />
+    <{$weblinks_links_list}>
+    <br /><br />
+
+    <div class="weblinks_pagenavi">
+      <{$page_navi}>
+    </div>
+
+  <{/if}>
+<{/if}>
+<br /><br />
+
+<{if $feed_show == 1 }>
+  <div class="weblinks_title"><{$lang_atomfeed}></div>
+  <{$feed_found}><br /><br />
+
+<{* -- feed list begin -- *}>
+  <{foreach item=feed from=$feeds}>
+    <div class="weblinks_index_frame_feed">
+    <div class="weblinks_feed_frame_title">
+      <a href="<{$feed.link}>" target="_blank"><span class="weblinks_feed_title"><{$feed.title}></span></a><br />
+      &nbsp; from <a href="<{$feed.site_link}>" target="_blank"><{$feed.site_title}></a>&nbsp;
+      <{if $feed.updated_short != ""}>
+        (<{$feed.updated_short}>)&nbsp;
+      <{/if}>
+    </div>
+    <div class="weblinks_feed_frame_summary">
+      <{if $feed.summary != ""}>
+        <{$feed.summary}>
+      <{/if}>
+    </div>
+    </div>
+  <{/foreach}>
+  <br />
+<{* -- feed list end -- *}>
+
+<{elseif $feed_show == 2}>
+  <{if $feed_reason != ""}>
+    <div class="weblinks_title"><{$lang_atomfeed}></div>
+    <span class="weblinks_error"><{$feed_reason}></span><br />
+  <{/if}>
+<{/if}>
+
+<hr />
+<div class="weblinks_execution_time">execution time : <{$execution_time}> sec </div>
+<{if $is_module_admin }>
+  <{if $memory_usage > 0}>
+	<div class="weblinks_memory_usage">memory usage : <{$memory_usage}> MB </div>
+  <{/if}>
+	<a href="<{$xoops_url}>/modules/<{$dirname}>/admin/index.php"><{$lang_goto_admin}></a>
+<{/if}>

@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_link.php,v 1.1 2011/12/29 14:33:09 ohwada Exp $
+// $Id: weblinks_link.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// gm_icon
 
 // 2008-02-17 K.OHWADA
 // pagerank, pagerank_update in link, modify
@@ -323,6 +326,7 @@ function weblinks_link()
 	$this->initVar('gm_longitude', XOBJ_DTYPE_FLOAT, 0, false );
 	$this->initVar('gm_zoom',      XOBJ_DTYPE_INT,   0, false );
 	$this->initVar('gm_type',      XOBJ_DTYPE_INT,   0, false );
+	$this->initVar('gm_icon',      XOBJ_DTYPE_INT,   0, false );
 
 // publish
 	$this->initVar('time_publish', XOBJ_DTYPE_INT, 0);

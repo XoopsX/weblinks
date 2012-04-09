@@ -1,5 +1,12 @@
 <?php
-// $Id: bulk_manage.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+// $Id: bulk_manage.php,v 1.3 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// use camma by \2c
+// use \n in textarea1,2
+// comment_handler
+// rssc_add.php
+// link_geocoding.php
 
 // 2010-04-28 K.OHWADA
 // $_FLAG_LINK_INSERT;
@@ -62,12 +69,14 @@ class admin_bulk_manage extends happy_linux_error
 	var $_link_handler;
 	var $_category_handler;
 	var $_catlink_handler;
+	var $_comment_handler;
 
 	var $_post;
 	var $_strings;
 	var $_bulk_form;
 
 // local variable
+	var $_xoops_uid;
 	var $_split_pattern = ',';
 
 	var $_field_array = array();
@@ -96,11 +105,14 @@ function admin_bulk_manage()
 	$this->_link_handler      =& weblinks_get_handler( 'link',      WEBLINKS_DIRNAME );
 	$this->_category_handler  =& weblinks_get_handler( 'category',  WEBLINKS_DIRNAME );
 	$this->_catlink_handler   =& weblinks_get_handler( 'catlink',   WEBLINKS_DIRNAME );
+	$this->_comment_handler   =& weblinks_get_handler( 'comment',   WEBLINKS_DIRNAME );
 
 	$this->_post      =& happy_linux_post::getInstance();
 	$this->_strings   =& happy_linux_strings::getInstance();
 
 	$this->_bulk_form =& admin_bulk_form::getInstance();
+
+	$this->_xoops_uid = $this->get_xoops_uid();
 
 // BUG : not set search field
 	$this->_init();
@@ -116,6 +128,11 @@ function &getInstance()
 	return $instance;
 }
 
+function get_xoops_uid()
+{
+	global $xoopsUser;
+	return $xoopsUser->getVar('uid');
+}
 
 //=========================================================
 // public
@@ -148,6 +165,11 @@ function get_post_linklist()
 	return $this->_post->get_post_text_split('linklist');
 }
 
+function get_post_comment_list()
+{
+	return $this->_post->get_post_text_split('commentlist');
+}
+
 function get_post_check_url()
 {
 	return $this->_post->get_post_int('check_url');
@@ -178,15 +200,20 @@ function print_menu()
 	$script_link_opt  = $script.'?op=form_link_optional';
 	$script_file_cat  = $script.'?op=form_file_cat';
 	$script_file_link = $script.'?op=form_file_link';
+	$script_comment   = $script.'?op=form_comment';
 
 	echo "<h3>". _AM_WEBLINKS_BULK_IMPORT ."</h3>\n";
 	echo "<ul>\n";
 	echo "<li><a href='$script_cat'>".       _AM_WEBLINKS_BULK_CAT ."</a><br /><br /></li>\n";
 	echo "<li><a href='$script_link'>".      _AM_WEBLINKS_BULK_LINK ." (". _AM_WEBLINKS_BULK_LINK_DSC10 ." )</a><br /><br /></li>\n";
 	echo "<li><a href='$script_link_opt'>".  _AM_WEBLINKS_BULK_LINK ." (". _AM_WEBLINKS_BULK_LINK_DSC20 ." )</a><br /><br /></li>\n";
+	echo "<li><a href='$script_comment'>".       _AM_WEBLINKS_BULK_COMMENT ."</a><br /><br /></li>\n";
+	echo "<li><a href='rssc_add.php'>".  _AM_WEBLINKS_TITLE_RSSC_ADD ."</a><br /><br /></li>\n";
+	echo "<li><a href='link_geocoding.php'>".  _AM_WEBLINKS_GEO_ADD ."</a><br /><br /></li>\n";
 //	echo "<li><a href='$script_file_cat'>".  _AM_WEBLINKS_BULK_CAT ."</a><br /><br /></li>\n";
 //	echo "<li><a href='$script_file_link'>". _AM_WEBLINKS_BULK_LINK ."</a><br /><br /></li>\n";
 	echo "</ul>\n";
+	echo _AM_WEBLINKS_BULK_DSC1 ."<br /><br />\n";
 }
 
 function print_form_file($title, $dsc, $file, $op)
@@ -252,9 +279,27 @@ function print_form_link_optional($file)
 	$this->_bulk_form->print_form_link_optional($file);
 }
 
+function print_form_comment($file)
+{
+	$this->_bulk_form->print_form_comment($file);
+}
+
+
 //---------------------------------------------------------
 // add category & link
 //---------------------------------------------------------
+function check_lines($lines)
+{
+	$count = count($lines);
+	if ($count == 0) {
+		return false;
+	}
+ 	if ( ($count == 1) && empty($lines[0]) ) {
+		return false;
+	}
+	return true;
+}
+
 function add_cat($cid, $line_arr)
 {
 	echo "<h4>". _AM_WEBLINKS_BULK_CAT ."</h4>\n";
@@ -299,6 +344,22 @@ function add_link_optional($line_arr)
 
 	echo "<br />\n";
 	echo "<h4>". _WLS_NEWLINKADDED ."</h4>\n";
+}
+
+function add_comment($line_arr)
+{
+	echo "<h4>". _AM_WEBLINKS_BULK_COMMENT ."</h4>\n";
+
+// proc lines
+	$ret = $this->_proc_comment($line_arr);
+	if ( !$ret )
+	{
+		echo "<br />\n";
+		$this->_print_error( _AM_WEBLINKS_BULK_ERROR_FINISH );
+	}
+
+	echo "<br />\n";
+	echo "<h4>". _AM_WEBLINKS_COMMENT_ADDED ."</h4>\n";
 }
 
 //---------------------------------------------------------
@@ -859,6 +920,19 @@ function _get_link_optinal($line)
 		$description = $link_arr['description'];
 		$link_arr['description'] = $this->_convert_str_to_crlf($description);
 	}
+	if ( isset($link_arr['description']) )
+	{
+		$description = $link_arr['description'];
+		$link_arr['description'] = $this->_convert_str_to_crlf($description);
+	}
+	if ( isset($link_arr['textarea1']) )
+	{
+		$link_arr['textarea1'] = $this->_convert_str_to_crlf( $link_arr['textarea1'] );
+	}
+	if ( isset($link_arr['textarea2']) )
+	{
+		$link_arr['textarea2'] = $this->_convert_str_to_crlf( $link_arr['textarea2'] );
+	}
 
 	$str = "$title, $url, $description";
 	echo $this->_str_trim_html($str);
@@ -890,6 +964,65 @@ function _check_field( $arr )
  	return true;
 }
 
+//---------------------------------------------------------
+// comment
+//---------------------------------------------------------
+function _proc_comment($line_arr)
+{
+	foreach ($line_arr as $line)
+	{
+		$line = trim($line);
+	 	if (empty($line))  continue;
+
+		list($link_title, $uid, $com_title, $com_text) = $this->_split_line($line);
+
+		$str = "$link_title, $uid, $com_title, $com_text";
+		echo $this->_str_trim_html($str);
+		echo "<br />\n";
+
+		if ( empty($link_title) ) {
+			$this->_print_error( "no link title" );
+			return false;
+		}
+
+		if ( empty($com_text) ) {
+			$this->_print_error( "no comment text" );
+			return false;
+		}
+
+		$link_title_s = $this->_str_trim_html($link_title);
+
+		$lid = $this->_link_handler->get_lid_by_title($link_title);
+		if ( $lid == -1 ) {
+			$this->_print_error( _NO_MATCH_RECORD.": ".$link_title_s );
+			return false;
+		} elseif (($lid == -2)||($lid == -3)) {
+			$this->_print_error( _MANY_MATCH_RECORD.": ".$link_title_s );
+			return false;
+		}
+
+		$uid = intval($uid);
+		if ( empty($uid) || ($uid <= 0) ) {
+			$uid = $this->_xoops_uid ;
+		}
+		if ( empty($com_title) ) {
+			$com_title = 'Re:'.$link_title ;
+		}
+
+		$com_text = $this->_convert_str_to_crlf($com_text);
+
+		$newid = $this->_comment_handler->insert_comment_by_lid(
+			$lid, $uid, $com_title, $com_text);
+		if ( !$newid ) {
+			$error = $this->_comment_handler->get_error();
+			$this->_print_error( $error );
+			return false;
+		}
+	}
+
+	return true;
+}
+
 //-----------------------------------------------
 // check or split line
 //-----------------------------------------------
@@ -909,7 +1042,8 @@ function &_split_line($line)
 
 	foreach ($item_arr as $key => $item)
 	{
-		$item_arr[$key] = trim($item);
+		$item_arr[$key] = $this->_convert_str_to_camma( trim($item) );
+
 	}
 
 	return $item_arr;
@@ -933,6 +1067,12 @@ function _str_trim_html($str, $max=100)
 function _convert_str_to_crlf($str)
 {
 	$str = $this->_strings->convert_str_to_crlf($str);
+	return $str;
+}
+
+function _convert_str_to_camma($str)
+{
+	$str = str_replace('\2c', ',', $str);
 	return $str;
 }
 
@@ -1094,6 +1234,31 @@ function print_form_link_optional($file)
 
 }
 
+function print_form_comment($file)
+{
+	echo $this->_build_table_begin( _AM_WEBLINKS_BULK_COMMENT );
+
+// add category
+	echo $this->build_form_begin( 'add_comment' );
+	echo $this->build_token();
+	echo $this->build_html_input_hidden('op', 'add_comment');
+
+	echo _AM_WEBLINKS_BULK_COMMENT_DSC1."<br />\n";
+	echo _AM_WEBLINKS_BULK_SAMPLE."<br /><br />\n";
+
+	echo $this->build_html_textarea('commentlist', '', $this->ROWS, $this->COLS );
+	echo "<br />\n";
+	echo $this->build_html_input_submit('submit', _ADD );
+	echo $this->build_html_input_button_cancel('cancel', _BACK );
+	echo $this->build_form_end();
+
+// view file 
+	$this->_print_view_file('view_comment', $file);
+
+	echo $this->_build_table_end();
+
+}
+
 function print_file_in_form($file, $rows=40, $cols=80 )
 {
 	echo "<form>\n";
@@ -1200,6 +1365,12 @@ if ( !file_exists( $FILE_FILE_LINK ) )
 	$FILE_FILE_LINK = WEBLINKS_ROOT_PATH."/language/english/bulk/link_tab.txt";
 }
 
+$FILE_COMMENT = WEBLINKS_ROOT_PATH."/language/".$XOOPS_LANGUAGE."/bulk/comment_cvs.txt";
+if ( !file_exists( $FILE_COMMENT ) ) 
+{
+	$FILE_COMMENT = WEBLINKS_ROOT_PATH."/language/english/bulk/comment_cvs.txt";
+}
+
 $bulk_manage =& admin_bulk_manage::getInstance();
 
 $op   = $bulk_manage->get_post_op();
@@ -1222,7 +1393,7 @@ switch ($op)
 		$cid       = $bulk_manage->get_post_cid();
 		$cat_lines = $bulk_manage->get_post_catlist();
 
-		if (count($cat_lines) == 0) 
+		if ( ! $bulk_manage->check_lines($cat_lines) )
 		{
 			redirect_header("bulk_manage.php", 2, _NO_CATEGORY);
 			exit();
@@ -1242,7 +1413,7 @@ switch ($op)
 
 		$link_lines = $bulk_manage->get_post_linklist();
 
-		if (count($link_lines) == 0) 
+		if ( ! $bulk_manage->check_lines($link_lines) )
 		{
 			redirect_header("index.php", 2, _NO_LINK);
 			exit();
@@ -1262,7 +1433,7 @@ switch ($op)
 
 		$link_lines = $bulk_manage->get_post_linklist();
 
-		if (count($link_lines) == 0) 
+		if ( ! $bulk_manage->check_lines($link_lines) )
 		{
 			redirect_header("index.php", 2, _NO_LINK);
 			exit();
@@ -1271,6 +1442,26 @@ switch ($op)
 		xoops_cp_header();
 		weblinks_admin_print_bread( _AM_WEBLINKS_BULK_IMPORT, 'bulk_manage.php', _AM_WEBLINKS_BULK_LINK );
 		$bulk_manage->add_link_optional($link_lines);
+		break;
+
+	case 'add_comment':
+		if( !( $bulk_manage->check_token() ) ) 
+		{
+			redirect_header( "bulk_manage.php", 5, "Token Error");
+			exit();
+		}
+
+		$comment_lines = $bulk_manage->get_post_comment_list();
+
+		if ( ! $bulk_manage->check_lines($comment_lines) )
+		{
+			redirect_header("bulk_manage.php", 2, _AM_WEBLINKS_NO_COMMENT);
+			exit();
+		}
+
+		xoops_cp_header();
+		weblinks_admin_print_bread( _AM_WEBLINKS_BULK_IMPORT, 'bulk_manage.php', _AM_WEBLINKS_BULK_COMMENT );
+		$bulk_manage->add_comment($comment_lines);
 		break;
 
 	case 'file_cat':
@@ -1313,6 +1504,14 @@ switch ($op)
 		weblinks_admin_print_menu();
 		echo "<h3>". _AM_WEBLINKS_BULK_IMPORT ."</h3>\n";
 		$bulk_manage->print_form_file($TITLE_FILE_LINK, $DESC_FILE_LINK, $FILE_FILE_LINK, 'file_link');
+		break;
+
+	case 'form_comment':
+		xoops_cp_header();
+		weblinks_admin_print_header();
+		weblinks_admin_print_menu();
+		$bulk_manage->print_menu();
+		$bulk_manage->print_form_comment( $FILE_COMMENT );
 		break;
 
 	case 'form_cat':

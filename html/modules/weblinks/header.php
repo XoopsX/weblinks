@@ -1,5 +1,8 @@
 <?php
-// $Id: header.php,v 1.1 2011/12/29 14:32:27 ohwada Exp $
+// $Id: header.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap.php
 
 // 2008-02-17 K.OHWADA
 // weblinks_htmlout.php
@@ -155,6 +158,9 @@ include_once WEBLINKS_ROOT_PATH.'/plugins/forum_sel.php';
 include_once WEBLINKS_ROOT_PATH.'/plugins/album_sel.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_menu.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_template.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_block_view.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_block_webmap.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_webmap.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_config2_basic_handler.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_linkitem_basic_handler.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_category_basic_handler.php';
@@ -171,7 +177,6 @@ include_once WEBLINKS_ROOT_PATH.'/class/weblinks_banner_handler.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_auth.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_plugin.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_header.php';
-include_once WEBLINKS_ROOT_PATH.'/class/weblinks_gmap.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_map_jp.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_htmlout.php';
 include_once WEBLINKS_ROOT_PATH.'/htmlout/weblinks_htmlout_base.php';

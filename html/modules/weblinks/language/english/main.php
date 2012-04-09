@@ -1,5 +1,5 @@
 <?php
-// $Id: main.php,v 1.1 2011/12/29 14:32:48 ohwada Exp $
+// $Id: main.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
 
 // 2008-02-17 K.OHWADA
 // pagerank, pagerank_update
@@ -567,6 +567,18 @@ define('_WEBLINKS_KML_PERPAGE', 'The number to divide');
 
 // pagerank
 define('_WEBLINKS_SITE_PAGERANK', 'High PageRank Site');
+
+//---------------------------------------------------------
+// 2012-04-02 v2.10
+//---------------------------------------------------------
+// webmap3
+define('_WEBLINKS_WEBMAP3_NOT_INSTALLED', 'NOT installed WEBMAP3 module ( %s ) ');
+define('_WEBLINKS_WEBMAP3_INSTALLED',     'Installed WEBMAP3 module ( %s ) ver %s ');
+define('_WEBLINKS_WEBMAP3_REQUIRE',       'Require WEBMAP3 module ver %s or later');
+
+// google map
+define('_WEBLINKS_GM_LOCATION', 'Location');
+define('_WEBLINKS_GM_ICON', 'Google Icon');
 
 }
 // --- define language end ---

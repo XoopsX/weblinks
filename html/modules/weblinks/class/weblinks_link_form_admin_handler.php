@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_link_form_admin_handler.php,v 1.1 2011/12/29 14:33:07 ohwada Exp $
+// $Id: weblinks_link_form_admin_handler.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap
 
 // 2008-02-17 K.OHWADA
 // add_admin_gm_kml()
@@ -114,6 +117,18 @@ function show_admin_form($form_mode, $id=0)
 
 	$this->init();
 	$this->begin_admin_form();
+
+// webmap
+	$ret = $this->_webmap_class->init_form();
+	if ( $ret == 1 ) {
+		$this->_flag_webmap = true;
+		$this->_webmap_class->set_lid( $id );
+		$this->_webmap_class->set_display_url();
+		echo $this->_webmap_class->get_form_js( false );
+
+	} elseif ( $ret == -1 ) {
+		xoops_error( $this->_webmap_class->get_init_error() );
+	}
 
 	$linkitem_arr = $this->_load_define();
 
@@ -386,6 +401,10 @@ function show_admin_form($form_mode, $id=0)
 // google map
 			case 'gm_latitude':
 				$this->add_gm_latitude_by_id($id);
+				break;
+
+			case 'gm_icon':
+				$this->add_gm_icon_by_id($id);
 				break;
 
 			case 'gm_kml':

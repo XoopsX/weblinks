@@ -1,5 +1,8 @@
 <?php
-// $Id: admin_header_link.php,v 1.1 2011/12/29 14:32:54 ohwada Exp $
+// $Id: admin_header_link.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_block_view.php
 
 // 2008-02-17 K.OHWADA
 // weblinks_link_view_basic.php
@@ -16,6 +19,7 @@
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_notification.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_link_count_handler.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_cat_view_handler.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_block_view.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_link_view_basic.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_link_view.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_link_view_handler.php';

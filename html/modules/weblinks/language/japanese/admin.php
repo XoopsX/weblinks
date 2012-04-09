@@ -1,5 +1,5 @@
 <?php
-// $Id: admin.php,v 1.1 2011/12/29 14:32:47 ohwada Exp $
+// $Id: admin.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
 
 // 2008-02-17 K.OHWADA
 // htmlout
@@ -738,6 +738,36 @@ define('_AM_WEBLINKS_USE_PAGERANK_CACHE', '╝ш╞└д╖д┐ PageRank дЄенеуе├е╖ехд╖д╞бв╔
 
 // kml
 define('_AM_WEBLINKS_KML_USE', 'KML д╬╔╜╝и');
+
+
+//---------------------------------------------------------
+// 2012-04-02 v2.10
+//---------------------------------------------------------
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY','│╡═╫д╬еъеєеп└ш');
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY_DSC','еле╞е┤еъбвдкд╣д╣дсе╡еде╚д╩д╔д╟бв│╡═╫ дЄ┴к┬Єд╖д┐д╚днд╦┼м═╤д╡дьды');
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY_0','е╡еде╚д╬url');
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY_1','Weblinksд╬singlelink');
+
+define('_AM_WEBLINKS_TITLE_RSSC_MANAGE','RSSC ┤╔═¤');
+define('_AM_WEBLINKS_TITLE_RSSC_ARCHIVE','RSSC евб╝еледе╓┤╔═¤');
+define('_AM_WEBLINKS_TITLE_RSSC_ADD','еъеєепд╦ RSS URL дЄ─╔▓├д╣ды');
+
+define('_AM_WEBLINKS_BULK_COMMENT','е│есеєе╚░ь│ч┼╨╧┐');
+define('_AM_WEBLINKS_BULK_COMMENT_DSC1','еъеєепд╬е┐еде╚еы, uid, е│есеєе╚д╬е┐еде╚еы, е│есеєе╚д╬╦▄╩╕ дЄелеєе▐(,)д╟╢ш└┌д├д╞╡н╜╥д╣ды<br />uid д╧╛╩╬м▓─бг┤╔═¤╝╘д╬uid д╟┬х═╤д╡дьды<br/ >е│есеєе╚д╬е┐еде╚еы д╧╛╩╬м▓─бгеъеєепд╬е┐еде╚еы д╟┬х═╤д╡дьды');
+define('_AM_WEBLINKS_NO_COMMENT','е│есеєе╚дмд╩дд');
+define('_AM_WEBLINKS_COMMENT_ADDED','е│есеєе╚дЄ─╔▓├д╖д┐');
+define('_AM_WEBLINKS_BULK_DSC1','елеєе▐д╚▓■╣╘дЄ╞├╩╠д╩╡н╦бд╟╡н╜╥д╟днд▐д╣<br />елеєе▐(,)д╧ \2c д╚╡н╜╥д╣ды<br/ >▓■╣╘д╧ \n д╚╡н╜╥д╣ды');
+
+define('_AM_WEBLINKS_TITLE_LINK_GEOCODING','еъеєепд╬░▐┼┘бж╖╨┼┘д╬░ь═ў');
+define('_AM_WEBLINKS_TITLE_LINK_GEOCODING_DSC','╜╗╜ъдлдщ░▐┼┘бж╖╨┼┘дЄ╕б║ўд╖д▐д╣<br />д╣д╟д╦┼╨╧┐д╡дьд╞дддыдтд╬д╧╕б║ўд╡дьд▐д╗дє<br />╕б║ў╖ы▓╠д╧<span style="color:#0000ff">└─╗·</span>д╟╔╜╝ид╡дьд▐д╣<br />╕б║ўд╟днд╩длд├д┐д╚днд╧<span style="color:#ff0000">└╓╗·</span>д╟╔╜╝ид╡дьд▐д╣');
+define('_AM_WEBLINKS_SEARCHED_ADDRESS','╕б║ўд╡дьд┐╜╗╜ъ');
+define('_AM_WEBLINKS_GOTO_NEXT_PAGE','╝бд╬е┌б╝е╕д╪');
+define('_AM_WEBLINKS_LAST_PAGE','д│д│д╧║╟╕хд╬е┌б╝е╕д╟д╣');
+define('_AM_WEBLINKS_GEO_ADD','еъеєепд╦░▐┼┘бж╖╨┼┘дЄ─╔▓├д╣ды');
+
+define('_AM_WEBLINKS_TITLE_LINK_CSV','еъеєеп╛Ё╩єдЄCSV╖┴╝░д╟е└ежеєеэб╝е╔д╣ды');
+
+define('_AM_WEBLINKS_GM_LOCATION_DSC', '░▐┼┘бж╖╨┼┘д╬╛ь╜ъдЄ╝ид╣есет');
 
 }
 // --- define language end ---

@@ -1,4 +1,4 @@
-<{* $Id: weblinks_link_single.html,v 1.2 2011/12/29 19:54:56 ohwada Exp $ *}>
+<{* $Id: weblinks_link_single.html,v 1.3 2012/04/09 10:20:07 ohwada Exp $ *}>
 
 <div class="weblinks_link_single_frame">
 <div class="weblinks_link_single_frame_2">
@@ -7,9 +7,11 @@
 <table class="weblinks_link_single_title"><tr>
 <td class="weblinks_link_single_title_left">
 
-<{if $link.flag_url == 1}>
+<{if ($link.mode_singlelink != 1)&&($link.mode_url_summary == 3) }>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/singlelink.php?lid=<{$link.lid}>" >
+<{elseif ($link.flag_url == 1)||($link.mode_url_summary == 1)}>
   <a href="<{$xoops_url}>/modules/<{$dirname}>/visit.php?lid=<{$link.lid}>" target="_blank">
-<{elseif $link.flag_url == 2}>
+<{elseif ($link.flag_url == 2)||($link.mode_url_summary == 2)}>
   <a href="<{$link.url}>" onmousedown="return weblinks_hardlink(this,<{$link.lid}>)" target="_blank">
 <{/if}>
 

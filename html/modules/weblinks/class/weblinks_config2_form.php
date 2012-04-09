@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_config2_form.php,v 1.1 2011/12/29 14:33:09 ohwada Exp $
+// $Id: weblinks_config2_form.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// _build_conf_extra_webmap3_dirname_list()
 
 // 2007-10-10 K.OHWADA
 // extra_link_img_thumb
@@ -74,6 +77,10 @@ function build_conf_extra_func( $config )
 			$ele = $this->_build_conf_extra_rssc_dirname_list( $config );
 			break;
 
+		case 'extra_webmap3_dirname_list':
+			$ele = $this->_build_conf_extra_webmap3_dirname_list( $config );
+			break;
+
 		case 'extra_forum_plugin':
 			$ele = $this->_build_conf_extra_forum_plugin( $config );
 			break;
@@ -104,67 +111,40 @@ function build_conf_extra_func( $config )
 
 function _build_conf_extra_dirname_list( $config )
 {
-	$name  =  $config['name'];
-	$value =  $config['value'];
-
-//	$options   =& $this->_get_conf_options_dirname_list( $value );
-
-	$param = array(
-		'dirname_except'  => $this->_DIRNAME,
-		'none_flag'       => true,
-		'dirname_default' => $value,
-	);
-
-	$modules =& $this->_system->get_module_list( $param );
-	$options =& $this->_system->get_dirname_list( $modules, $param );
-
-	return $this->build_html_select( $name, $value, $options );
+	return $this->_build_conf_extra_dirname_list_common( $config, null );
 }
 
 function _build_conf_extra_rssc_dirname_list( $config )
 {
+	return $this->_build_conf_extra_dirname_list_common( 
+		$config, 'include/rssc_version.php' );
+}
+
+function _build_conf_extra_webmap3_dirname_list( $config )
+{
+	return $this->_build_conf_extra_dirname_list_common( 
+		$config, 'include/webmap3_version.php' );
+}
+
+function _build_conf_extra_dirname_list_common( $config, $file )
+{
 	$name  =  $config['name'];
 	$value =  $config['value'];
 
 	$param = array(
 		'dirname_except'  => $this->_DIRNAME,
-		'file'            => 'include/rssc_version.php',
 		'none_flag'       => true,
 		'dirname_default' => $value,
 	);
+
+	if ( $file ) {
+		$param['file'] = $file;
+	}
 
 	$modules =& $this->_system->get_module_list( $param );
 	$options =& $this->_system->get_dirname_list( $modules, $param );
 
 	return $this->build_html_select( $name, $value, $options );
-}
-
-function &xxxxx_get_conf_options_dirname_list( $dirname )
-{
-	$criteria = new CriteriaCompo();
-	$criteria->add( new Criteria('isactive', '1', '=') );
-	$module_handler =& xoops_gethandler('module');
-	$objs           =& $module_handler->getObjects( $criteria );
-
-	$arr1 = array(
-		'0' => '---',
-	);
-
-	foreach ( $objs as $obj )
-	{
-		$arr1[ $obj->getVar('dirname') ] = $obj->getVar('dirname') .': '. $obj->getVar('name');
-	}
-
-	if ( !empty($dirname) && !isset($arr1[ $dirname ]) )
-	{
-		$arr1[ $dirname ] = $dirname .': '. $dirname .' module';
-	}
-
-	asort( $arr1 );
-	reset( $arr1 );
-	$arr2 = array_flip( $arr1 );
-
-	return $arr2;
 }
 
 function _build_conf_extra_forum_plugin( $config )

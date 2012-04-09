@@ -1,4 +1,11 @@
-# $Id: weblinks.sql,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+# $Id: weblinks.sql,v 1.3 2012/04/09 10:20:06 ohwada Exp $
+
+# 2012-04-02 K.OHWADA
+# link modify
+#  gm_icon
+#  url varchar -> text
+# category 
+#  gm_icon gm_location 
 
 # 2011-12-29 K.OHWADA
 # TYPE=MyISAM -> ENGINE=MyISAM
@@ -91,6 +98,8 @@ CREATE TABLE weblinks_category (
   doxcode  tinyint(1) NOT NULL default '1',
   doimage  tinyint(1) NOT NULL default '1',
   dobr     tinyint(1) NOT NULL default '1',
+  gm_icon     int(5) default '0',
+  gm_location varchar(255) default '',
   PRIMARY KEY  (cid),
   KEY pid (pid),
   KEY orders (orders),
@@ -108,7 +117,7 @@ CREATE TABLE weblinks_link (
   uid int(5) unsigned NOT NULL default '0',
   cids   varchar(255) default NULL,
   title  varchar(255) NOT NULL default '',
-  url    varchar(255) NOT NULL default '',
+  url text NOT NULL,
   banner varchar(255) NOT NULL default '',
   description text NOT NULL,
   name varchar(255) default NULL,
@@ -177,6 +186,7 @@ CREATE TABLE weblinks_link (
   gm_type      tinyint(2) NOT NULL default '0',
   pagerank     tinyint(2) NOT NULL default '0',
   pagerank_update int(5) default '0',
+  gm_icon  int(5) default '0',
   PRIMARY KEY  (lid),
   KEY uid (uid),
   KEY cids (cids),
@@ -201,7 +211,7 @@ CREATE TABLE weblinks_modify (
   uid int(5) unsigned NOT NULL default '0',
   cids   varchar(255) default NULL,
   title  varchar(255) NOT NULL default '',
-  url    varchar(255) NOT NULL default '',
+  url text NOT NULL,
   banner varchar(255) NOT NULL default '',
   description text NOT NULL,
   name varchar(255) default NULL,
@@ -269,6 +279,7 @@ CREATE TABLE weblinks_modify (
   gm_type      tinyint(2) NOT NULL default '0',
   pagerank     tinyint(2) NOT NULL default '0',
   pagerank_update int(5) default '0',
+  gm_icon  int(5) default '0',
   PRIMARY KEY  (mid)
 ) ENGINE=MyISAM;
 

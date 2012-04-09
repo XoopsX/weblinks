@@ -1,5 +1,9 @@
 <?php
-// $Id: link_list.php,v 1.1 2011/12/29 14:32:55 ohwada Exp $
+// $Id: link_list.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// link_geocoding.php
+// link_csv.php
 
 // 2007-11-11 K.OHWADA
 // set_config_google_server()
@@ -359,7 +363,7 @@ function _print_top()
 	echo "<br /><br />\n";
 
 	echo "<table width='80%' border='0' cellspacing='1' class='outer'>";
-	echo "<tr class='odd'><td>";
+	echo "<tr class='odd'><td><ul>";
 	echo "<li><a href='link_list.php?sortid=0'>"._WEBLINKS_ADMIN_LINK_ALL_ASC."</a> ($this->_count_all) </li>\n";
 	echo "<li><a href='link_list.php?sortid=1'>"._WEBLINKS_ADMIN_LINK_ALL_DESC."</a> ($this->_count_all) </li>\n";
 	echo "<li><a href='link_list.php?sortid=2'>"._WEBLINKS_ADMIN_LINK_BROKEN."</a> ($total_broken) </li>\n";
@@ -368,6 +372,14 @@ function _print_top()
 	echo "<li><a href='link_list.php?sortid=5'>"._AM_WEBLINKS_LINK_TIME_PUBLISH_BEFORE."</a> ($total_time_publish_before) </li>\n";
 	echo "<li><a href='link_list.php?sortid=6'>"._AM_WEBLINKS_LINK_TIME_EXPIRE_AFTER."</a> ($total_time_expire_after) </li>\n";
 	echo "<li><a href='link_list.php?sortid=7'>"._AM_WEBLINKS_LINK_USERCOMMENT_DESC."</a> ($this->_count_usercomment) </li>\n";
+	echo "<li><a href='link_geocoding.php'>"._AM_WEBLINKS_TITLE_LINK_GEOCODING.'</a> ('. _AM_WEBLINKS_GEO_ADD .") </li>\n";
+	echo"</ul></td></tr>\n";
+
+	echo"<tr><td>\n";
+	echo "<a href='link_csv.php'>";
+	echo "<span class='font-size:120%'>";
+	echo _AM_WEBLINKS_TITLE_LINK_CSV
+	echo "</span></a>\n";
 	echo"</td></tr></table>\n";
 
 	echo "<h4>".$title."</h4>\n";

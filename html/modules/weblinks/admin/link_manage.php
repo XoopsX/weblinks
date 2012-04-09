@@ -1,5 +1,8 @@
 <?php
-// $Id: link_manage.php,v 1.1 2011/12/29 14:32:54 ohwada Exp $
+// $Id: link_manage.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap
 
 // 2008-02-17 K.OHWADA
 // weblinks_link_view_basic.php
@@ -90,7 +93,9 @@ include_once WEBLINKS_ROOT_PATH.'/class/weblinks_plugin.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_menu.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_auth.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_header.php';
-include_once WEBLINKS_ROOT_PATH.'/class/weblinks_gmap.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_block_view.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_block_webmap.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_webmap.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_link.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_link_handler.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_notification.php';

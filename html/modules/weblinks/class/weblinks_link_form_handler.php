@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_link_form_handler.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+// $Id: weblinks_link_form_handler.php,v 1.3 2012/04/09 10:20:05 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap
 
 // 2011-12-29 K.OHWADA
 // PHP 5.3 : Assigning the return value of new by reference is now deprecated.
@@ -101,9 +104,9 @@ class weblinks_link_form_handler extends happy_linux_form_lib
 	var $_linkitem_define_handler;
 
 	var $_auth;
-	var $_gmap;
 	var $_system;
 	var $_post;
+	var $_webmap_class;
 
 // config
 	var $_conf;
@@ -132,6 +135,8 @@ class weblinks_link_form_handler extends happy_linux_form_lib
 	var $_form_mode = null;
 	var $_lid       = 0;
 
+	var	$_flag_webmap = false;
+
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
@@ -151,9 +156,9 @@ function weblinks_link_form_handler( $dirname )
 	$this->_linkitem_define_handler =& weblinks_get_handler( 'linkitem_define',  $dirname );
 
 	$this->_auth    =& weblinks_auth::getInstance( $dirname );
-	$this->_gmap    =& weblinks_gmap::getInstance( $dirname );
 	$this->_system  =& happy_linux_system::getInstance();
 	$this->_post    =& happy_linux_post::getInstance();
+	$this->_webmap_class =& weblinks_webmap::getInstance( $dirname );
 
 	$this->_conf = $this->_config_handler->get_conf();
 
@@ -202,12 +207,20 @@ function get_link_dhtml_size( $name )
 //---------------------------------------------------------
 function show_user_form($form_mode, $lid=0)
 {
-
 	$this->_form_mode = $form_mode;
 	$this->_lid       = $lid;
 
 	$this->init();
 	$this->begin_form();
+
+// webmap
+	$ret = $this->_webmap_class->init_form();
+	if ( $ret == 1 ) {
+		$this->_flag_webmap = true;
+		$this->_webmap_class->set_lid( $lid );
+		$this->_webmap_class->set_display_url();
+		echo $this->_webmap_class->get_form_js( true );
+	}
 
 	$linkitem_arr = $this->_load_define();
 
@@ -371,6 +384,10 @@ function show_user_form($form_mode, $lid=0)
 // google map
 			case 'gm_latitude':
 				$this->add_gm_latitude_by_id($id);
+				break;
+
+			case 'gm_icon':
+				$this->add_gm_icon_by_id($id);
 				break;
 
 // captcha
@@ -905,29 +922,36 @@ function add_dhtml_option_single( $name )
 //---------------------------------------------------------
 // build google map
 //---------------------------------------------------------
-// google map: hacked by wye
 function add_gm_latitude_by_id($id)
 {
+	if ( ! $this->_flag_webmap ) {
+		return;
+	}
+
+	$desc   = $this->_webmap_class->build_form_desc();
+	$iframe = $this->_webmap_class->build_form_iframe();;
+
 	list( $cap, $name, $value, $opt, $form, $mode ) = $this->get_user_param($id);
 
 	$cap2 = $this->_build_caption( _WEBLINKS_GOOGLE_MAPS );
-	$this->add_buff( $cap2, $this->build_gm_desc() );
-	$this->add_buff( '',    $this->build_gm_iframe(), false );
+	$this->add_buff( $cap2, $desc );
+	$this->add_buff( '',    $iframe, false );
 
 	$text1 = $this->build_html_input_text($name, $value, $this->TEXT_SIZE, $this->TEXT_MAX);
 	$this->add_buff( $cap, $text1 );
 }
 
-function build_gm_desc()
+function add_gm_icon_by_id($id)
 {
-	$text = $this->_gmap->build_form_desc();
-	return $text;
-}
+	if ( ! $this->_flag_webmap ) {
+		return;
+	}
 
-function build_gm_iframe()
-{
-	$text = $this->_gmap->build_form_iframe();
-	return $text;
+	list( $cap, $name, $value, $opt, $form, $mode ) = $this->get_user_param($id);
+
+	$text = $this->_webmap_class->build_ele_icon( $value );
+
+	$this->add_buff( $cap, $text );
 }
 
 //---------------------------------------------------------

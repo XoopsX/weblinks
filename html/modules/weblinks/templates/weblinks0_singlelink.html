@@ -1,4 +1,12 @@
-<{* $Id: weblinks0_singlelink.html,v 1.1 2011/12/29 14:32:35 ohwada Exp $ *}>
+<{* $Id: weblinks0_singlelink.html,v 1.2 2012/04/09 10:20:06 ohwada Exp $ *}>
+
+<{if $show_webmap}>
+<script type="text/javascript">
+//<![CDATA[
+  window.onload = <{$webmap_func}>;
+//]]>
+</script>
+<{/if}>
 
 <{$weblinks_module_header}>
 
@@ -27,9 +35,15 @@
   <br />
 <{/if}>
 
-<{* google map : hacked by wye *}>
-<{if $show_gm_single}>
-  <{$weblinks_gm_single}>
+<{if $show_webmap}>
+  <div id="<{$webmap_div_id}>" class="weblinks_gm_map_singlelink">Loading ...</div>
+  <br />
+  <div class="weblinks_gm_location">
+    <a href="http://maps.google.com/maps?hl=<{$xoops_langcode}>&amp;q=<{$link.gm_latitude}>,+<{$link.gm_longitude}>&amp;z=<{$link.gm_zoom}>" target="_blank">
+    <img src="<{$xoops_url}>/modules/<{$dirname}>/images/google_maps.gif" border="0" alt="google map" /> </a> 
+    <{$lang_gm_latitude}> : <{$link.gm_latitude}> / <{$lang_gm_longitude}> : <{$link.gm_longitude}> / <{$lang_gm_zoom}> : <{$link.gm_zoom}>
+  </div>
+  <br />
 <{/if}>
 
 <{if $link.warn_time_publish}>

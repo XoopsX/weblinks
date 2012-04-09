@@ -1,4 +1,12 @@
-<{* $Id: weblinks2_index.html,v 1.1 2011/12/29 14:32:36 ohwada Exp $ *}>
+<{* $Id: weblinks2_index.html,v 1.2 2012/04/09 10:20:06 ohwada Exp $ *}>
+
+<{if $show_webmap}>
+<script type="text/javascript">
+//<![CDATA[
+  window.onload = <{$webmap_func}>;
+//]]>
+</script>
+<{/if}>
 
 <{$weblinks_module_header}>
 
@@ -28,9 +36,9 @@
   <br />
 <{/if}>
 
-<{* google map : hacked by wye *}>
-<{if $show_gm_list}>
-  <{$weblinks_gm_list}><br />
+<{if $show_webmap}>
+  <div id="<{$webmap_div_id}>" class="weblinks_gm_map_index">Loading ...</div>
+  <br />
 <{/if}>
 
 <span class="weblinks_bold"><{$lang_main}></span><br />

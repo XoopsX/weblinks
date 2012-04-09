@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_category_basic_handler.php,v 1.1 2011/12/29 14:33:05 ohwada Exp $
+// $Id: weblinks_category_basic_handler.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// gm_icon gm_location
 
 // 2007-08-01 K.OHWADA
 // get_rows_by_like_title()
@@ -451,6 +454,8 @@ function &get_gm_value($cid)
 		'gm_longitude' => null,
 		'gm_zoom'      => null,
 		'gm_type'      => null,
+		'gm_icon'      => null,
+		'gm_location'  => null,
 	);
 
 	$cache =& $this->get_cache($cid);
@@ -471,6 +476,8 @@ function get_parent_gm_value( $cid )
 		'gm_longitude' => null,
 		'gm_zoom'      => null,
 		'gm_type'      => null,
+		'gm_icon'      => null,
+		'gm_location'  => null,
 	);
 
 	$pid_arr =& $this->_get_parent_path_array_from_cache_by_cid($cid);

@@ -1,5 +1,5 @@
 <?php
-// $Id: main.php,v 1.1 2011/12/29 14:32:42 ohwada Exp $
+// $Id: main.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
 
 // 2008-02-17 K.OHWADA
 // pagerank, pagerank_update
@@ -579,6 +579,18 @@ define('_WEBLINKS_KML_PERPAGE', '分割する件数');
 
 // pagerank
 define('_WEBLINKS_SITE_PAGERANK', '高 PageRank サイト');
+
+//---------------------------------------------------------
+// 2012-04-02 v2.10
+//---------------------------------------------------------
+// webmap3
+define('_WEBLINKS_WEBMAP3_NOT_INSTALLED', 'WEBMAP3 モジュール ( %s ) はインストールされていない');
+define('_WEBLINKS_WEBMAP3_INSTALLED',     'WEBMAP3 モジュール ( %s ) ver %s はインストールされている');
+define('_WEBLINKS_WEBMAP3_REQUIRE',       'WEBMAP3 モジュール ver %s かそれ以降が必要です');
+
+// google map
+define('_WEBLINKS_GM_LOCATION', '場所');
+define('_WEBLINKS_GM_ICON', 'Googleアイコン');
 
 }
 // --- define language end ---

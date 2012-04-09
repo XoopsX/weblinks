@@ -1,4 +1,11 @@
-# $Id: weblinks1.sql,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+# $Id: weblinks1.sql,v 1.3 2012/04/09 10:20:06 ohwada Exp $
+
+# 2012-04-02 K.OHWADA
+# link modify
+#  gm_icon
+#  url varchar -> text
+# category 
+#  gm_icon gm_location 
 
 # 2011-12-29 K.OHWADA
 # TYPE=MyISAM -> ENGINE=MyISAM
@@ -48,10 +55,10 @@
 #=========================================================
 
 #
-# Table structure for table `weblinks1_category`
+# Table structure for table `weblinks_category`
 #
 
-CREATE TABLE weblinks1_category (
+CREATE TABLE weblinks_category (
   cid int(5) unsigned NOT NULL auto_increment,
   pid int(5) unsigned NOT NULL default '0',
   title  varchar(255) NOT NULL default '',
@@ -91,6 +98,8 @@ CREATE TABLE weblinks1_category (
   doxcode  tinyint(1) NOT NULL default '1',
   doimage  tinyint(1) NOT NULL default '1',
   dobr     tinyint(1) NOT NULL default '1',
+  gm_icon     int(5) default '0',
+  gm_location varchar(255) default '',
   PRIMARY KEY  (cid),
   KEY pid (pid),
   KEY orders (orders),
@@ -99,16 +108,16 @@ CREATE TABLE weblinks1_category (
 ) ENGINE=MyISAM;
 
 #
-# Table structure for table `weblinks1_link`
+# Table structure for table `weblinks_link`
 # add width, height
 #
 
-CREATE TABLE weblinks1_link (
+CREATE TABLE weblinks_link (
   lid int(11) unsigned NOT NULL auto_increment,
   uid int(5) unsigned NOT NULL default '0',
   cids   varchar(255) default NULL,
   title  varchar(255) NOT NULL default '',
-  url    varchar(255) NOT NULL default '',
+  url text NOT NULL,
   banner varchar(255) NOT NULL default '',
   description text NOT NULL,
   name varchar(255) default NULL,
@@ -177,6 +186,7 @@ CREATE TABLE weblinks1_link (
   gm_type      tinyint(2) NOT NULL default '0',
   pagerank     tinyint(2) NOT NULL default '0',
   pagerank_update int(5) default '0',
+  gm_icon  int(5) default '0',
   PRIMARY KEY  (lid),
   KEY uid (uid),
   KEY cids (cids),
@@ -189,11 +199,11 @@ CREATE TABLE weblinks1_link (
 ) ENGINE=MyISAM;
 
 #
-# Table structure for table `weblinks1_modify`
-# same as weblinks1_link
+# Table structure for table `weblinks_modify`
+# same as weblinks_link
 #
 
-CREATE TABLE weblinks1_modify (
+CREATE TABLE weblinks_modify (
   mid int(11) unsigned NOT NULL auto_increment,
   mode tinyint(2) NOT NULL default '0',
   muid int(11) unsigned NOT NULL default '0',
@@ -201,7 +211,7 @@ CREATE TABLE weblinks1_modify (
   uid int(5) unsigned NOT NULL default '0',
   cids   varchar(255) default NULL,
   title  varchar(255) NOT NULL default '',
-  url    varchar(255) NOT NULL default '',
+  url text NOT NULL,
   banner varchar(255) NOT NULL default '',
   description text NOT NULL,
   name varchar(255) default NULL,
@@ -269,14 +279,15 @@ CREATE TABLE weblinks1_modify (
   gm_type      tinyint(2) NOT NULL default '0',
   pagerank     tinyint(2) NOT NULL default '0',
   pagerank_update int(5) default '0',
+  gm_icon  int(5) default '0',
   PRIMARY KEY  (mid)
 ) ENGINE=MyISAM;
 
 #
-# Table structure for table `weblinks1_catlink`
+# Table structure for table `weblinks_catlink`
 #
 
-CREATE TABLE weblinks1_catlink (
+CREATE TABLE weblinks_catlink (
   jid int(11) unsigned NOT NULL auto_increment,
   cid int(4)  unsigned NOT NULL default '0',
   lid int(11) unsigned NOT NULL default '0',
@@ -286,11 +297,11 @@ CREATE TABLE weblinks1_catlink (
 ) ENGINE=MyISAM;
 
 #
-# Table structure for table `weblinks1_broken`
+# Table structure for table `weblinks_broken`
 # same column as `mylinks_broken`
 #
 
-CREATE TABLE weblinks1_broken (
+CREATE TABLE weblinks_broken (
   bid int(5) NOT NULL auto_increment,
   lid int(11) unsigned NOT NULL default '0',
   sender int(11) unsigned NOT NULL default '0',
@@ -302,11 +313,11 @@ CREATE TABLE weblinks1_broken (
 ) ENGINE=MyISAM;
 
 #
-# Table structure for table `weblinks1_votedata`
+# Table structure for table `weblinks_votedata`
 # same as `mylinks_votedata`
 #
 
-CREATE TABLE weblinks1_votedata (
+CREATE TABLE weblinks_votedata (
   ratingid int(11) unsigned NOT NULL auto_increment,
   lid int(11) unsigned NOT NULL default '0',
   ratinguser int(11) unsigned NOT NULL default '0',
@@ -319,10 +330,10 @@ CREATE TABLE weblinks1_votedata (
 ) ENGINE=MyISAM;
 
 #
-# Table structure for table `weblinks1_atomfeed`
+# Table structure for table `weblinks_atomfeed`
 #
 
-CREATE TABLE weblinks1_atomfeed (
+CREATE TABLE weblinks_atomfeed (
   aid int(11) unsigned NOT NULL auto_increment,
   lid int(11) unsigned NOT NULL default '0',
   site_title varchar(100) NOT NULL default '',
@@ -344,10 +355,10 @@ CREATE TABLE weblinks1_atomfeed (
 ) ENGINE=MyISAM;
 
 #
-# Table structure for table `weblinks1_config`
+# Table structure for table `weblinks_config`
 #
 
-CREATE TABLE weblinks1_config (
+CREATE TABLE weblinks_config (
   auth_submit      varchar(255) NOT NULL default '',
   auth_submit_auto varchar(255) NOT NULL default '',
   auth_modify      varchar(255) NOT NULL default '',
@@ -397,11 +408,11 @@ CREATE TABLE weblinks1_config (
 ) ENGINE=MyISAM;
 
 #
-# Table structure for table `weblinks1_config2`
+# Table structure for table `weblinks_config2`
 # modify from system `config`
 #
 
-CREATE TABLE weblinks1_config2 (
+CREATE TABLE weblinks_config2 (
   id      smallint(5) unsigned NOT NULL auto_increment,
   conf_id smallint(5) unsigned NOT NULL default 0,
   conf_name      varchar(255) NOT NULL default '',
@@ -416,10 +427,10 @@ CREATE TABLE weblinks1_config2 (
 ) ENGINE=MyISAM;
 
 #
-# Table structure for table `weblinks1_linkitem`
+# Table structure for table `weblinks_linkitem`
 #
 
-CREATE TABLE weblinks1_linkitem (
+CREATE TABLE weblinks_linkitem (
   id      smallint(5) unsigned NOT NULL auto_increment,
   item_id smallint(5) unsigned NOT NULL default 0,
   name      varchar(255) NOT NULL default '',

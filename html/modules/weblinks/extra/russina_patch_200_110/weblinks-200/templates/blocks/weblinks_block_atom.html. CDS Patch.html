@@ -1,0 +1,32 @@
+<{* $Id: weblinks_block_atom.html.\040CDS\040Patch.html,v 1.1 2012/04/09 10:22:23 ohwada Exp $ *}>
+
+<ul>
+<{foreach item=feed from=$block.feeds}>
+  <li>
+  <a href="<{$feed.url}>" target="_blank"><{$feed.title}></a>&nbsp;
+
+  <{if $feed.date != ""}>
+    (<{$feed.date}>)&nbsp;
+  <{/if}>
+
+  <br />
+  &nbsp; <{$smarty.const._WEBLINKS_FROM}> <a href="<{$feed.site_url}>" target="_blank"><{$feed.site_title}></a>
+
+  <{if $feed.summary != ""}>
+    <br />
+    <{$feed.summary}>
+  <{/if}>
+
+  <br /><br />
+  </li>
+<{/foreach}>
+</ul>
+
+<a href="<{$xoops_url}>/modules/<{$block.dirname}>/feed_rdf.php" target="_blank">
+<img src="<{$xoops_url}>/modules/<{$block.dirname}>/images/rdf.png" border="0" alt="rdf" /></a> 
+<a href="<{$xoops_url}>/modules/<{$block.dirname}>/feed_rss.php" target="_blank">
+<img src="<{$xoops_url}>/modules/<{$block.dirname}>/images/rss.png" border="0" alt="rss" /></a> 
+<a href="<{$xoops_url}>/modules/<{$block.dirname}>/feed_atom.php" target="_blank">
+<img src="<{$xoops_url}>/modules/<{$block.dirname}>/images/atom.png" border="0" alt="atom" /></a> 
+<br />
+<a href="<{$xoops_url}>/modules/<{$block.dirname}>/viewfeed.php"><{$block.lang_more}></a>

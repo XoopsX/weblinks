@@ -1,5 +1,8 @@
 <?php
-// $Id: viewcat.php,v 1.1 2011/12/29 14:32:28 ohwada Exp $
+// $Id: viewcat.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap
 
 // 2009-02-16 K.OHWADA
 // Notice [PHP]: Only variables should be assigned by reference
@@ -77,9 +80,9 @@ class weblinks_viewcat
 	var $_config_handler;
 	var $_link_view_handler;
 	var $_template;
-	var $_gmap;
 	var $_map_jp;
 	var $_class_keyword;
+	var $_webmap_class;
 
 	var $_conf;
 
@@ -90,9 +93,9 @@ function weblinks_viewcat( $dirname )
 {
 	$this->_config_handler     =& weblinks_get_handler( 'config2_basic',  $dirname );
 	$this->_link_view_handler  =& weblinks_get_handler( 'link_view',      $dirname  );
-	$this->_template  =& weblinks_template::getInstance( $dirname );
-	$this->_gmap      =& weblinks_gmap::getInstance(     $dirname );
-	$this->_map_jp    =& weblinks_map_jp::getInstance(   $dirname );
+	$this->_template     =& weblinks_template::getInstance( $dirname );
+	$this->_map_jp       =& weblinks_map_jp::getInstance(   $dirname );
+	$this->_webmap_class =& weblinks_webmap::getInstance(   $dirname );
 
 	$this->_class_keyword =& happy_linux_keyword::getInstance();
 
@@ -145,8 +148,6 @@ function &build( &$category, &$keyword_array )
 	$links_full         = '';
 	$show_linklist      = false;
 	$links_list         = '';
-	$show_gm_list       = false;
-	$gm_list            = '';
 	$show_forum_list    = false;
 	$forum_list         = '';
 	$show_photo_list    = false;
@@ -154,6 +155,9 @@ function &build( &$category, &$keyword_array )
 	$show_desc_disp     = false;
 	$map_jp             = '';
 	$show_map_jp        = false;
+	$show_webmap        = false;
+	$webmap_div_id      = '';
+	$webmap_func        = '';
 
 	$this->_link_view_handler->set_highlight( $this->_conf['use_highlight'] );
 	$this->_link_view_handler->set_keyword_array( $keyword_array );
@@ -218,8 +222,13 @@ function &build( &$category, &$keyword_array )
 
 		if ( isset($gm_value['show_gm']) && $gm_value['show_gm'] )
 		{
-			$show_gm_list = true;
-			$gm_list = $this->_gmap->fetch_list( $link_list, $gm_value, 'weblinks_gm_map_index' );
+			$ret = $this->_webmap_class->init_map();
+			if ( $ret ) {
+				$webmap_param  = $this->_webmap_class->fetch_list( $link_list, $gm_value );
+				$show_webmap   = $webmap_param['show_webmap'];
+				$webmap_div_id = $webmap_param['webmap_div_id'];
+				$webmap_func   = $webmap_param['webmap_func'];
+			}
 		}
 	}
 
@@ -255,8 +264,6 @@ function &build( &$category, &$keyword_array )
 		'links_full'         => $links_full,
 		'show_linklist'      => $show_linklist,
 		'links_list'         => $links_list,
-		'show_gm_list'       => $show_gm_list,
-		'gm_list'            => $gm_list,
 		'show_forum_list'    => $show_forum_list,
 		'forum_list'         => $forum_list,
 		'show_photo_list'    => $show_photo_list,
@@ -265,6 +272,9 @@ function &build( &$category, &$keyword_array )
 		'show_desc_disp'     => $show_desc_disp,
 		'show_map_jp'        => $show_map_jp,
 		'map_jp'             => $map_jp,
+		'show_webmap'        => $show_webmap,
+		'webmap_div_id'      => $webmap_div_id,
+		'webmap_func'        => $webmap_func,
 	);
 
 	return $arr;
@@ -352,8 +362,6 @@ $xoopsTpl->assign('show_links',             $arr['show_links'] );
 $xoopsTpl->assign('weblinks_links_full',    $arr['links_full'] );
 $xoopsTpl->assign('show_linklist',          $arr['show_linklist'] );
 $xoopsTpl->assign('weblinks_links_list',    $arr['links_list'] );
-$xoopsTpl->assign('show_gm_list',           $arr['show_gm_list'] );
-$xoopsTpl->assign('weblinks_gm_list',       $arr['gm_list'] );
 $xoopsTpl->assign('show_forum_list',        $arr['show_forum_list'] );
 $xoopsTpl->assign('weblinks_forum_list',    $arr['forum_list'] );
 $xoopsTpl->assign('show_forum_list',        $arr['show_forum_list'] );
@@ -363,6 +371,9 @@ $xoopsTpl->assign('category_image_mode',    $arr['cat_img_mode'] );
 $xoopsTpl->assign('show_desc_disp',         $arr['show_desc_disp'] );
 $xoopsTpl->assign('show_map_jp',            $arr['show_map_jp'] );
 $xoopsTpl->assign('weblinks_map_jp',        $arr['map_jp'] );
+$xoopsTpl->assign('show_webmap',            $arr['show_webmap'] );
+$xoopsTpl->assign('webmap_div_id',          $arr['webmap_div_id'] );
+$xoopsTpl->assign('webmap_func',            $arr['webmap_func'] );
 
 $xoopsTpl->assign('keywords',            $keywords_urlencoded );
 $xoopsTpl->assign('lang_latest_forum',   _WEBLINKS_LATEST_FORUM);

@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_header.php,v 1.1 2011/12/29 14:33:07 ohwada Exp $
+// $Id: weblinks_header.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// remove gmap_api.php
 
 // 2009-01-25 K.OHWADA
 // happy_linux_check_once_gmap_api()
@@ -18,8 +21,6 @@
 // === class begin ===
 if( !class_exists('weblinks_header') ) 
 {
-
-include_once WEBLINKS_ROOT_PATH.'/include/gmap_api.php';
 
 //=========================================================
 // class weblinks_header
@@ -99,7 +100,6 @@ function get_module_header_submit()
 function build_module_header_submit()
 {
 	$temp  = $this->_build_visit_js();
-	$temp .= $this->_build_iframe_js();
 
 	$text  = $this->_build_weblinks_css();
 	$text .= $this->_envelop_script( $temp );
@@ -117,15 +117,10 @@ function build_module_header_map_jp()
 //-------------------------------------------------------------------
 // private
 //-------------------------------------------------------------------
-function _build_module_header( $flag_gmap=false )
+function _build_module_header()
 {
 	$text  = $this->_build_weblinks_css();
 	$text .= $this->_build_map_jp_css();
-	if ( $flag_gmap )
-	{
-		$text .= $this->_build_once_google_server_js();
-		$text .= $this->_build_once_weblinks_gmap_js();
-	}
 	$text .= $this->_envelop_script( $this->_build_visit_js() );
 	return $text;
 }
@@ -133,7 +128,6 @@ function _build_module_header( $flag_gmap=false )
 function _build_module_header_submit()
 {
 	$temp  = $this->_build_visit_js();
-	$temp .= $this->_build_iframe_js();
 
 	$text  = $this->_build_weblinks_css();
 	$text .= $this->_envelop_script( $temp );
@@ -194,40 +188,6 @@ END_OF_TEXT;
 	return $text."\n";
 }
 
-function _build_iframe_js()
-{
-	$WINDOW_WIDTH  = '800';
-	$WINDOW_HEIGHT = '850';
-	$IFRAME_WIDTH  = '100%';
-	$IFRAME_HEIGHT = '700px';
-
-	$window_url = $this->_WEBLINKS_URL .'/gm_get_location.php?mode=opener';
-	$iframe_url = $this->_WEBLINKS_URL .'/gm_get_location.php?mode=parent';
-	$lang_disp_off = _WEBLINKS_GM_DISP_OFF;
-
-	$text = <<< END_OF_TEXT
-/* google map */
-function weblinks_gm_window_open()
-{
-    var options = "width=$WINDOW_WIDTH, height=$WINDOW_HEIGHT, toolbar=no, location=yes, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, copyhistory=no";
-    window.open("$window_url", "weblinks_gm_window", options);
-}
-function weblinks_gm_disp_on()
-{
-	var iframe = '<a href="#google_map_desc" onclick="weblinks_gm_disp_off()">[ $lang_disp_off ]</a>';
-	iframe += '<br /><br />';
-	iframe += '<iframe src="$iframe_url" width="$IFRAME_WIDTH" height="$IFRAME_HEIGHT" frameborder="0" scrolling="yes"></iframe>';
-	document.getElementById("weblinks_gm_iframe").innerHTML = iframe;
-}
-function weblinks_gm_disp_off()
-{
-	document.getElementById("weblinks_gm_iframe").innerHTML = '';
-}
-END_OF_TEXT;
-
-	return $text."\n";
-}
-
 function _envelop_script( $content )
 {
 	$text = <<< END_OF_TEXT
@@ -258,30 +218,6 @@ function _assign_weblinks_module_header( $var )
 {
 	global $xoopsTpl;
 	$xoopsTpl->assign( 'weblinks_module_header', $var );
-}
-
-//--------------------------------------------------------
-// common with webphoto
-//--------------------------------------------------------
-function _build_once_google_server_js()
-{
-	if ( ! $this->_conf['gm_use'] ) {
-		return null;
-	}
-	if ( ! $this->_check_google_server_js() ) {
-		return null;
-	}
-	return $this->_build_google_server_js();
-}
-
-function _check_google_server_js()
-{
-	return happy_linux_check_once_gmap_api();
-}
-
-function _build_google_server_js()
-{
-	return happy_linux_build_gmap_api( $this->_conf['gm_apikey'], $this->_GOOGLE_MAP_HL );
 }
 
 // --- class end ---

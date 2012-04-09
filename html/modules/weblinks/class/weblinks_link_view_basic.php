@@ -1,5 +1,12 @@
 <?php
-// $Id: weblinks_link_view_basic.php,v 1.1 2011/12/29 14:33:08 ohwada Exp $
+// $Id: weblinks_link_view_basic.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_block_view
+// mode_url_summary
+
+// 2010-03-15 K.OHWADA
+// _set_gm_marker()
 
 // 2008-02-17 K.OHWADA
 // divid from weblinks_link_view.php
@@ -17,7 +24,7 @@ if( !class_exists('weblinks_link_view_basic') )
 //=========================================================
 // class weblinks_link_view_basic
 //=========================================================
-class weblinks_link_view_basic extends happy_linux_basic
+class weblinks_link_view_basic extends weblinks_block_view
 {
 	var $_DIRNAME;
 	var $_WEBLINKS_URL;
@@ -25,9 +32,9 @@ class weblinks_link_view_basic extends happy_linux_basic
 // handler
 	var $_config_handler;
 	var $_link_handler;
+	var $_block_class;
 
 // class
-	var $_myts;
 	var $_system;
 
 // local
@@ -38,7 +45,7 @@ class weblinks_link_view_basic extends happy_linux_basic
 //---------------------------------------------------------
 function weblinks_link_view_basic( $dirname )
 {
-	$this->happy_linux_basic();
+	$this->weblinks_block_view();
 
 	$this->_DIRNAME = $dirname;
 	$this->_WEBLINKS_URL = XOOPS_URL.'/modules/'.$dirname;
@@ -46,8 +53,8 @@ function weblinks_link_view_basic( $dirname )
 	$this->_config_handler       =& weblinks_get_handler('config2_basic',      $dirname );
 	$this->_link_handler         =& weblinks_get_handler('link_basic',         $dirname );
 
-	$this->_myts         =& MyTextSanitizer::getInstance();
-	$this->_system       =& happy_linux_system::getInstance();
+	$this->_system      =& happy_linux_system::getInstance();
+	$this->_block_class =& weblinks_block_view::getInstance();
 
 	$this->_conf = $this->_config_handler->get_conf();
 
@@ -83,6 +90,9 @@ function &get_show_basic_by_lid( $lid )
 
 function build_show_basic()
 {
+	$this->set_params( $this->_conf );
+	$this->set_multi();
+
 // dont show
 	$this->set('passwd',      '');
 	$this->set('search',      '');
@@ -93,13 +103,35 @@ function build_show_basic()
 // sanitize
 	$this->_set_sanitize_all();
 
-	$desc = $this->_build_description_disp();
+// pop votes rating
+	$this->set('flag_pop',    $this->get_show_popular() );
+	$this->set('votes_disp',  $this->get_votes_disp() );
+	$this->set('rating_disp', $this->get_rating_disp() );
+
+// new update
+	list( $flag_new, $flag_update) = $this->get_show_new_update();
+	$this->set('flag_new',    $flag_new);
+	$this->set('flag_update', $flag_update);
+
+// name mail
+	$name_disp = $this->get_name_disp();
+	$mail_disp = $this->get_mail_disp();
+
+	if ( empty($name_disp) && $mail_disp ) {
+		$name_disp = 'Email';
+	}
+
+	$this->set('name_disp',  $name_disp );
+	$this->set('mail_disp',  $mail_disp );
+
+// description
+	$desc = $this->get_description_disp();
+	$this->set('description_disp', $desc );
 
 	$this->_set_textarea1_disp();
 	$this->_set_textarea2_disp();
 	$this->_set_admincomment_disp();
 
-	$this->_set_name_mail_disp();
 	$this->_set_array_addr_urlencode();
 
 	$this->_set_warning();
@@ -123,26 +155,6 @@ function build_show_basic()
 
 // is_owner
 	$this->set('is_owner', $this->_system->is_owner( $this->get('uid') ) );
-
-// new update
-	$flag_new    = false;
-	$flag_update = false;
-
-	if ( $this->_conf['newdays'] > 0 )
-	{
-		$startdate = time() - (86400 * $this->_conf['newdays'] );
-		if ( $startdate < $time_create ) 
-		{
-			$flag_new = true;
-		}
-		elseif ( $startdate < $time_update )
-		{
-			$flag_update = true;
-		}
-	}
-
-	$this->set('flag_new',    $flag_new);
-	$this->set('flag_update', $flag_update);
 
 // time_publish
 // Warning : date(): Windows does not support dates prior to ...
@@ -183,45 +195,22 @@ function build_show_basic()
 	$this->set('time_expire_short',  $time_expire_short );
 
 // url
-	$flag_url = false;
+	$flag_url         = 0;
+	$mode_url_summary = 0;
 	if ( $this->get('url') && $this->_conf['view_url'] )
 	{
 		$flag_url = $this->_conf['view_url'];
 	}
 
-	$this->set('flag_url', $flag_url);
-
-// votes
-	$votes = $this->get('votes');
-	if ($votes == 1) 
-	{
-		$votes_disp = _WLS_ONEVOTE;
-	} 
-	else
-	{
-		$votes_disp = sprintf(_WLS_NUMVOTES, $votes);
+	if ( $this->_conf['view_url_summary'] ) {
+		$mode_url_summary = 3;
+	} else {
+		$mode_url_summary = $flag_url;
 	}
 
-	$this->set('votes_disp', $votes_disp);
+	$this->set('flag_url',         $flag_url);
+	$this->set('mode_url_summary', $mode_url_summary);
 
-// rating
-	$DECIMALS = 2;
-	$rating_disp = number_format($this->get('rating'), $DECIMALS);
-
-	$this->set('rating_disp', $rating_disp );
-
-// hits
-	$flag_pop = false;
-	if ( ( $this->_conf['popular'] > 0 ) &&
-         ( $this->get('hits') >= $this->_conf['popular'] ) )
-	{
-		$flag_pop = true;
-	}
-
-	$this->set('flag_pop', $flag_pop);
-
-// google map
-	$this->_set_gmap();
 
 // admin
 	$flag_admin = false;
@@ -274,20 +263,6 @@ function _set_sanitize_all()
 
 }
 
-function _build_description_disp()
-{
-	$context  = $this->get('description');
-	$dohtml   = $this->get('dohtml');
-	$dosmiley = $this->get('dosmiley');
-	$doxcode  = $this->get('doxcode');
-	$doimage  = $this->get('doimage');
-	$dobr     = $this->get('dobr');
-	$str = $this->_myts->displayTarea($context, $dohtml, $dosmiley, $doxcode, $doimage, $dobr);
-
-	$this->set('description_disp', $str );
-	return $str;
-}
-
 function _set_textarea1_disp()
 {
 	$context  = $this->get('textarea1');
@@ -296,7 +271,7 @@ function _set_textarea1_disp()
 	$doxcode  = $this->get('doxcode1');
 	$doimage  = $this->get('doimage1');
 	$dobr     = $this->get('dobr1');
-	$str = $this->_myts->displayTarea($context, $dohtml, $dosmiley, $doxcode, $doimage, $dobr);
+	$str = $this->display_textarea($context, $dohtml, $dosmiley, $doxcode, $doimage, $dobr);
 
 	$this->set('textarea1_disp', $str );
 }
@@ -309,7 +284,7 @@ function _set_textarea2_disp()
 	$doxcode  = 1;
 	$doimage  = 1;
 	$dobr     = 1;
-	$str = $this->_myts->displayTarea($context, $dohtml, $dosmiley, $doxcode, $doimage, $dobr);
+	$str = $this->display_textarea($context, $dohtml, $dosmiley, $doxcode, $doimage, $dobr);
 
 	$this->set('textarea2_disp', $str );
 }
@@ -322,33 +297,9 @@ function _set_admincomment_disp()
 	$doxcode  = 1;
 	$doimage  = 1;
 	$dobr     = 1;
-	$str = $this->_myts->displayTarea($context, $dohtml, $dosmiley, $doxcode, $doimage, $dobr);
+	$str = $this->display_textarea($context, $dohtml, $dosmiley, $doxcode, $doimage, $dobr);
 
 	$this->set('admincomment_disp', $str );
-}
-
-function _set_name_mail_disp()
-{
-	$name_disp = $this->_build_name_mail_common( $this->get('name'), $this->get('nameflag') );
-	$mail_disp = $this->_build_name_mail_common( $this->get('mail'), $this->get('mailflag') );
-
-	if ( empty($name_disp) && $mail_disp )
-	{
-		$name_disp = 'Email';
-	}
-
-	$this->set('name_disp',  $name_disp );
-	$this->set('mail_disp',  $mail_disp );
-}
-
-function _build_name_mail_common( $value, $flag )
-{
-	$str = null;
-	if ($flag)
-	{
-		$str = $this->sanitize_text($value);
-	}
-	return $str;
 }
 
 function _set_array_addr_urlencode()
@@ -457,150 +408,6 @@ function _is_warn_broken()
 }
 
 //---------------------------------------------------------
-// google map
-//---------------------------------------------------------
-function _set_gmap()
-{
-	$this->_set_gm_desc_wrap();
-	$this->_set_gm_title();
-	$this->_set_gm_type();
-	$this->_set_gm_use();
-
-	$link = $this->_build_single_link();
-
-	$info_single = $this->_build_gmap_info( $this->get('url'), true );
-	$info_list   = $this->_build_gmap_info( $this->_build_single_link() );
-
-	$this->set('gm_info_single', $info_single);
-	$this->set('gm_info_list',   $info_list);
-
-}
-
-function _build_gmap_info( $url, $flag_target=false )
-{
-	$gm_title_s   = $this->get('gm_title_s');
-	$gm_desc_wrap = $this->get('gm_desc_wrap');
-
-	$url_s = $this->sanitize_url( $url );
-
-	$target = '';
-	if ( $flag_target )
-	{
-		$target = 'target="_blank"';
-	}
-
-	$desc  = '<a href="'. $url_s .'" '. $target .'>';
-	$desc .= '<b>'. $gm_title_s .'</b>';
-	$desc .= '</a><br />';
-	$desc .= '<font size="-2">'. $gm_desc_wrap .'</font>';
-
-	$info = $desc;
-	if ( $this->_conf['gm_marker_width'] > 0 ) 
-	{
-		$info  = '<div style="width:'. $this->_conf['gm_marker_width'] .'px">';
-		$info .= $desc;
-		$info .= '</div>';
-	}
-
-	return $info;
-}
-
-function _set_gm_desc_wrap()
-{
-	$str = $this->_build_gm_desc( $this->get('description_disp') );
-	$str = $this->sanitize_text($str);
-
-	if ( $this->_conf['gm_wordwrap'] > 0 )
-	{
-		$str = wordwrap( $str, $this->_conf['gm_wordwrap'], "<br />" );
-	}
-
-	$this->set('gm_desc_wrap', $str);
-}
-
-function _set_gm_title()
-{
-	$str = $this->get('title');
-
-	$length = $this->_conf['gm_title_length'];
-
-	if (( $length > 0 )&&( strlen($str) > $length ))
-	{
-		$str = $this->shorten_text($str, $length );
-	}
-	elseif ( $length == 0 )
-	{
-		$str = '';
-	}
-
-	$this->set('gm_title',   $str);
-	$this->set('gm_title_s', $this->sanitize_text($str) );
-}
-
-function _set_gm_type()
-{
-	$gm_type = $this->get('gm_type');
-
-	$gm_type_str = '';
-	if ( $gm_type == 1 ) {
-		$gm_type_str = 'satellite';
-	} elseif ( $gm_type == 2 ) {
-		$gm_type_str = 'hybrid';
-	}
-
-	$this->set('gm_type_str', $gm_type_str);
-}
-
-function _set_gm_use()
-{
-	$flag_gm_use  = false;
-	$flag_kml_use = false;
-
-	if ( $this->_check_gm_set() )
-	{
-		if ( $this->_conf['gm_use'] && $this->_conf['gm_apikey'] ) 
-		{
-			$flag_gm_use = true;
-		}
-		if ( $this->_conf['kml_use'] ) 
-		{
-			$flag_kml_use = true;
-		}
-	}
-
-	$this->set('flag_gm_use',  $flag_gm_use);
-	$this->set('flag_kml_use', $flag_kml_use);
-}
-
-function _check_gm_set()
-{
-	if ( $this->get('gm_latitude')  != 0 ) { return true; }
-	if ( $this->get('gm_longitude') != 0 ) { return true; }
-	if ( $this->get('gm_zoom')      != 0 ) { return true; }
-	return false;
-}
-
-function _build_gm_desc( $str )
-{
-	$str = $this->add_space_after_punctuation($str);
-	$str = $this->replace_return_to_space($str);
-	$str = $this->strip_space($str);
-	$str = $this->strip_tags_for_text($str);
-
-	$length = $this->_conf['gm_desc_length'];
-	if (( $length > 0 )&&( strlen($str) > $length ))
-	{
-		$str = $this->shorten_text($str, $length );
-	}
-	elseif ( $length == 0 )
-	{
-		$str = '';
-	}
-
-	return $str;
-}
-
-//---------------------------------------------------------
 // google map kml
 //---------------------------------------------------------
 function get_kml_by_lid( $lid )
@@ -627,7 +434,9 @@ function build_kml()
 
 function _build_kml_desc()
 {
-	$summary = $this->_build_gm_desc( $this->_build_description_disp() );
+	$summary = $this->build_summary( 
+		$this->get_description_disp(), $this->_conf['gm_desc_length'] );
+
 	$url_s   = $this->sanitize_url( $this->get('url') );
 	$link_s  = $this->sanitize_url( $this->_build_single_link() );
 

@@ -1,5 +1,8 @@
 <?php
-// $Id: admin_header.php,v 1.1 2011/12/29 14:32:53 ohwada Exp $
+// $Id: admin_header.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// remove weblinks_gmap.php
 
 // 2007-11-01 K.OHWADA
 // divid to admin_header_min.php
@@ -72,9 +75,6 @@ include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/object_handler.php';
 include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/pagenavi.php';
 include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/page_frame.php';
 include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/manage.php';
-
-//include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/server.php';
-
 include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/highlight.php';
 
 //---------------------------------------------------------
@@ -89,7 +89,6 @@ include_once WEBLINKS_ROOT_PATH.'/class/weblinks_link_handler.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_auth.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_menu.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_header.php';
-include_once WEBLINKS_ROOT_PATH.'/class/weblinks_gmap.php';
 include_once WEBLINKS_ROOT_PATH.'/class/weblinks_locate.php';
 
 //---------------------------------------------------------

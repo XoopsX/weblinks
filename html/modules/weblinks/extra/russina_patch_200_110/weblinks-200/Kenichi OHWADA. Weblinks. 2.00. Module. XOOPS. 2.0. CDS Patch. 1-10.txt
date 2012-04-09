@@ -1,0 +1,98 @@
+CDS Patch. Weblinks. 2.00. 1
+	Добавление. Совместимость с XOOPS 2.5.0+
+	.\modules\weblinks\admin\admin_header_mail.php
+	.\modules\weblinks\class\weblinks_template.php
+	.\modules\weblinks\class\weblinks_gmap.php
+	.\modules\weblinks\blocks\weblinks_top.php
+	.\modules\weblinks\gm_get_location.php
+
+CDS Patch. Weblinks. 2.00. 2
+	Корректировка. Код для работы с переменными текущей схемы
+	.\modules\weblinks\print.php
+	.\modules\weblinks\gm_get_location.php
+
+CDS Patch. Weblinks. 2.00. 3
+	Корректировка, добавление. Переменные языка
+	.\modules\weblinks\templates\parts\weblinks_links_list.html
+	.\modules\weblinks\templates\parts\weblinks_link_single.html
+	.\modules\weblinks\templates\weblinks_index.html
+	.\modules\weblinks\templates\weblinks_topten.html
+	.\modules\weblinks\templates\weblinks_catlist.html
+	.\modules\weblinks\templates\weblinks_viewmark.html
+	.\modules\weblinks\templates\weblinks_singlelink.html
+	.\modules\weblinks\templates\weblinks_print.html
+	.\modules\weblinks\templates\weblinks_search.html
+	.\modules\weblinks\templates\weblinks_viewcat.html
+	.\modules\weblinks\templates\weblinks_topten_mixed.html
+	.\modules\weblinks\templates\weblinks_viewfeed.html
+	.\modules\weblinks\templates\blocks\weblinks_block_atom.html
+	.\modules\weblinks\templates\blocks\weblinks_block_generic.html
+	.\modules\weblinks\templates\blocks\weblinks_block_new.html
+	.\modules\weblinks\templates\blocks\weblinks_block_photo.html
+	.\modules\weblinks\templates\blocks\weblinks_block_random.html
+	.\modules\weblinks\templates\blocks\weblinks_block_rate.html
+	.\modules\weblinks\templates\blocks\weblinks_block_top.html
+	.\modules\weblinks\templates\blocks\weblinks_catlist.html
+
+CDS Patch. Weblinks. 2.00. 4
+	Корректировка. Отображение переменных
+	.\modules\weblinks\templates\parts\weblinks_link_single.html
+	.\modules\weblinks\templates\weblinks_print.html
+
+CDS Patch. Weblinks. 2.00. 5
+	Корректировка. Верстка шаблонов (лишние и недостающие тэги)
+	.\modules\weblinks\templates\parts\weblinks_link_single.html
+	.\modules\weblinks\templates\parts\weblinks_links_list.html
+
+CDS Patch. Weblinks. 2.00. 6
+	Добавление. Шаблон и переменная панели иконок RFD/RSS/ATOM - $weblinks_guidance_rssicon
+	.\modules\weblinks\templates\parts\weblinks_guidance_rssicon.html
+	.\modules\weblinks\class\weblinks_template.php
+
+CDS Patch. Weblinks. 2.00. 7
+	Добавление. Переменная шаблона. Количество лучших ссылок (Популярный сайт, Лучший сайт, Сайт с высокой важностью страницы) - $total_site_topten_number
+	Добавление. Переменная шаблона. Заголовок страницы (Популярный сайт, Лучший сайт, Сайт с высокой важностью страницы) (без детализации 'Лучшие X') - $lang_topten_title_simple
+	Добавление. Переменная шаблона. Сортировка базы данных (Популярный сайт, Лучший сайт, Сайт с высокой важностью страницы) - $sort_db
+	Добавление. Переменная шаблона. Количество ссылок - $lang_thereare_count
+	Добавление. Переменная шаблона. 'Рейтинг' округленный до целой части - $link.rating_disp_avg
+	Добавление. Переменная шаблона. Количество найденых записей поиска - $search_found_count
+	Добавление. Переменная шаблона. Количество найденых записей поиска - $feed_found_count
+	Добавление. Переменная шаблона. Простой заголовок категории (без 'Лучшие X') - $top.title_simple
+	.\modules\weblinks\class\weblinks_template.php
+	.\modules\weblinks\index.php
+	.\modules\weblinks\class\weblinks_link_view_basic.php
+	.\modules\weblinks\topten.php
+	.\modules\weblinks\viewmark.php
+	.\modules\weblinks\search.php
+	.\modules\weblinks\class\weblinks_link_view_handler.php
+
+CDS Patch. Weblinks. 2.00. 8
+	Добавление. Вывод списка элементов в виде массива
+	Добавление. Переменная шаблона. Список элементов в виде массива - $weblinks_links_full_list
+	.\modules\weblinks\class\weblinks_template.php
+	.\modules\weblinks\viewcat.php
+	.\modules\weblinks\viewmark.php
+
+CDS Patch. Weblinks. 2.00. 9
+	Добавление. Блок. Список категорий веб-ссылок. Переменная шаблона. Список подкатегорий в виде списка - $category.subcategories_list
+	Добавление. Блок. Список категорий веб-ссылок. Переменная шаблона. Флаг подробного списка подкатегорий  - $category.subcategories_more
+	.\modules\weblinks\blocks\weblinks_catlist.php
+
+CDS Patch. Weblinks. 2.00. 10
+	Добавление. Сортировка по 'Время публикации' ссылки
+	Добавление. Переменная шаблона. 'Дата публикации' - $lang_publish
+	.\modules\weblinks\class\weblinks_config2_define_handler.php
+	.\modules\weblinks\class\weblinks_pagenavi_menu.php
+	.\modules\weblinks\templates\weblinks_viewcat.html
+	.\modules\weblinks\templates\weblinks_viewmark.html
+
+Установка:
+Первая установка:
+1. При установке "с нуля" - заменить оригинальные файлы файлами из архива.
+2. Установить модуль.
+Установка на существующий:
+1. Заменить оригинальные файлы файлами из архива.
+2. Обновить модуль.
+
+Примечание:
+Для корректной работы исправления CDS Patch. Weblinks. 2.00. 3, CDS Patch. Weblinks. 2.00. 10 необходима русификация Weblinks. 2.00. Русский. UTF-8 или Weblinks. 2.00. Русский. CP1251 (windows-1251) в зависимости от кодировки.

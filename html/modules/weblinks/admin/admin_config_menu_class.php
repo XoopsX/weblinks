@@ -1,5 +1,8 @@
 <?php
-// $Id: admin_config_menu_class.php,v 1.1 2011/12/29 14:32:55 ohwada Exp $
+// $Id: admin_config_menu_class.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// changed _print_menu_list_6()
 
 // 2008-02-17 K.OHWADA
 // print_menu_7()
@@ -165,12 +168,12 @@ function _print_menu_list_6()
 {
 	echo '<div style="'.$this->_MENU_STYLE.'">';
 	echo "<ul>\n";
-	echo '<li><a href="config_manage_6.php#form_locate">'._AM_WEBLINKS_CONF_LOCATE."</a></li>\n";
-	echo '<li><a href="config_manage_6.php#form_map">'._AM_WEBLINKS_CONF_MAP."</a></li>\n";
-	echo '<li><a href="config_manage_6.php#form_google_seach">'._AM_WEBLINKS_CONF_GOOGLE_SEARCH."</a></li>\n";
 	echo '<li><a href="config_manage_6.php#form_google_map">'._AM_WEBLINKS_CONF_GOOGLE_MAP."</a></li>\n";
 	echo '<li><a href="config_manage_6.php#form_index">'._AM_WEBLINKS_CONF_INDEX."</a></li>\n";
 	echo '<li><a href="config_manage_6.php#form_cat_page">'._AM_WEBLINKS_CONF_CAT_PAGE."</a></li>\n";
+	echo '<li><a href="config_manage_6.php#form_locate">'._AM_WEBLINKS_CONF_LOCATE."</a></li>\n";
+	echo '<li><a href="config_manage_6.php#form_map">'._AM_WEBLINKS_CONF_MAP."</a></li>\n";
+	echo '<li><a href="config_manage_6.php#form_google_seach">'._AM_WEBLINKS_CONF_GOOGLE_SEARCH."</a></li>\n";
 	echo '<li><a href="config_manage_6.php#gm_kml_debug">'._WEBLINKS_GM_KML_DEBUG."</a></li>\n";
 	echo "</ul>\n";
 	echo "</div>\n";

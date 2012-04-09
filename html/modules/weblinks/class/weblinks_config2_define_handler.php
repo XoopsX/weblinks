@@ -1,5 +1,9 @@
 <?php
-// $Id: weblinks_config2_define_handler.php,v 1.1 2011/12/29 14:33:09 ohwada Exp $
+// $Id: weblinks_config2_define_handler.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// webmap3_dirname
+// view_url_summary
 
 // 2008-02-17 K.OHWADA
 // kml_use
@@ -366,6 +370,18 @@ function &get_define()
 	$config[36]['options']     = array(
 		_AM_WEBLINKS_VIEW_STYLE_0 => 0,
 		_AM_WEBLINKS_VIEW_STYLE_1 => 1
+	);
+
+	$config[37]['name']        = 'view_url_summary';
+	$config[37]['catid']       = '3';
+	$config[37]['title']       = '_AM_WEBLINKS_VIEW_URL_SUMMARY';
+	$config[37]['description'] = '_AM_WEBLINKS_VIEW_URL_SUMMARY_DSC';
+	$config[37]['formtype']    = 'radio';
+	$config[37]['valuetype']   = 'int';
+	$config[37]['default']     = 0;
+	$config[37]['options']     = array(
+		_AM_WEBLINKS_VIEW_URL_SUMMARY_0 => 0,
+		_AM_WEBLINKS_VIEW_URL_SUMMARY_1 => 1
 	);
 
 //---------------------------------------------------------
@@ -1125,6 +1141,14 @@ function &get_define()
 //---------------------------------------------------------
 // google map: hacked by wye
 //---------------------------------------------------------
+	$config[303]['name']        = 'webmap3_dirname';
+	$config[303]['catid']       = '21';
+	$config[303]['title']       = '_AM_WEBLINKS_DIRNAME_SEL';
+//	$config[303]['description'] = '_AM_WEBLINKS_CONF_WEBMAP_DIRNAME_DESC';
+	$config[303]['formtype']    = 'extra_webmap3_dirname_list';
+	$config[303]['valuetype']   = 'txet';
+	$config[303]['default']     = 'webmap3';
+
 	$config[211]['name']        = 'gm_use';
 	$config[211]['catid']       = '21';
 	$config[211]['title']       = '_AM_WEBLINKS_CONF_GM_USE';
@@ -1132,22 +1156,22 @@ function &get_define()
 	$config[211]['valuetype']   = 'int';
 	$config[211]['default']     = 0;
 
-	$config[212]['name']        = 'gm_apikey';
-	$config[212]['catid']       = '21';
-	$config[212]['title']       = '_AM_WEBLINKS_CONF_GM_APIKEY';
-	$config[212]['description'] = '_AM_WEBLINKS_CONF_GM_APIKEY_DESC';
-	$config[212]['formtype']    = 'textarea';
-	$config[212]['valuetype']   = 'text';
-	$config[212]['default']     = '';
+//	$config[212]['name']        = 'gm_apikey';
+//	$config[212]['catid']       = '21';
+//	$config[212]['title']       = '_AM_WEBLINKS_CONF_GM_APIKEY';
+//	$config[212]['description'] = '_AM_WEBLINKS_CONF_GM_APIKEY_DESC';
+//	$config[212]['formtype']    = 'textarea';
+//	$config[212]['valuetype']   = 'text';
+//	$config[212]['default']     = '';
 
-	$config[213]['name']        = 'gm_server';
-	$config[213]['catid']       = '21';
-	$config[213]['title']       = '_AM_WEBLINKS_CONF_GM_SERVER';
-	$config[213]['formtype']    = 'text';
-	$config[213]['valuetype']   = 'text';
-	$config[213]['default']     = $default['gm_server'];
-	$config[213]['cc_flag']     = 1;
-	$config[213]['cc_value']    = $cc['gm_server'];
+//	$config[213]['name']        = 'gm_server';
+//	$config[213]['catid']       = '21';
+//	$config[213]['title']       = '_AM_WEBLINKS_CONF_GM_SERVER';
+//	$config[213]['formtype']    = 'text';
+//	$config[213]['valuetype']   = 'text';
+//	$config[213]['default']     = $default['gm_server'];
+//	$config[213]['cc_flag']     = 1;
+//	$config[213]['cc_value']    = $cc['gm_server'];
 
 	$config[214]['name']        = 'gm_location';
 	$config[214]['catid']       = '21';
@@ -1218,51 +1242,51 @@ function &get_define()
 	$config[291]['valuetype']   = 'int';
 	$config[291]['default']     = '-1';
 
-	$config[292]['name']        = 'gm_use_center_marker';
-	$config[292]['catid']       = '21';
-	$config[292]['title']       = '_AM_WEBLINKS_GM_USE_CENTER_MARKER';
-	$config[292]['description'] = '_AM_WEBLINKS_GM_USE_CENTER_MARKER_DESC';
-	$config[292]['formtype']    = 'yesno';
-	$config[292]['valuetype']   = 'int';
-	$config[292]['default']     = '0';
+//	$config[292]['name']        = 'gm_use_center_marker';
+//	$config[292]['catid']       = '21';
+//	$config[292]['title']       = '_AM_WEBLINKS_GM_USE_CENTER_MARKER';
+//	$config[292]['description'] = '_AM_WEBLINKS_GM_USE_CENTER_MARKER_DESC';
+//	$config[292]['formtype']    = 'yesno';
+//	$config[292]['valuetype']   = 'int';
+//	$config[292]['default']     = '0';
 
-	$config[293]['name']        = 'gm_map_control';
-	$config[293]['catid']       = '21';
-	$config[293]['title']       = '_AM_WEBLINKS_GM_MAP_CONT';
-	$config[293]['description'] = '_AM_WEBLINKS_GM_MAP_CONT_DESC';
-	$config[293]['formtype']    = 'radio_nl_non';
-	$config[293]['valuetype']   = 'text';
-	$config[293]['default']     = 'small';
-	$config[293]['options']     = array(
-		_AM_WEBLINKS_GM_MAP_CONT_NON   => 'non',
-		_AM_WEBLINKS_GM_MAP_CONT_LARGE => 'large',
-		_AM_WEBLINKS_GM_MAP_CONT_SMALL => 'small',
-		_AM_WEBLINKS_GM_MAP_CONT_ZOOM  => 'zoom',
-	);
+//	$config[293]['name']        = 'gm_map_control';
+//	$config[293]['catid']       = '21';
+//	$config[293]['title']       = '_AM_WEBLINKS_GM_MAP_CONT';
+//	$config[293]['description'] = '_AM_WEBLINKS_GM_MAP_CONT_DESC';
+//	$config[293]['formtype']    = 'radio_nl_non';
+//	$config[293]['valuetype']   = 'text';
+//	$config[293]['default']     = 'small';
+//	$config[293]['options']     = array(
+//		_AM_WEBLINKS_GM_MAP_CONT_NON   => 'non',
+//		_AM_WEBLINKS_GM_MAP_CONT_LARGE => 'large',
+//		_AM_WEBLINKS_GM_MAP_CONT_SMALL => 'small',
+//		_AM_WEBLINKS_GM_MAP_CONT_ZOOM  => 'zoom',
+//	);
 
-	$config[294]['name']        = 'gm_use_type_control';
-	$config[294]['catid']       = '21';
-	$config[294]['title']       = '_AM_WEBLINKS_GM_USE_TYPE_CONT';
-	$config[294]['description'] = '_AM_WEBLINKS_GM_USE_TYPE_CONT_DESC';
-	$config[294]['formtype']    = 'yesno';
-	$config[294]['valuetype']   = 'int';
-	$config[294]['default']     = '1';
+//	$config[294]['name']        = 'gm_use_type_control';
+//	$config[294]['catid']       = '21';
+//	$config[294]['title']       = '_AM_WEBLINKS_GM_USE_TYPE_CONT';
+//	$config[294]['description'] = '_AM_WEBLINKS_GM_USE_TYPE_CONT_DESC';
+//	$config[294]['formtype']    = 'yesno';
+//	$config[294]['valuetype']   = 'int';
+//	$config[294]['default']     = '1';
 
-	$config[295]['name']        = 'gm_use_scale_control';
-	$config[295]['catid']       = '21';
-	$config[295]['title']       = '_AM_WEBLINKS_GM_USE_SCALE_CONT';
-	$config[295]['description'] = '_AM_WEBLINKS_GM_USE_SCALE_CONT_DESC';
-	$config[295]['formtype']    = 'yesno';
-	$config[295]['valuetype']   = 'int';
-	$config[295]['default']     = '0';
+//	$config[295]['name']        = 'gm_use_scale_control';
+//	$config[295]['catid']       = '21';
+//	$config[295]['title']       = '_AM_WEBLINKS_GM_USE_SCALE_CONT';
+//	$config[295]['description'] = '_AM_WEBLINKS_GM_USE_SCALE_CONT_DESC';
+//	$config[295]['formtype']    = 'yesno';
+//	$config[295]['valuetype']   = 'int';
+//	$config[295]['default']     = '0';
 
-	$config[296]['name']        = 'gm_use_overview_control';
-	$config[296]['catid']       = '21';
-	$config[296]['title']       = '_AM_WEBLINKS_GM_USE_OVERVIEW_CONT';
-	$config[296]['description'] = '_AM_WEBLINKS_GM_USE_OVERVIEW_CONT_DESC';
-	$config[296]['formtype']    = 'yesno';
-	$config[296]['valuetype']   = 'int';
-	$config[296]['default']     = '1';
+//	$config[296]['name']        = 'gm_use_overview_control';
+//	$config[296]['catid']       = '21';
+//	$config[296]['title']       = '_AM_WEBLINKS_GM_USE_OVERVIEW_CONT';
+//	$config[296]['description'] = '_AM_WEBLINKS_GM_USE_OVERVIEW_CONT_DESC';
+//	$config[296]['formtype']    = 'yesno';
+//	$config[296]['valuetype']   = 'int';
+//	$config[296]['default']     = '1';
 
 //	$config[297]['name']        = 'gm_map_type';
 //	$config[297]['catid']       = '21';
@@ -1277,33 +1301,33 @@ function &get_define()
 //		_WEBLINKS_GM_TYPE_HYBRID    => 'hybirid',
 //	);
 
-	$config[298]['name']        = 'gm_geocode_kind';
-	$config[298]['catid']       = '21';
-	$config[298]['title']       = '_AM_WEBLINKS_GM_GEOCODE_KIND';
-	$config[298]['description'] = '_AM_WEBLINKS_GM_GEOCODE_KIND_DESC';
-	$config[298]['formtype']    = 'radio_nl_non';
-	$config[298]['valuetype']   = 'text';
-	$config[298]['default']     = 'locations';
-	$config[298]['options']     = array(
-		_AM_WEBLINKS_GM_GEOCODE_KIND_LATLNG     => 'latlng',
-		_AM_WEBLINKS_GM_GEOCODE_KIND_LOCATIONS  => 'locations',
-	);
+//	$config[298]['name']        = 'gm_geocode_kind';
+//	$config[298]['catid']       = '21';
+//	$config[298]['title']       = '_AM_WEBLINKS_GM_GEOCODE_KIND';
+//	$config[298]['description'] = '_AM_WEBLINKS_GM_GEOCODE_KIND_DESC';
+//	$config[298]['formtype']    = 'radio_nl_non';
+//	$config[298]['valuetype']   = 'text';
+//	$config[298]['default']     = 'locations';
+//	$config[298]['options']     = array(
+//		_AM_WEBLINKS_GM_GEOCODE_KIND_LATLNG     => 'latlng',
+//		_AM_WEBLINKS_GM_GEOCODE_KIND_LOCATIONS  => 'locations',
+//	);
 
-	$config[299]['name']        = 'gm_use_geocode_tokyo';
-	$config[299]['catid']       = '21';
-	$config[299]['title']       = '_AM_WEBLINKS_GM_USE_GEOCODE_TOKYO';
-	$config[299]['description'] = '_AM_WEBLINKS_GM_USE_GEOCODE_TOKYO_DESC';
-	$config[299]['formtype']    = 'yesno';
-	$config[299]['valuetype']   = 'int';
-	$config[299]['default']     = '0';
+//	$config[299]['name']        = 'gm_use_geocode_tokyo';
+//	$config[299]['catid']       = '21';
+//	$config[299]['title']       = '_AM_WEBLINKS_GM_USE_GEOCODE_TOKYO';
+//	$config[299]['description'] = '_AM_WEBLINKS_GM_USE_GEOCODE_TOKYO_DESC';
+//	$config[299]['formtype']    = 'yesno';
+//	$config[299]['valuetype']   = 'int';
+//	$config[299]['default']     = '0';
 
-	$config[301]['name']        = 'gm_use_nishioka_inverse';
-	$config[301]['catid']       = '21';
-	$config[301]['title']       = '_AM_WEBLINKS_GM_USE_NISHIOKA';
-	$config[301]['description'] = '_AM_WEBLINKS_GM_USE_NISHIOKA_DESC';
-	$config[301]['formtype']    = 'yesno';
-	$config[301]['valuetype']   = 'int';
-	$config[301]['default']     = '0';
+//	$config[301]['name']        = 'gm_use_nishioka_inverse';
+//	$config[301]['catid']       = '21';
+//	$config[301]['title']       = '_AM_WEBLINKS_GM_USE_NISHIOKA';
+//	$config[301]['description'] = '_AM_WEBLINKS_GM_USE_NISHIOKA_DESC';
+//	$config[301]['formtype']    = 'yesno';
+//	$config[301]['valuetype']   = 'int';
+//	$config[301]['default']     = '0';
 
 	$config[234]['name']        = 'index_gm_mode';
 	$config[234]['catid']       = '29';
@@ -1349,6 +1373,7 @@ function &get_define()
 
 //	$config[301]['name']        = 'gm_use_nishioka_inverse';
 //	$config[302]['name']        = 'gm_marker_width';
+//	$config[303]['name']        = 'webmap3_dirname';
 
 //---------------------------------------------------------
 // google search

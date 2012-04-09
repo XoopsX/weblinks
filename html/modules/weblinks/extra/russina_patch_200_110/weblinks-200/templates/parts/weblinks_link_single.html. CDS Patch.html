@@ -1,0 +1,370 @@
+<{* $Id: weblinks_link_single.html.\040CDS\040Patch.html,v 1.1 2012/04/09 10:22:24 ohwada Exp $ *}>
+
+<div class="weblinks_link_single_frame">
+<div class="weblinks_link_single_frame_2">
+
+<div class="weblinks_link_single_frame_title">
+<table class="weblinks_link_single_title"><tr>
+<td class="weblinks_link_single_title_left">
+
+<{if $link.flag_url == 1}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/visit.php?lid=<{$link.lid}>" target="_blank">
+<{elseif $link.flag_url == 2}>
+  <a href="<{$link.url}>" onmousedown="return weblinks_hardlink(this,<{$link.lid}>)" target="_blank">
+<{/if}>
+
+<{if $link.flag_url != 0}>
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/link.gif" border="0" alt="<{$lang_visit}>" /> &nbsp; 
+<{/if}>
+
+<span class="weblinks_link_title"><{$link.title_s}></span>
+
+<{if $link.flag_url != 0}>
+  </a>
+<{/if}>
+
+ &nbsp; 
+
+<{if $link.flag_new}>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/index.php?keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/index.php">
+  <{/if}>
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/new.gif" border="0" alt="<{$lang_site_new}>" /></a>
+<{/if}>
+
+<{if $link.flag_update}>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/index.php?keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/index.php">
+  <{/if}>
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/update.gif" border="0" alt="<{$lang_site_update}>" /></a>
+<{/if}>
+
+<{if $link.flag_pop}>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/topten.php?hit=1&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/topten.php?hit=1">
+  <{/if}>
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/pop.gif" border="0" alt="<{$lang_site_popular}>" /></a>
+<{/if}>
+
+<{if $link.flag_recommend}>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=recommend&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=recommend">
+  <{/if}>
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/cool.gif" border="0" alt="<{$lang_site_recommend}>" /></a>
+<{/if}>
+
+<{if $link.flag_mutual}>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=mutual&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=mutual">
+  <{/if}>
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/hot.gif" border="0" alt="<{$lang_site_mutual}>" /></a>
+<{/if}>
+
+ &nbsp; 
+
+<{if $link.rss_flag == 1}>
+  <a href="<{$link.rss_url_s}>" target="_blank">
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/rdf.png" border="0" alt="rdf" /></a>
+<{elseif $link.rss_flag == 2}>
+  <a href="<{$link.rss_url_s}>" target="_blank">
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/rss.png" border="0" alt="rss" /></a>
+<{elseif $link.rss_flag == 3}>
+  <a href="<{$link.rss_url_s}>" target="_blank">
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/atom.png" border="0" alt="atom" /></a>
+<{/if}>
+
+ &nbsp; 
+
+<{if $link.flag_gm_use}>
+  <{if $keywords != '' }>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=gmap&amp;keywords=<{$keywords}>">
+  <{else}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/viewmark.php?mark=gmap">
+  <{/if}>
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/google_maps.png" border="0" alt="<{$lang_site_gmap}>" /></a>
+<{/if}>
+
+<{if $link.flag_kml_use}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/kml/kml.php?lid=<{$link.lid}>">
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/google_earth.png" border="0" alt="Google Earth" />
+  </a>
+<{/if}>
+
+</td>
+
+<{if $link.show_pagerank}> 
+  <td class="weblinks_link_single_title_right">
+  <{$smarty.const._WEBLINKS_PAGERANK}><br />
+  <{$link.pagerank}> 
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/bar/bar<{$link.pagerank}>.png" border="0" alt="PageRank" />
+  </td>
+<{/if}>
+
+</tr></table>
+</div>
+
+<div class="weblinks_link_single_frame_time_update">
+
+<span class="weblinks_bold"><{$lang_link_time_update}></span> <{$link.update_middle}>  
+<{if $link.time_expire_long }>
+  &nbsp; <span class="weblinks_bold"><{$lang_link_time_expire}></span> <{$link.time_expire_middle}>
+<{/if}>
+
+</div>
+
+<div class="weblinks_link_single_frame_category">
+
+<span class="weblinks_bold"><{$lang_link_cat}></span>&nbsp;
+
+<{if $link.show_catpaths}>
+<{* -- Start path loop -- *}>
+  <{section name=ii loop=$link.catpaths}>
+    <{section name=j loop=$link.catpaths[ii]}>
+      <{if $keywords != '' }>
+        <a href="<{$xoops_url}>/modules/<{$dirname}>/viewcat.php?cid=<{$link.catpaths[ii][j].cid}>&amp;keywords=<{$keywords}>">
+      <{else}>        
+        <a href="<{$xoops_url}>/modules/<{$dirname}>/viewcat.php?cid=<{$link.catpaths[ii][j].cid}>">
+      <{/if}>        
+      <{$link.catpaths[ii][j].title_s}></a>
+      <{if $smarty.section.j.last == false}>
+        <img src="<{$xoops_url}>/modules/<{$dirname}>/images/arrow2.gif" border="0" alt="arrow" /> 
+      <{/if}>
+    <{/section}>
+    <{if $smarty.section.ii.last == false}>
+      &nbsp; : &nbsp;
+    <{/if}>
+  <{/section}>
+<{* -- End path loop -- *}>
+<{else}>
+  <span class="weblinks_error"><{$smarty.const._NO_CATEGORY}></span>
+<{/if}>
+<br />
+
+<{if $link.name_disp != "" or $link.mail_disp != "" or $link.company_s != ""}>
+  <span class="weblinks_bold"><{$lang_promoter}></span>&nbsp;
+  
+  <{if $link.name_disp != ""}>
+    <{if $link.mail_disp != ""}>
+      <a href="mailto:<{$link.mail_disp}>"><{$link.name_disp}></a>
+    <{else}>
+      <{$link.name_disp}>
+    <{/if}>
+    &nbsp; 
+  <{/if}>
+  
+  <{$link.company_s}> <br />
+<{/if}>
+
+<{if $link.zip_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_zip}></span> <{$link.zip_s}>
+<{/if}>
+
+<{if ($link.state_s !="") || ($link.city_s !="") || ($link.addr_s !="") || ($link.addr2_s !="") }>
+  <table><tr><td align="left">
+  <span class="weblinks_bold"><{$lang_link_addr}></span> 
+
+  <{if $is_japanese }>
+    <{if $link.state_s != ""}>
+      <{$link.state_s}> 
+    <{/if}>
+    <{if $link.city_s != ""}>
+      <{$link.city_s}> 
+    <{/if}>
+    <{if $link.addr_s != ""}>
+      <{$link.addr_s}> 
+    <{/if}>
+    <{if $link.addr2_s != ""}>
+      <{$link.addr2_s}> 
+    <{/if}>
+  <{else}>
+    <{if $link.addr2_s != ""}>
+      <{$link.addr2_s}> 
+    <{/if}>
+    <{if $link.addr_s != ""}>
+      <{$link.addr_s}> 
+    <{/if}>
+    <{if $link.city_s != ""}>
+      <{$link.city_s}> 
+    <{/if}>
+    <{if $link.state_s != ""}>
+      <{$link.state_s}> 
+    <{/if}>
+  <{/if}>
+
+  </td><td valign="middle" align="right">
+  <{if ($flag_map_use == 1) && ($link.map_use == 1) }>
+    <{$link.map}>
+  <{/if}>
+  </td></tr></table>
+<{/if}>
+
+<{if ($link.tel_s != "") || ($link.fax_s != "") }>
+  <{if $link.tel_s != ""}>
+    <span class="weblinks_bold"><{$lang_link_tel}></span> <{$link.tel_s}> &nbsp; 
+  <{/if}>
+
+  <{if $link.fax_s != ""}>
+    <span class="weblinks_bold"><{$lang_link_fax}></span> <{$link.fax_s}>
+  <{/if}>
+<{/if}>
+
+</div>
+
+<div class="weblinks_link_single_frame_description">
+
+<{if $link.image_link_show}>
+  <{if $link.flag_url == 1}>
+    <a href="<{$xoops_url}>/modules/<{$dirname}>/visit.php?lid=<{$link.lid}>" target="_blank">
+  <{elseif $link.flag_url == 2}>
+    <a href="<{$link.url}>" onmousedown="return weblinks_hardlink(this,<{$link.lid}>)" target="_blank">
+  <{/if}>
+  <{if ($link.image_link_width != "") && ($link.image_link_height != "")}>
+    <img src="<{$link.image_url}>" width="<{$link.image_link_width}>"  height="<{$link.image_link_height}>" alt="banner" class="weblinks_link_image" />
+  <{else}>
+    <img src="<{$link.image_url}>" alt="banner" class="weblinks_link_image" />
+  <{/if}>
+  <{if $link.flag_url != 0}>
+    </a>
+  <{/if}>
+<{/if}>
+
+<{if $is_module_admin}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/admin/link_manage.php?op=modLink&amp;lid=<{$link.lid}>">
+  <img src="<{$xoops_url}>/modules/<{$dirname}>/images/editicon.gif" border="0" alt="<{$lang_editthislink}>" />
+  </a> 
+<{/if}>
+
+<span class="weblinks_bold"><{$lang_link_description}></span><br />
+<span class="weblinks_link_description"><{$link.desc_disp}></span><br /><br />
+
+<{if $link.admincomment_disp != ""}>
+  <span class="weblinks_bold"><{$lang_link_admincomment}></span><br />
+  <span class="weblinks_link_admincomment"><{$link.admincomment_disp}></span><br /><br />
+<{/if}>
+
+<{if $link.etc1_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc1}></span> <{$link.etc1_s}><br />
+<{/if}>
+
+<{if $link.etc2_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc2}></span> <{$link.etc2_s}><br />
+<{/if}>
+
+<{if $link.etc3_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc3}></span> <{$link.etc3_s}><br />
+<{/if}>
+
+<{if $link.etc4_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc4}></span> <{$link.etc4_s}><br />
+<{/if}>
+
+<{if $link.etc5_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc5}></span> <{$link.etc5_s}><br />
+<{/if}>
+
+<{if $link.etc6_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc6}></span> <{$link.etc6_s}><br />
+<{/if}>
+
+<{if $link.etc7_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc7}></span> <{$link.etc7_s}><br />
+<{/if}>
+
+<{if $link.etc8_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc8}></span> <{$link.etc8_s}><br />
+<{/if}>
+
+<{if $link.etc9_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc9}></span> <{$link.etc9_s}><br />
+<{/if}>
+
+<{if $link.etc10_s != ""}>
+  <span class="weblinks_bold"><{$lang_link_etc10}></span> <{$link.etc10_s}><br />
+<{/if}>
+
+<{if $link.image_link_show}>
+  <br class="weblinks_link_image_clear" />
+<{/if}>
+
+</div>
+
+<div class="weblinks_link_single_frame_hits">
+
+<{if $show_hits}>
+  <span class="weblinks_bold"><{$lang_link_hits}>:</span> <{$link.hits}>&nbsp;&nbsp;
+<{/if}>
+
+<{if $show_rating}>
+  <span class="weblinks_bold"><{$lang_link_rating}>:</span> <{$link.rating_disp}> (<{$link.votes_disp}>)
+<{/if}>
+
+</div>
+
+<div class="weblinks_link_single_frame_footer">
+
+<{if $link.show_modify}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/modlink.php?lid=<{$link.lid}>"><{$lang_modify}></a>
+  &nbsp; | &nbsp; 
+<{/if}>
+
+<{if $show_ratelink}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/ratelink.php?lid=<{$link.lid}>"><{$lang_ratethissite}></a>
+  &nbsp; | &nbsp; 
+<{/if}>
+
+<{if $show_brokenlink}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/brokenlink.php?lid=<{$link.lid}>"><{$lang_reportbroken}></a>
+  &nbsp; | &nbsp; 
+<{/if}>
+
+<{if $keywords != '' }>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/singlelink.php?lid=<{$link.lid}>&amp;keywords=<{$keywords}>#comment">
+<{else}>
+  <a href="<{$xoops_url}>/modules/<{$dirname}>/singlelink.php?lid=<{$link.lid}>#comment">
+<{/if}>
+
+<{$lang_link_comments}> (<{$link.comments}>)</a>
+&nbsp; | &nbsp; 
+
+<{if $show_atomfeed}>
+  <{if ($link.rss_flag == 1) || ($link.rss_flag == 2) ||  ($link.rss_flag == 3) }>
+    <{if $keywords != '' }>
+      <a href="<{$xoops_url}>/modules/<{$dirname}>/singlelink.php?lid=<{$link.lid}>&amp;keywords=<{$keywords}>#rss">
+    <{else}>
+      <a href="<{$xoops_url}>/modules/<{$dirname}>/singlelink.php?lid=<{$link.lid}>#rss">
+    <{/if}>
+    <{if $link.rss_flag == 1 }>
+      RDF
+    <{elseif $link.rss_flag == 2 }>
+      RSS
+    <{elseif $link.rss_flag == 3 }>
+      ATOM
+    <{/if}>
+    </a> &nbsp; | &nbsp; 
+  <{/if}>
+<{/if}>
+
+<a href="<{$xoops_url}>/modules/<{$dirname}>/print.php?lid=<{$link.lid}>">
+<img src="<{$xoops_url}>/modules/<{$dirname}>/images/print.gif" alt="<{$lang_print}>" border="0" /> 
+<{$lang_print}>
+</a>
+&nbsp; | &nbsp;
+<a target="_top" href="mailto:?subject=<{$link.mail_subject}>&amp;body=<{$link.mail_body}>">
+<img src="<{$xoops_url}>/modules/<{$dirname}>/images/friend.gif" alt="<{$lang_tellafriend}>" border="0" /> 
+<{$lang_tellafriend}>
+</a> 
+
+</div>
+
+</div>
+</div>

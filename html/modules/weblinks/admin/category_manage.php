@@ -1,5 +1,8 @@
 <?php
-// $Id: category_manage.php,v 1.1 2011/12/29 14:32:53 ohwada Exp $
+// $Id: category_manage.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap
 
 // 2007-12-16 K.OHWADA
 // build_selbox_top()
@@ -67,6 +70,8 @@
 //=========================================================
 
 include 'admin_header.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_block_webmap.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_webmap.php';
 
 //=========================================================
 // class admin_category_manage
@@ -925,8 +930,10 @@ class admin_form_category extends happy_linux_form
 	var $_handler;
 	var $_config_handle;
 	var $_plugin;
-	var $_gmap;
 	var $_header;
+	var $_webmap_class;
+
+	var	$_flag_webmap = false;
 
 // hack for multi site
 	var $_flag_show_aux_int_1  = false;
@@ -945,9 +952,9 @@ function admin_form_category()
 
 	$this->_handler           =& weblinks_get_handler('category',       WEBLINKS_DIRNAME );
 	$this->_config_handler    =& weblinks_get_handler('config2_basic',  WEBLINKS_DIRNAME );
-	$this->_plugin  =& weblinks_plugin::getInstance( WEBLINKS_DIRNAME );
-	$this->_gmap    =& weblinks_gmap::getInstance(   WEBLINKS_DIRNAME );
-	$this->_header  =& weblinks_header::getInstance( WEBLINKS_DIRNAME );
+	$this->_plugin       =& weblinks_plugin::getInstance( WEBLINKS_DIRNAME );
+	$this->_header       =& weblinks_header::getInstance( WEBLINKS_DIRNAME );
+	$this->_webmap_class =& weblinks_webmap::getInstance( WEBLINKS_DIRNAME );
 
 // hack for multi site
 	if ( weblinks_multi_is_japanese_site() )
@@ -973,7 +980,20 @@ function &getInstance()
 //---------------------------------------------------------
 function _show(&$obj, $extra=null, $show_mode=0 )
 {
+	$cid = $obj->getVar('cid', 'e');
+
 	echo $this->_header->build_module_header_submit();
+
+	$ret = $this->_webmap_class->init_form();
+	if ( $ret == 1 ) {
+		$this->_flag_webmap = true;
+		$this->_webmap_class->set_cid( $cid );
+		$this->_webmap_class->set_display_url();
+		echo $this->_webmap_class->get_form_js( false );
+
+	} elseif ( $ret == -1 ) {
+		xoops_error( $this->_webmap_class->get_init_error() );
+	}
 
 	switch ($show_mode) 
 	{
@@ -996,7 +1016,6 @@ function _show(&$obj, $extra=null, $show_mode=0 )
 
 	$this->set_obj($obj);
 
-	$cid    = $obj->getVar('cid', 'e');
 	$selbox = $this->_handler->build_selbox_top( $obj->get('pid'), 1, 'pid', '' );
 
 	$forum_opt = $this->_plugin->get_options_for_cat_forum();
@@ -1037,12 +1056,20 @@ function _show(&$obj, $extra=null, $show_mode=0 )
 	echo $this->build_form_table_line( _WEBLINKS_FORUM_SEL, $forum_sel);
 	echo $this->build_form_table_line( _WEBLINKS_ALBUM_SEL, $album_sel);
 	echo $this->_build_cat_gm_mode(  $obj->get('gm_mode') );
-	echo $this->build_form_table_line( '', $this->_gmap->build_form_desc() );
-	echo $this->_build_cat_gm();
-	echo $this->build_obj_table_text( _WEBLINKS_GM_LATITUDE,  'gm_latitude' );
-	echo $this->build_obj_table_text( _WEBLINKS_GM_LONGITUDE, 'gm_longitude' );
-	echo $this->build_obj_table_text( _WEBLINKS_GM_ZOOM,      'gm_zoom' );
-	echo $this->_build_cat_gm_type(  $obj->get('gm_type') );
+
+	if ( $this->_flag_webmap ) {
+		$cap_gm_location = $this->build_form_caption( _WEBLINKS_GM_LOCATION, _AM_WEBLINKS_GM_LOCATION_DSC );
+
+		echo $this->build_form_table_line( '', $this->_webmap_class->build_form_desc() );
+		echo $this->_build_cat_gm();
+		echo $this->build_obj_table_text( $cap_gm_location,       'gm_location' );
+		echo $this->build_obj_table_text( _WEBLINKS_GM_LATITUDE,  'gm_latitude' );
+		echo $this->build_obj_table_text( _WEBLINKS_GM_LONGITUDE, 'gm_longitude' );
+		echo $this->build_obj_table_text( _WEBLINKS_GM_ZOOM,      'gm_zoom' );
+		echo $this->_build_cat_gm_type(  $obj->get('gm_type') );
+		echo $this->_build_cat_gm_icon(  $obj->get('gm_icon') );
+	}
+
 	echo $this->build_form_table_line( _WLS_DESCRIPTION, $desc );
 	echo $this->build_form_table_line( _WEBLINKS_OPTIONS, $desc_opt );
 	echo $this->_build_cat_imgurl( $obj );
@@ -1134,11 +1161,18 @@ function _build_cat_gm_type( $value )
 	return $ele;
 }
 
+function _build_cat_gm_icon( $value )
+{
+	$text = $this->_webmap_class->build_ele_icon( $value );
+	$ele = $this->build_form_table_line( _WEBLINKS_GM_ICON, $text );
+	return $ele;
+}
+
 function _build_cat_gm()
 {
 	$text  = $this->build_html_tr_tag_begin('left', 'top');
 	$text .= $this->build_html_td_tag_begin('', '', 2, '', 'odd');
-	$text .= $this->_gmap->build_form_iframe();
+	$text .= $this->_webmap_class->build_form_iframe();
 	$text .= $this->build_html_td_tag_end();
 	$text .= $this->build_html_tr_tag_end();
 	return $text;

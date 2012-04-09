@@ -1,5 +1,7 @@
 <?php
-// $Id: weblinks_linkitem_define_handler.php,v 1.1 2011/12/29 14:33:06 ohwada Exp $
+// $Id: weblinks_linkitem_define_handler.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+
+//	 $config[66]['name']        = 'gm_icon';
 
 // 2008-02-17 K.OHWADA
 // pagerank, pagerank_update in link, modify
@@ -504,6 +506,14 @@ function &get_define()
 		_WEBLINKS_GM_TYPE_SATELLITE => 1,
 		_WEBLINKS_GM_TYPE_HYBRID    => 2,
 	);
+
+	 $config[66]['name']        = 'gm_icon';
+	 $config[66]['title']       = _WEBLINKS_GM_ICON;
+	 $config[66]['user_mode']   = 0;
+	 $config[66]['user_form']   = 'gm_icon';
+	 $config[66]['admin_form']  = 'gm_icon';
+	 $config[66]['conf_form']   = 1;
+	 $config[66]['save_mode']   = 1;
 
 // virtual item for additional
 	 $config[65]['name']        = 'gm_kml';

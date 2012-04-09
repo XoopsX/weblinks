@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_link_view.php,v 1.1 2011/12/29 14:33:06 ohwada Exp $
+// $Id: weblinks_link_view.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap
 
 // 2008-03-30 K.OHWADA
 // show when url is fill
@@ -63,6 +66,7 @@ class weblinks_link_view extends weblinks_link_view_basic
 	var $_pagerank_handler;
 	var $_rssc_handler;
 	var $_auth;
+	var $_webmap_class;
 
 	var $_lang;
 	var $_highlight;
@@ -80,6 +84,7 @@ function weblinks_link_view( $dirname )
 	$this->_pagerank_handler     =& weblinks_get_handler('pagerank',           $dirname );
 	$this->_rssc_handler         =& weblinks_get_handler('rssc_view',          $dirname );
 	$this->_auth                 =& weblinks_auth::getInstance( $dirname );
+	$this->_webmap_class         =& weblinks_webmap::getInstance( $dirname );
 
 	$this->_lang      =& happy_linux_language_factory::getInstance();
 	$this->_highlight =& happy_linux_highlight::getInstance();
@@ -126,15 +131,15 @@ function build_show( $flag_highlight=false, $keyword_array=null )
 	$this->_set_highlight_short( $desc, $flag_highlight, $keyword_array );
 
 // lid
-	$lid = $this->get('lid');
-	$this->_set_link_catpaths_by_lid($lid);
-	$this->_set_link_mail_by_lid($lid);
+	$this->_set_link_categories();
+	$this->_set_link_mail();
 
 	$this->_set_link_image();
 	$this->_set_pagerank();
 	$this->_set_show_modify();
 	$this->_set_link_rss_url();
 
+	$this->_set_gm_use();
 }
 
 //---------------------------------------------------------
@@ -149,41 +154,34 @@ function _set_show_modify()
 //---------------------------------------------------------
 // catlink_handler
 //---------------------------------------------------------
-function _set_link_catpaths_by_lid($lid)
+function _set_link_categories()
 {
-	$show_catpaths = false;
-	$catpaths      = null;
+	$lid = $this->get('lid');
+	$cid_arr = $this->_catlink_handler->get_cid_array_by_lid( $lid );
+	$this->set_catpaths_by_cid_array( $cid_arr );
 
-	$cid_arr = $this->_catlink_handler->get_cid_array_by_lid($lid);
-	if ( is_array($cid_arr) && count($cid_arr) )
-	{
-		list($show_catpaths, $catpaths) =
-			$this->build_catpaths_by_cid_array( $cid_arr );
+	if ( $this->check_lat_lng_zoom() ) {
+		$this->set_google_icon_by_cid_array( $cid_arr );
 	}
-
-	$this->set('show_catpaths', $show_catpaths);
-	$this->set('catpaths',      $catpaths);
 }
 
 //---------------------------------------------------------
 // category_handler
 //---------------------------------------------------------
-function build_catpaths_by_cid_array( &$cid_arr )
+function set_catpaths_by_cid_array( $cid_arr )
 {
 	$show_catpaths = false;
 	$catpaths      = null;
 
-	if ( is_array($cid_arr) && count($cid_arr) )
-	{
+	if ( is_array($cid_arr) && count($cid_arr) ) {
 		$catpaths =& $this->_category_handler->build_parent_path_multi($cid_arr);
+		if ( is_array($catpaths) && count($catpaths) ){
+			$show_catpaths = true;
+		}
 	}
 
-	if ( is_array($catpaths) && count($catpaths) )
-	{
-		$show_catpaths = true;
-	}
-
-	return array($show_catpaths, $catpaths);
+	$this->set('show_catpaths', $show_catpaths);
+	$this->set('catpaths',      $catpaths);
 }
 
 //---------------------------------------------------------
@@ -310,8 +308,10 @@ function _set_highlight_short( $text, $flag_highlight=false, $keyword_array=null
 //---------------------------------------------------------
 // class language
 //---------------------------------------------------------
-function _set_link_mail_by_lid($lid)
+function _set_link_mail()
 {
+	$lid = $this->get('lid');
+
 	$mail_subject = '';
 	$mail_body    = '';
 
@@ -344,6 +344,81 @@ function build_link_mail_by_lid($lid)
 	return array($subject, $body);
 }
 
+//---------------------------------------------------------
+// google map
+//---------------------------------------------------------
+function check_webmap_dirname()
+{
+	$dirname = $this->_conf['webmap3_dirname'];
+	$use     = $this->_conf['gm_use'];
+
+	$ret = $this->_webmap_class->check_webmap_dirname( $dirname );
+	if ( !$ret ) {
+		return false;
+	}
+	if ( ! $use ) {
+		return false;
+	}
+	return true;
+}
+
+function check_lat_lng_zoom()
+{
+	$ret = $this->_webmap_class->check_lat_lng_zoom( 
+		$this->get('gm_latitude'), 
+		$this->get('gm_longitude'), 
+		$this->get('gm_zoom') );
+
+	$this->set('google_use', $ret);
+	return $ret;
+}
+
+function _set_gm_use()
+{
+	$flag_gm_use  = false;
+	$flag_kml_use = false;
+
+	if ( $this->get('google_use') )
+	{
+		if ( $this->check_webmap_dirname() ){
+			$flag_gm_use = true;
+		}
+		if ( $this->_conf['kml_use'] ) {
+			$flag_kml_use = true;
+		}
+	}
+
+	$this->set('flag_gm_use',  $flag_gm_use);
+	$this->set('flag_kml_use', $flag_kml_use);
+}
+
+function set_google_icon_by_cid_array( $cid_arr )
+{
+	$icon = $this->find_google_icon( $cid_arr );
+	$this->set('google_icon', $icon);
+}
+
+function find_google_icon( $cid_arr )
+{
+// find in link
+	$gm_icon = $this->get('gm_icon');
+	if ( $gm_icon > 0 ) {
+		return $gm_icon;
+	}
+
+	foreach ($cid_arr as $cid) {
+		$cat_row = $this->_category_handler->get_cache_row( $cid );
+
+// find in category
+		if ( $cat_row['gm_icon'] > 0 ) {
+			return $cat_row['gm_icon'];
+		}
+	}
+
+// not find
+	return 0;
+}
+
 //=========================================================
 // for rss
 //=========================================================
@@ -367,7 +442,7 @@ function build_rss( $flag_user=false )
 	$uid = $this->get('uid');
 
 	$link    = $this->_build_single_link_by_lid($lid);
-	$content = $this->_build_description_disp();
+	$content = $this->get_description_disp();
 
 // author_name
 	$author_name  = '';

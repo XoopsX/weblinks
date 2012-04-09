@@ -1,5 +1,8 @@
 <?php
-// $Id: singlelink.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+// $Id: singlelink.php,v 1.3 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap
 
 // 2010-01-24 K.OHWADA
 // Notice [PHP]: Only variables should be assigned by reference
@@ -63,7 +66,7 @@ include_once WEBLINKS_ROOT_PATH.'/class/weblinks_singlelink.php';
 $weblinks_singlelink =& weblinks_singlelink::getInstance( WEBLINKS_DIRNAME );
 $weblinks_template   =& weblinks_template::getInstance(   WEBLINKS_DIRNAME );
 $weblinks_header     =& weblinks_header::getInstance(     WEBLINKS_DIRNAME );
-$weblinks_gmap       =& weblinks_gmap::getInstance(       WEBLINKS_DIRNAME );
+$weblinks_webmap     =& weblinks_webmap::getInstance(     WEBLINKS_DIRNAME );
 
 // BUG 2932: dont work correctly when register_long_arrays = off
 $lid = $weblinks_singlelink->get_get_lid();
@@ -136,13 +139,28 @@ foreach ($catpath_arr as $catpath)
 	$xoopsTpl->append('catpaths', $catpath);
 }
 
+$link_show['mode_singlelink'] = 1;
 $single = $weblinks_template->fetch_link_single( $link_show );
 $xoopsTpl->assign('weblinks_link_single', $single);
 
-// google map: hacked by wye
-$gm_single = $weblinks_gmap->fetch_single( $link_show );
-$xoopsTpl->assign('show_gm_single',     $link_show['flag_gm_use'] );
-$xoopsTpl->assign('weblinks_gm_single', $gm_single);
+// --- webmap ---
+$show_webmap   = false;
+$webmap_div_id = '';
+$webmap_func   = '';
+
+if ( $link_show['flag_gm_use'] ) {
+	$ret = $weblinks_webmap->init_map();
+	if ( $ret) {
+		$webmap_param  = $weblinks_webmap->fetch_single( $link_show );
+		$show_webmap   = $webmap_param['show_webmap'];
+		$webmap_div_id = $webmap_param['webmap_div_id'];
+		$webmap_func   = $webmap_param['webmap_func'];
+	}
+}
+
+$xoopsTpl->assign('show_webmap',   $show_webmap );
+$xoopsTpl->assign('webmap_div_id', $webmap_div_id );
+$xoopsTpl->assign('webmap_func',   $webmap_func );
 
 // atomfeed
 $atomfeed = $weblinks_singlelink->get_atomfeed( $lid );

@@ -1,11 +1,63 @@
-$Id: readme_jp.txt,v 1.4 2011/12/29 20:57:52 ohwada Exp $
+$Id: readme_jp.txt,v 1.5 2012/04/09 10:20:04 ohwada Exp $
+
+=================================================
+Version: 2.10
+Date:   2012-04-02
+Author: Kenichi OHWADA
+URL:    http://linux.ohwada.jp/
+Email:  webmaster@ohwada.jp
+=================================================
+
+● 変更内容
+1. Google Maps API V3 対応
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1271&forum=5
+
+(1) WEBMAP3 モジュールが必要です。
+
+(2) カテゴリ単位、リンク単位にマーカーのアイコンが指定できます。
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1150
+
+(3) 任意のアイコンを設定できます。
+WEBMAP3 モジュールの機能です。
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=848
+
+2. 管理者の設定に url 選択を追加した
+タイトルのハイパーリンクに、
+元のサイトと Weblinks のsinglelink.php との選択ができる
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1198
+
+3. 登録できるURLの文字数を255バイトから64Kバイトに変更した
+http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1279
+
+4. 一括登録に下記の機能を追加した
+(1) フォーム画面からコメントを一括登録する
+(2) 登録済のリンクの URL からから RSS URL を検索して、自動で登録する
+(3) 登録済のリンクの住所から緯度・経度を検索して、半自動で登録する
+(4) \2c という記法でカンマを記述できるようにした
+(5) textarea1,2 にて改行(\n)を記述できるようにした
+
+5. 言語ファイル
+(1) ロシア語 ( CP1251 & UTF-8 ) を追加した
+language ディレクトリの他に extra ディレクトリにも置いている
+多謝 Anthony xoops-org.ru 
+
+
+● テーブル構造
+1. link, modify テーブル
+(1) 下記の項目を追加した
+gm_icon : Google Maps Icon
+(2) 下記の項目の属性を varchar から text に変更した
+url 
+
+2. category テーブル
+(1) 下記の項目を追加した
+gm_icon : Google Maps Icon
+gm_location : memo of location
+
 
 =================================================
 Version: 2.00
 Date:   2011-12-29
-Author: Kenichi OHWADA
-URL:    http://linux.ohwada.jp/
-Email:  webmaster@ohwada.jp
 =================================================
 
 ● 変更内容

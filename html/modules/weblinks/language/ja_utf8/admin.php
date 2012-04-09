@@ -1,5 +1,5 @@
 <?php
-// $Id: admin.php,v 1.1 2011/12/29 14:32:42 ohwada Exp $
+// $Id: admin.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
 
 // 2008-02-17 K.OHWADA
 // htmlout
@@ -738,6 +738,35 @@ define('_AM_WEBLINKS_USE_PAGERANK_CACHE', '取得した PageRank をキャッシ
 
 // kml
 define('_AM_WEBLINKS_KML_USE', 'KML の表示');
+
+//---------------------------------------------------------
+// 2012-04-02 v2.10
+//---------------------------------------------------------
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY','概要のリンク先');
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY_DSC','カテゴリ、おすすめサイトなどで、概要 を選択したときに適用される');
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY_0','サイトのurl');
+define('_AM_WEBLINKS_VIEW_URL_SUMMARY_1','Weblinksのsinglelink');
+
+define('_AM_WEBLINKS_TITLE_RSSC_MANAGE','RSSC 管理');
+define('_AM_WEBLINKS_TITLE_RSSC_ARCHIVE','RSSC アーカイブ管理');
+define('_AM_WEBLINKS_TITLE_RSSC_ADD','リンクに RSS URL を追加する');
+
+define('_AM_WEBLINKS_BULK_COMMENT','コメント一括登録');
+define('_AM_WEBLINKS_BULK_COMMENT_DSC1','リンクのタイトル, uid, コメントのタイトル, コメントの本文 をカンマ(,)で区切って記述する<br />uid は省略可。管理者のuid で代用される<br/ >コメントのタイトル は省略可。リンクのタイトル で代用される');
+define('_AM_WEBLINKS_NO_COMMENT','コメントがない');
+define('_AM_WEBLINKS_COMMENT_ADDED','コメントを追加した');
+define('_AM_WEBLINKS_BULK_DSC1','カンマと改行を特別な記法で記述できます<br />カンマ(,)は \2c と記述する<br/ >改行は \n と記述する');
+
+define('_AM_WEBLINKS_TITLE_LINK_GEOCODING','リンクの緯度・経度の一覧');
+define('_AM_WEBLINKS_TITLE_LINK_GEOCODING_DSC','住所から緯度・経度を検索します<br />すでに登録されているものは検索されません<br />検索結果は<span style="color:#0000ff">青字</span>で表示されます<br />検索できなかったときは<span style="color:#ff0000">赤字</span>で表示されます');
+define('_AM_WEBLINKS_SEARCHED_ADDRESS','検索された住所');
+define('_AM_WEBLINKS_GOTO_NEXT_PAGE','次のページへ');
+define('_AM_WEBLINKS_LAST_PAGE','ここは最後のページです');
+define('_AM_WEBLINKS_GEO_ADD','リンクに緯度・経度を追加する');
+
+define('_AM_WEBLINKS_TITLE_LINK_CSV','リンク情報をCSV形式でダウンロードする');
+
+define('_AM_WEBLINKS_GM_LOCATION_DSC', '緯度・経度の場所を示すメモ');
 
 }
 // --- define language end ---

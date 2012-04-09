@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_category_handler.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+// $Id: weblinks_category_handler.php,v 1.3 2012/04/09 10:20:04 ohwada Exp $
+
+//	$this->initVar('gm_icon',      XOBJ_DTYPE_INT,   0, false );
+//	$this->initVar('gm_location',  XOBJ_DTYPE_TXTBOX, null, false, 255);
 
 // 2010-10-28 K.OHWADA
 // get_cid_array_by_title_like()
@@ -125,6 +128,8 @@ function weblinks_category()
 	$this->initVar('gm_longitude', XOBJ_DTYPE_FLOAT, 0, false );
 	$this->initVar('gm_zoom',      XOBJ_DTYPE_INT,   0, false );
 	$this->initVar('gm_type',      XOBJ_DTYPE_INT,   0, false );
+	$this->initVar('gm_icon',      XOBJ_DTYPE_INT,   0, false );
+	$this->initVar('gm_location',  XOBJ_DTYPE_TXTBOX, null, false, 255);
 
 // dhtml
 	$this->initVar('dohtml',   XOBJ_DTYPE_INT, 0, false);
@@ -269,6 +274,8 @@ function _build_insert_sql(&$obj, $flag_cid=false)
 	$sql .= 'gm_longitude, ';
 	$sql .= 'gm_zoom, ';
 	$sql .= 'gm_type, ';
+	$sql .= 'gm_icon, ';
+	$sql .= 'gm_location, ';
 
 // dhtml
 	$sql .= 'dohtml, ';
@@ -326,6 +333,8 @@ function _build_insert_sql(&$obj, $flag_cid=false)
 	$sql .= floatval($gm_longitude).', ';
 	$sql .= intval($gm_zoom).', ';
 	$sql .= intval($gm_type).', ';
+	$sql .= intval($gm_icon).', ';
+	$sql .= $this->quote($gm_location).', ';
 
 // dhtml
 	$sql .= intval($dohtml).', ';
@@ -386,6 +395,8 @@ function _build_update_sql(&$obj)
 	$sql .= 'gm_longitude='.floatval($gm_longitude).', ';
 	$sql .= 'gm_zoom='.intval($gm_zoom).', ';
 	$sql .= 'gm_type='.intval($gm_type).', ';
+	$sql .= 'gm_icon='.intval($gm_icon).', ';
+	$sql .= 'gm_location='.$this->quote($gm_location).', ';
 
 // dhtml
 	$sql .= 'dohtml='.intval($dohtml).', ';

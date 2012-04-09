@@ -1,5 +1,8 @@
 <?php
-// $Id: index.php,v 1.1 2011/12/29 14:32:29 ohwada Exp $
+// $Id: index.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap
 
 // 2009-02-08 K.OHWADA
 // Notice [PHP]: Only variables should be assigned by reference
@@ -62,14 +65,13 @@
 //================================================================
 
 include 'header.php';
-
 include_once WEBLINKS_ROOT_PATH.'/api/waiting.php';
 
 $weblinks_view_handler  =& weblinks_get_handler( 'link_view',  WEBLINKS_DIRNAME );
 $weblinks_rssc_handler  =& weblinks_get_handler( 'rssc_view',  WEBLINKS_DIRNAME );
 $weblinks_template      =& weblinks_template::getInstance( WEBLINKS_DIRNAME );
 $weblinks_header        =& weblinks_header::getInstance(   WEBLINKS_DIRNAME );
-$weblinks_gmap          =& weblinks_gmap::getInstance(     WEBLINKS_DIRNAME );
+$weblinks_webmap        =& weblinks_webmap::getInstance(   WEBLINKS_DIRNAME );
 $weblinks_map_jp        =& weblinks_map_jp::getInstance(   WEBLINKS_DIRNAME );
 
 //---------------------------------------------------------
@@ -93,6 +95,9 @@ $keywords_urlencoded =  $weblinks_template->get_keywords_urlencode();
 
 $show_gm  = false;
 $gm_param = array();
+
+//---------
+$conf['gm_use'] = 1;
 
 if ( $conf['gm_use'] )
 {
@@ -172,8 +177,9 @@ $xoopsTpl->assign('lang_thereare', sprintf(_WLS_THEREARE, $total_link));
 // BUG 4278: cannot set no link list on the top page
 $show_links_list = false;
 $links_list      = '';
-$show_gm_list    = false;
-$gm_list         = '';
+$show_webmap     = false;
+$webmap_div_id   = '';
+$webmap_func     = '';
 
 if ($conf_new_link)
 {
@@ -188,11 +194,16 @@ if ($conf_new_link)
 		$show_links_list = true;
 		$links_list = $weblinks_template->fetch_links_list( $link_list );
 
-// google map
+// --- webmap ---
 		if ( $show_gm )
 		{
-			$show_gm_list = true;
-			$gm_list = $weblinks_gmap->fetch_list( $link_list, $gm_param, 'weblinks_gm_map_index' );
+			$ret = $weblinks_webmap->init_map();
+			if ( $ret ) {
+				$webmap_param  = $weblinks_webmap->fetch_list( $link_list, $gm_param );
+				$show_webmap   = $webmap_param['show_webmap'];
+				$webmap_div_id = $webmap_param['webmap_div_id'];
+				$webmap_func   = $webmap_param['webmap_func'];
+			}
 		}
 	}
 }
@@ -200,9 +211,10 @@ if ($conf_new_link)
 $xoopsTpl->assign('show_links_list',     $show_links_list);
 $xoopsTpl->assign('weblinks_links_list', $links_list);
 
-// google map
-$xoopsTpl->assign('show_gm_list',     $show_gm_list );
-$xoopsTpl->assign('weblinks_gm_list', $gm_list);
+// webmap
+$xoopsTpl->assign('show_webmap',   $show_webmap );
+$xoopsTpl->assign('webmap_div_id', $webmap_div_id );
+$xoopsTpl->assign('webmap_func',   $webmap_func );
 
 // --- atomfeed list ---
 $show_new_atomfeed = false;

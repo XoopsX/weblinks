@@ -1,5 +1,9 @@
 <?php
-// $Id: weblinks_link_handler.php,v 1.2 2011/12/29 19:54:56 ohwada Exp $
+// $Id: weblinks_link_handler.php,v 1.3 2012/04/09 10:20:05 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// gm_icon
+// get_lid_array_by_title()
 
 // 2010-03-31 K.OHWADA
 // get_objects_broken()
@@ -217,6 +221,7 @@ function _build_insert_sql(&$obj, $flag_lid=false)
 	$sql .= 'gm_longitude, ';
 	$sql .= 'gm_zoom, ';
 	$sql .= 'gm_type, ';
+	$sql .= 'gm_icon, ';
 
 // publish
 	$sql .= 'time_publish, ';
@@ -307,6 +312,7 @@ function _build_insert_sql(&$obj, $flag_lid=false)
 	$sql .= floatval($gm_longitude).', ';
 	$sql .= intval($gm_zoom).', ';
 	$sql .= intval($gm_type).', ';
+	$sql .= intval($gm_icon).', ';
 
 // publish
 	$sql .= intval($time_publish).', ';
@@ -421,6 +427,7 @@ function _build_update_sql(&$obj)
 	$sql .= 'gm_longitude='.floatval($gm_longitude).', ';
 	$sql .= 'gm_zoom='.intval($gm_zoom).', ';
 	$sql .= 'gm_type='.intval($gm_type).', ';
+	$sql .= 'gm_icon='.intval($gm_icon).', ';
 
 // publish
 	$sql .= 'time_publish='.intval($time_publish).', ';
@@ -736,6 +743,27 @@ function &get_objects_rss_flag_prev_ver($limit=0, $start=0)
 }
 
 //---------------------------------------------------------
+// get objects for bulk manage
+//---------------------------------------------------------
+function &get_objects_by_title($title)
+{
+	$title = addslashes($title);
+	$criteria = new CriteriaCompo();
+	$criteria->add( new criteria('title', $title, '=') );
+	$objs =& $this->getObjects($criteria);
+	return $objs;
+}
+
+function &get_objects_by_title_like($title)
+{
+	$title = addslashes($title);
+	$criteria = new CriteriaCompo();
+	$criteria->add( new criteria('title', '%'.$title.'%', 'LIKE') );
+	$objs =& $this->getObjects($criteria);
+	return $objs;
+}
+
+//---------------------------------------------------------
 // get lid list
 //---------------------------------------------------------
 // for randum jump
@@ -850,6 +878,70 @@ function add_column_table_etc($start, $end)
 
 	$ret = $this->query($sql);
 	return $ret;
+}
+
+//---------------------------------------------------------
+// get lid_array for bulk manage
+//---------------------------------------------------------
+function get_lid_by_title($title)
+{
+	$lid_arr = $this->get_lid_array_by_title($title);
+	$count   = count($lid_arr);
+
+	if ( is_array($lid_arr) && ($count == 1)) {
+		return $lid_arr[0];
+
+	} elseif ($count > 1) {
+		return -2;	// too many
+	}
+
+	if ( !is_array($lid_arr) || ($count == 0)) {
+		$lid_arr2 =& $this->get_lid_array_by_title_like($title);
+		$count2   = count($lid_arr2);
+
+		if ( is_array($lid_arr2) && ($count2 == 1)) {
+			return $lid_arr2[0];
+
+		} elseif ($count2 > 1) {
+			return -3;	// too many
+		}
+	}
+
+	return -1;	// no match
+}
+
+function get_lid_array_by_title($title)
+{
+	$lid_arr = array();
+
+	$objs =& $this->get_objects_by_title($title);
+
+	if (count($objs) > 0)
+	{
+		foreach ($objs as $obj)
+		{
+			$lid_arr[] = $obj->get('lid');
+		}
+	}
+
+	return $lid_arr;
+}
+
+function get_lid_array_by_title_like($title)
+{
+	$lid_arr = array();
+
+	$objs =& $this->get_objects_by_title_like($title);
+
+	if (count($objs) > 0)
+	{
+		foreach ($objs as $obj)
+		{
+			$lid_arr[] = $obj->get('lid');
+		}
+	}
+
+	return $cid_arr;
 }
 
 //=========================================================

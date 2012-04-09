@@ -1,5 +1,7 @@
 <?php
-// $Id: weblinks_modify_handler.php,v 1.1 2011/12/29 14:33:04 ohwada Exp $
+// $Id: weblinks_modify_handler.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+
+//	$sql .= 'gm_icon='.intval($gm_icon).', ';
 
 // 2008-02-17 K.OHWADA
 // pagerank, pagerank_update in link, modify
@@ -177,6 +179,7 @@ function _build_insert_sql(&$obj)
 	$sql .= 'gm_longitude, ';
 	$sql .= 'gm_zoom, ';
 	$sql .= 'gm_type, ';
+	$sql .= 'gm_icon, ';
 
 // publish
 	$sql .= 'time_publish, ';
@@ -273,6 +276,7 @@ function _build_insert_sql(&$obj)
 	$sql .= floatval($gm_longitude).', ';
 	$sql .= intval($gm_zoom).', ';
 	$sql .= intval($gm_type).', ';
+	$sql .= intval($gm_icon).', ';
 
 // publish
 	$sql .= intval($time_publish).', ';
@@ -395,6 +399,7 @@ function _build_update_sql(&$obj)
 	$sql .= 'gm_longitude='.floatval($gm_longitude).', ';
 	$sql .= 'gm_zoom='.intval($gm_zoom).', ';
 	$sql .= 'gm_type='.intval($gm_type).', ';
+	$sql .= 'gm_icon='.intval($gm_icon).', ';
 
 // publish
 	$sql .= 'time_publish='.intval($time_publish).', ';
