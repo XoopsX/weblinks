@@ -1,5 +1,5 @@
 <?php
-// $Id: weblinks_category_basic_handler.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+// $Id: weblinks_category_basic_handler.php,v 1.3 2012/04/10 18:52:29 ohwada Exp $
 
 // 2012-04-02 K.OHWADA
 // gm_icon gm_location
@@ -291,7 +291,7 @@ function &get_parent_imgurl_size( $cid )
 		'img_show_height' => 0,
 	);
 
-	$pid_arr =& $this->_get_parent_path_array_from_cache_by_cid($cid);
+	$pid_arr =& $this->get_cached_pid_array_by_cid($cid);
 
 	foreach ($pid_arr as $pid)
 	{
@@ -343,7 +343,7 @@ function get_parent_desc_disp( $cid )
 {
 	$val = null;
 
-	$pid_arr =& $this->_get_parent_path_array_from_cache_by_cid($cid);
+	$pid_arr =& $this->get_cached_pid_array_by_cid($cid);
 
 	foreach ($pid_arr as $pid)
 	{
@@ -382,7 +382,7 @@ function get_parent_forum_id( $cid )
 {
 	$forum_id = 0;
 
-	$pid_arr =& $this->_get_parent_path_array_from_cache_by_cid($cid);
+	$pid_arr =& $this->get_cached_pid_array_by_cid($cid);
 
 	foreach ($pid_arr as $pid)
 	{
@@ -421,7 +421,7 @@ function get_parent_album_id( $cid )
 {
 	$album_id = 0;
 
-	$pid_arr =& $this->_get_parent_path_array_from_cache_by_cid($cid);
+	$pid_arr =& $this->get_cached_pid_array_by_cid($cid);
 
 	foreach ($pid_arr as $pid)
 	{
@@ -480,7 +480,7 @@ function get_parent_gm_value( $cid )
 		'gm_location'  => null,
 	);
 
-	$pid_arr =& $this->_get_parent_path_array_from_cache_by_cid($cid);
+	$pid_arr =& $this->get_cached_pid_array_by_cid($cid);
 
 	foreach ($pid_arr as $pid)
 	{
@@ -492,18 +492,17 @@ function get_parent_gm_value( $cid )
 		switch( $cache['gm_mode'] )
 		{
 		// parent
-			case 2:
+			case WEBLINKS_C_GM_MODE_PARENT:
 				continue;
 
-		// config
-			case 1:
-		// self
-			case 3:
+		// config or self
+			case WEBLINKS_C_GM_MODE_DEFAULT:
+			case WEBLINKS_C_GM_MODE_FOLLOWING:
 				$arr =& $cache;
 				break;
 
 		// not show
-			case 0:
+			case WEBLINKS_C_GM_MODE_NON:
 			default:
 				break;
 		}
@@ -688,7 +687,7 @@ function &get_cat_info_array()
 	return $this->_cached_info;
 }
 
-function &_get_parent_path_array_from_cache_by_cid($cid)
+function &get_cached_pid_array_by_cid($cid)
 {
 	$val = false;
 	if ( isset( $this->_cached_info[$cid]['parent'] ) )
@@ -711,7 +710,7 @@ function &get_cid_child_array_from_cache_by_cid($cid)
 function get_cid_depth_from_cache_by_cid($cid)
 {
 	$depth = 0;
-	$cid_arr =& $this->_get_parent_path_array_from_cache_by_cid($cid);
+	$cid_arr =& $this->get_cached_pid_array_by_cid($cid);
 	if ( is_array($cid_arr) )
 	{
 		$count = count($cid_arr);
@@ -731,7 +730,7 @@ function build_cat_path($cid, $format='s')
 {
 	$catpath = '';
 
-	$pid_arr = $this->_get_parent_path_array_from_cache_by_cid($cid);
+	$pid_arr = $this->get_cached_pid_array_by_cid($cid);
 	if ( !is_array($pid_arr) || (count($pid_arr) == 0) )
 	{	return $catpath;	}
 
@@ -798,7 +797,7 @@ function _build_cat_path_2($pid_arr, $format='s')
 
 function &get_parent_path($cid)
 {
-	$pid_arr    = $this->_get_parent_path_array_from_cache_by_cid($cid);
+	$pid_arr    = $this->get_cached_pid_array_by_cid($cid);
 	$path_array = array();
 
 	if ( is_array($pid_arr) )
@@ -829,6 +828,58 @@ function &build_parent_path_multi($cid_arr)
 	}
 
 	return $path_array;
+}
+
+//---------------------------------------------------------
+// google map
+//---------------------------------------------------------
+function find_gm_icon_by_cid_array( $cid_arr )
+{
+
+// search category
+	foreach ($cid_arr as $cid) {
+
+// find in category
+		$row = $this->get_cache_row( $cid );
+		if ( $row['gm_icon'] > 0 ) {
+			return $row['gm_icon'];
+		}
+	}
+
+// search parent category
+	foreach ($cid_arr as $cid) {
+
+// find in parent category
+		$icon = $this->find_gm_icon_in_parent_by_cid( $cid );
+		if ( $icon > 0 ) {
+			return $icon;
+		}
+	}
+
+// not find
+	return 0;
+}
+
+function find_gm_icon_in_parent_by_cid( $cid )
+{
+	$pid_arr = $this->get_cached_pid_array_by_cid( $cid );
+
+// from bottom to top 
+	$pid_reverse_arr = array_reverse( $pid_arr );
+
+// remove myselef
+	array_pop( $pid_reverse_arr );
+
+	foreach ($pid_reverse_arr as $pid) {
+
+// find in parent category
+		$row = $this->get_cache_row( $pid );
+		if ( $row['gm_icon'] > 0 ) {
+			return $row['gm_icon'];
+		}
+	}
+
+	return 0;
 }
 
 //=========================================================

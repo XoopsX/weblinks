@@ -1,5 +1,5 @@
 <?php
-// $Id: weblinks_constant.php,v 1.1 2011/12/29 14:32:33 ohwada Exp $
+// $Id: weblinks_constant.php,v 1.2 2012/04/10 18:52:29 ohwada Exp $
 
 // 2008-02-17 K.OHWADA
 // WEBLINKS_C_KML_PERPAGE
@@ -116,6 +116,12 @@ define('WEBLINKS_OP_APPROVE_DEL', 'approve_del');
 
 // 2008-02-17
 define('WEBLINKS_C_KML_PERPAGE', 100);
+
+// 2012-04-02
+define('WEBLINKS_C_GM_MODE_NON',       0);
+define('WEBLINKS_C_GM_MODE_DEFAULT',   1);
+define('WEBLINKS_C_GM_MODE_PARENT',    2);
+define('WEBLINKS_C_GM_MODE_FOLLOWING', 3);
 
 //---------------------------------------------------------
 // hack for etc columns in link table

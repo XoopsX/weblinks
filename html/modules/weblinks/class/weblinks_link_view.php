@@ -1,5 +1,5 @@
 <?php
-// $Id: weblinks_link_view.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+// $Id: weblinks_link_view.php,v 1.3 2012/04/10 18:52:29 ohwada Exp $
 
 // 2012-04-02 K.OHWADA
 // weblinks_webmap
@@ -406,13 +406,10 @@ function find_google_icon( $cid_arr )
 		return $gm_icon;
 	}
 
-	foreach ($cid_arr as $cid) {
-		$cat_row = $this->_category_handler->get_cache_row( $cid );
-
 // find in category
-		if ( $cat_row['gm_icon'] > 0 ) {
-			return $cat_row['gm_icon'];
-		}
+	$gm_icon = $this->_category_handler->find_gm_icon_by_cid_array( $cid_arr );
+	if ( $gm_icon > 0 ) {
+		return $gm_icon;
 	}
 
 // not find

@@ -1,5 +1,5 @@
 <?php
-// $Id: category_manage.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+// $Id: category_manage.php,v 1.3 2012/04/10 18:52:29 ohwada Exp $
 
 // 2012-04-02 K.OHWADA
 // weblinks_webmap
@@ -249,6 +249,11 @@ function _exec_add_table()
 		$obj->setVar('img_orig_height', $orig_height);
 		$obj->setVar('img_show_width',  $show_width);
 		$obj->setVar('img_show_height', $show_height);
+	}
+
+	$pid = $obj->get('pid');
+	if ( $pid > 0 ) {
+		$obj->setVar('gm_mode', WEBLINKS_C_GM_MODE_PARENT);
 	}
 
 	$newid = $this->_handler->insert($obj);
@@ -1055,19 +1060,17 @@ function _show(&$obj, $extra=null, $show_mode=0 )
 	echo $this->build_form_table_line( _WLS_PARENT, $selbox);
 	echo $this->build_form_table_line( _WEBLINKS_FORUM_SEL, $forum_sel);
 	echo $this->build_form_table_line( _WEBLINKS_ALBUM_SEL, $album_sel);
-	echo $this->_build_cat_gm_mode(  $obj->get('gm_mode') );
 
 	if ( $this->_flag_webmap ) {
-		$cap_gm_location = $this->build_form_caption( _WEBLINKS_GM_LOCATION, _AM_WEBLINKS_GM_LOCATION_DSC );
-
+		echo $this->_build_cat_gm_mode();
 		echo $this->build_form_table_line( '', $this->_webmap_class->build_form_desc() );
 		echo $this->_build_cat_gm();
-		echo $this->build_obj_table_text( $cap_gm_location,       'gm_location' );
+		echo $this->_build_cat_gm_location();
 		echo $this->build_obj_table_text( _WEBLINKS_GM_LATITUDE,  'gm_latitude' );
 		echo $this->build_obj_table_text( _WEBLINKS_GM_LONGITUDE, 'gm_longitude' );
 		echo $this->build_obj_table_text( _WEBLINKS_GM_ZOOM,      'gm_zoom' );
-		echo $this->_build_cat_gm_type(  $obj->get('gm_type') );
-		echo $this->_build_cat_gm_icon(  $obj->get('gm_icon') );
+		echo $this->_build_cat_gm_type();
+		echo $this->_build_cat_gm_icon();
 	}
 
 	echo $this->build_form_table_line( _WLS_DESCRIPTION, $desc );
@@ -1136,36 +1139,48 @@ function _build_cat_lflag( $value=1 )
 	return $ele;
 }
 
-function _build_cat_gm_mode( $value )
+function _build_cat_gm_mode()
 {
+	$val = $this->_obj->getVar('gm_mode', 'n');
 	$opt = array(
-		_AM_WEBLINKS_MODE_NON       => 0,
-		_AM_WEBLINKS_MODE_DEFAULT   => 1,
-		_AM_WEBLINKS_MODE_PARENT    => 2,
-		_AM_WEBLINKS_MODE_FOLLOWING => 3,
+		_AM_WEBLINKS_MODE_NON       => WEBLINKS_C_GM_MODE_NON,
+		_AM_WEBLINKS_MODE_DEFAULT   => WEBLINKS_C_GM_MODE_DEFAULT,
+		_AM_WEBLINKS_MODE_PARENT    => WEBLINKS_C_GM_MODE_PARENT,
+		_AM_WEBLINKS_MODE_FOLLOWING => WEBLINKS_C_GM_MODE_FOLLOWING,
 		);
 
-	$ele = $this->build_form_table_radio_select(_AM_WEBLINKS_CAT_SHOW_GM, 'gm_mode', $value, $opt);
+	$ele = $this->build_form_table_radio_select(_AM_WEBLINKS_CAT_SHOW_GM, 'gm_mode', $val, $opt);
 	return $ele;
 }
 
-function _build_cat_gm_type( $value )
+function _build_cat_gm_type()
 {
+	$val = $this->_obj->getVar('gm_icon', 'n');
 	$opt = array(
 		_WEBLINKS_GM_TYPE_MAP       => 0,
 		_WEBLINKS_GM_TYPE_SATELLITE => 1,
 		_WEBLINKS_GM_TYPE_HYBRID    => 2,
 		);
 
-	$ele = $this->build_form_table_radio_select(_WEBLINKS_GM_TYPE, 'gm_type', $value, $opt);
+	$ele = $this->build_form_table_radio_select(_WEBLINKS_GM_TYPE, 'gm_type', $val, $opt);
 	return $ele;
 }
 
-function _build_cat_gm_icon( $value )
+function _build_cat_gm_location()
 {
-	$text = $this->_webmap_class->build_ele_icon( $value );
-	$ele = $this->build_form_table_line( _WEBLINKS_GM_ICON, $text );
-	return $ele;
+	$cap  = $this->build_form_caption( _WEBLINKS_GM_LOCATION, _AM_WEBLINKS_CAT_GM_LOCATION_DSC );
+	$ele  = $this->build_obj_text( 'gm_location' );
+	$line = $this->build_form_table_line( $cap, $ele );
+	return $line;
+}
+
+function _build_cat_gm_icon()
+{
+	$cap = $this->build_form_caption( _WEBLINKS_GM_ICON, _AM_WEBLINKS_CAT_GM_ICON_DSC );
+	$val  = $this->_obj->getVar('gm_icon', 'n');
+	$ele  = $this->_webmap_class->build_ele_icon( $val );
+	$line = $this->build_form_table_line( $cap, $ele );
+	return $line;
 }
 
 function _build_cat_gm()
