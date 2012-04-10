@@ -1,5 +1,5 @@
 <?php
-// $Id: weblinks_block.php,v 1.1 2012/04/09 10:23:37 ohwada Exp $
+// $Id: weblinks_block.php,v 1.2 2012/04/10 04:12:39 ohwada Exp $
 
 //=========================================================
 // WebLinks Module
@@ -1025,7 +1025,7 @@ function get_google_use_icon( $row )
 	$google_use  = false;
 	$google_cid  = 0;
 	$google_icon = 0;
-	if ( $this->_webmap_class->check_latlng_by_row( $row ) ) {
+	if ( $this->_webmap_class->check_latlng_by_link( $row ) ) {
 		$google_use = true;
 		list( $google_cid, $google_icon ) = $this->find_google_icon( $row );
 	}
