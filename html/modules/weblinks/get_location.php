@@ -1,5 +1,5 @@
 <?php
-// $Id: get_location.php,v 1.1 2012/04/09 10:24:11 ohwada Exp $
+// $Id: get_location.php,v 1.2 2012/04/10 11:24:42 ohwada Exp $
 
 //=========================================================
 // WebLinks Module
@@ -7,6 +7,7 @@
 //=========================================================
 
 include 'header.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_address.php';
 
 //=========================================================
 // class weblinks_get_location
@@ -26,11 +27,15 @@ class weblinks_get_location
 	var $_ELE_ID_PARENT_ZOOM      = "gm_zoom";
 	var $_ELE_ID_PARENT_ADDRESS   = "gm_location";
 
+	var $_DIRNAME;
+
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
 function weblinks_get_location( $dirname )
 {
+	$this->_DIRNAME = $dirname;
+
 	$this->_link_handler =& weblinks_get_handler( 'link_basic', $dirname );
 	$this->_cat_handler  =& weblinks_get_handler( 'category_basic', $dirname );
 	$this->_conf_handler =& weblinks_get_handler( 'config2_basic', $dirname );
@@ -99,7 +104,8 @@ function get_latlng()
 				$zoom = $row['gm_zoom'];
 			}
 
-			$temp = $row['state'].$row['city'].$row['addr'];
+			$temp = $this->build_address( 
+				$row['state'], $row['city'], $row['addr'] );
 			if ( $temp != '' ) {
 				$addr = $temp;
 			}
@@ -121,6 +127,13 @@ function get_latlng()
 	}
 
 	return array( $flag, $lat, $lng, $zoom, $addr );
+}
+
+function build_address( $state, $city, $addr )
+{
+	$address_class =& weblinks_address::getInstance( $this->_DIRNAME );
+	$locate_class  =& $address_class->get_instance_locate();
+	return $locate_class->build_address( $state, $city, $addr );
 }
 
 function error()

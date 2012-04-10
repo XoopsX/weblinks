@@ -1,5 +1,5 @@
 <?php
-// $Id: link_geocoding.php,v 1.1 2012/04/09 10:23:37 ohwada Exp $
+// $Id: link_geocoding.php,v 1.2 2012/04/10 11:24:42 ohwada Exp $
 
 //================================================================
 // WebLinks Module
@@ -8,7 +8,8 @@
 
 include 'admin_header.php';
 include 'admin_header_list.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/include/gtickets.php';
+
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_address.php';
 
 //=========================================================
 // class admin_manage_geocoding
@@ -23,11 +24,11 @@ class admin_manage_geocoding extends happy_linux_manage
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function admin_manage_geocoding()
+function admin_manage_geocoding( $dirname )
 {
-	$this->happy_linux_manage( WEBLINKS_DIRNAME );
+	$this->happy_linux_manage( $dirname );
 
-	$this->set_handler( 'link', WEBLINKS_DIRNAME, 'weblinks' );
+	$this->set_handler( 'link', $dirname, 'weblinks' );
 	$this->set_id_name( 'lid' );
 	$this->set_list_id_name( 'link_geocoding_id' );
 	$this->set_script( 'link_geocoding.php' );
@@ -35,11 +36,11 @@ function admin_manage_geocoding()
 	$this->set_flag_execute_time( true );
 }
 
-function &getInstance()
+function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) {
-		$instance = new admin_manage_geocoding();
+		$instance = new admin_manage_geocoding( $dirname );
 	}
 	return $instance;
 }
@@ -99,19 +100,24 @@ function &_get_obj_mod_all()
 class admin_list_geocoding extends happy_linux_page_frame
 {
 	var $_api_class;
+	var $_system_class;
 	var $_locate_clas;
 
 	var $_flag_webmap = false;
 	var $_conf;
 
+	var $_DIRNAME;
+
 //---------------------------------------------------------
 // constructor
 //---------------------------------------------------------
-function admin_list_geocoding()
+function admin_list_geocoding( $dirname )
 {
+	$this->_DIRNAME = $dirname;
+
 	$this->happy_linux_page_frame();
 
-	$this->set_handler('link', WEBLINKS_DIRNAME, 'weblinks');
+	$this->set_handler('link', $dirname, 'weblinks');
 	$this->set_id_name('lid');
 	$this->set_max_sortid(1);
 	$this->set_lang_no_item( _WEBLINKS_NO_LINK );
@@ -124,17 +130,18 @@ function admin_list_geocoding()
 	$this->set_submit_colspan(1, 4, 4);
 	$this->set_flag_print_request_uri( true );
 
-	$this->_locate_class =& admin_locate_geocoding::getInstance();
+	$this->_system_class =& happy_linux_system::getInstance();
 
-	$config_handler =& weblinks_get_handler( 'config2_basic', WEBLINKS_DIRNAME );
-	$this->_conf =& $config_handler->get_conf();
+	$config_handler =& weblinks_get_handler( 'config2_basic', $dirname );
+	$config_handler->init();
+	$this->_conf = $config_handler->get_conf();
 }
 
-function &getInstance()
+function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) {
-		$instance = new admin_list_geocoding();
+		$instance = new admin_list_geocoding( $dirname );
 	}
 	return $instance;
 }
@@ -143,6 +150,18 @@ function &getInstance()
 // init
 //---------------------------------------------------------
 function _init()
+{
+	$this->_init_locate();
+	$this->_init_api();
+}
+
+function _init_locate()
+{
+	$address_class =& weblinks_address::getInstance( $this->_DIRNAME );
+	$this->_locate_class =& $address_class->get_instance_locate();
+}
+
+function _init_api()
 {
 	$webmap_dirname = $this->_conf['webmap3_dirname'];
 	if ( $webmap_dirname == '' ) {
@@ -213,7 +232,7 @@ function &_get_cols(&$obj)
 	$checkbox =	'-';
 
 	if ( $zoom == 0 ) {
-		$search = $this->_locate_class->build_search_address( $state, $city, $addr );
+		$search = $this->_locate_class->build_address( $state, $city, $addr );
 
 		if ( $search ) {
 			$p = $this->fetch( $search );
@@ -290,7 +309,7 @@ function _print_top()
 {
 	$paths   = array();
 	$paths[] = array(
-		'name' => $this->_system->get_module_name(),
+		'name' => $this->_system_class->get_module_name(),
 		'url'  => 'index.php',
 	);
 	$paths[] = array(
@@ -363,69 +382,11 @@ function _get_script()
 }
 
 //=========================================================
-// class admin_locate_geocoding
-//=========================================================
-class admin_locate_geocoding
-{
-
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-function admin_locate_geocoding()
-{
-	$this->_system =& happy_linux_system::getInstance();
-}
-
-function &getInstance()
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new admin_locate_geocoding();
-	}
-	return $instance;
-}
-
-//---------------------------------------------------------
-// function
-//---------------------------------------------------------
-function build_search_address( $state, $city, $addr )
-{
-	$state = trim($state);
-	$city  = trim($city);
-	$addr  = trim($addr);
-
-	if ( empty($state) && empty($city) && empty($addr) ) {
-		return '';
-	}
-
-// Japanse style: state city addr
-	if ( $this->_system->is_japanese() ) {
-		$str = $state.$city.$addr;
-
-// English style: addr, city, state
-	} else {
-		$str = '';
-		if ( $addr ) {
-			$str .= $addr.', ';
-		}
-		if ( $city ) {
-			$str .= $city.', ';
-		}
-		if ( $state ) {
-			$str .= $state;
-		}
-	}
-
-	return $str;
-}
-
-// --- class end ---
-}
-
-//=========================================================
 // main
 //=========================================================
-$manage =& admin_manage_geocoding::getInstance();
+$manage =& admin_manage_geocoding::getInstance( WEBLINKS_DIRNAME );
+$list   =& admin_list_geocoding::getInstance(   WEBLINKS_DIRNAME );
+
 $op = $manage->get_op();
 switch ($op)
 {
@@ -435,7 +396,6 @@ switch ($op)
 
 	default:
 		xoops_cp_header();
-		$list =& admin_list_geocoding::getInstance();
 		$list->_show();
 		xoops_cp_footer();
 		break;
