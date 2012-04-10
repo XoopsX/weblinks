@@ -1,5 +1,5 @@
 <?php
-// $Id: link_csv.php,v 1.1 2012/04/09 10:23:37 ohwada Exp $
+// $Id: link_csv.php,v 1.2 2012/04/10 19:47:02 ohwada Exp $
 
 //=========================================================
 // WebLinks Module
@@ -7,6 +7,10 @@
 //=========================================================
 
 include '../../../include/cp_header.php';
+
+include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/system.php';
+include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/strings.php';
+include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/html.php';
 
 $XOOPS_LANGUAGE = $xoopsConfig['language'];
 
@@ -38,6 +42,8 @@ if (file_exists( WEBLINKS_ROOT_PATH.'/language/'.$XOOPS_LANGUAGE.'/admin.php' ))
 class link_csv
 {
 	var $_db;
+	var $_system_class;
+	var $_html_class;
 
 	var $_fp;
 	var $_table_xoops_users;
@@ -143,6 +149,9 @@ function link_csv( $dirname )
 	$this->_db =& Database::getInstance();
 	$this->_user_handler =& xoops_gethandler('user');
 
+	$this->_system_class =& happy_linux_system::getInstance();
+	$this->_html_class   =& happy_linux_html::getInstance();
+
 	$this->_table_xoops_users  = $this->_db->prefix('users');
 	$this->_table_link     = $this->_db->prefix( $dirname.'_link' );
 	$this->_table_category = $this->_db->prefix( $dirname.'_category' );
@@ -208,7 +217,8 @@ function get_start_form()
 	$sql   = "SELECT count(*) FROM ".$this->_table_link;
 	$count = $this->get_count_by_sql($sql);
 
-	if ( _CHARSET != "UTF-8" ) {
+	$option = '' ;
+	if ( strtolower(_CHARSET) != "utf-8" ) {
 		$option = '<option value="'._CHARSET.'">'._CHARSET.'</option>';
 	}
 
@@ -241,6 +251,21 @@ EOF;
 
 function print_title()
 {
+	$paths   = array();
+	$paths[] = array(
+		'name' => $this->_system_class->get_module_name(),
+		'url'  => 'index.php',
+	);
+	$paths[] = array(
+		'name' => _WEBLINKS_ADMIN_LINK_LIST,
+		'url'  => 'link_list.php',
+	);
+	$paths[] = array(
+		'name' => _AM_WEBLINKS_TITLE_LINK_CSV
+	);
+
+	echo $this->_html_class->build_html_bread_crumb( $paths );
+
 	echo "<h3>"._AM_WEBLINKS_TITLE_LINK_CSV."</h3>\n";
 }
 
@@ -346,7 +371,7 @@ function link_to_csv()
 // file close
 	$this->close();
 
-	if ( $encoding != _CHARSET ) {
+	if ( strtolower($encoding) != strtolower(_CHARSET) ) {
 		$file_full = $this->convert_encoding( $file_full, $encoding );
 	}
 
