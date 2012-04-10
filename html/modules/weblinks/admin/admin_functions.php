@@ -1,5 +1,5 @@
 <?php
-// $Id: admin_functions.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+// $Id: admin_functions.php,v 1.3 2012/04/10 03:54:50 ohwada Exp $
 
 // 2012-03-01 K.OHWADA
 // changed weblinks_admin_print_menu()
@@ -163,7 +163,7 @@ function weblinks_admin_print_menu()
 		$url_rssc_feed_list = '';
 	}
 
-	$feed_list = _AM_WEBLINKS_RSSC_MANAGE.    " ($total_feed)";
+	$feed_list = _AM_WEBLINKS_TITLE_RSSC_MANAGE.    " ($total_feed)";
 
 	$menu_arr = array(
 

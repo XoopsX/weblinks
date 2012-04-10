@@ -1,5 +1,5 @@
 <?php
-// $Id: link_list.php,v 1.2 2012/04/09 10:20:04 ohwada Exp $
+// $Id: link_list.php,v 1.3 2012/04/10 03:54:50 ohwada Exp $
 
 // 2012-04-02 K.OHWADA
 // link_geocoding.php
@@ -375,12 +375,12 @@ function _print_top()
 	echo "<li><a href='link_geocoding.php'>"._AM_WEBLINKS_TITLE_LINK_GEOCODING.'</a> ('. _AM_WEBLINKS_GEO_ADD .") </li>\n";
 	echo"</ul></td></tr>\n";
 
-	echo"<tr><td>\n";
-	echo "<a href='link_csv.php'>";
+	echo"<tr class='odd'><td><ul>\n";
+	echo "<li><a href='link_csv.php'>";
 	echo "<span class='font-size:120%'>";
-	echo _AM_WEBLINKS_TITLE_LINK_CSV
-	echo "</span></a>\n";
-	echo"</td></tr></table>\n";
+	echo _AM_WEBLINKS_TITLE_LINK_CSV ;
+	echo "</span></a></li>\n";
+	echo"</ul></td></tr></table>\n";
 
 	echo "<h4>".$title."</h4>\n";
 	echo _WEBLINKS_ADMIN_LINK_BROKEN_CHECK_NOTICE;

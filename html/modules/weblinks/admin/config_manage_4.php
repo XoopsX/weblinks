@@ -1,5 +1,8 @@
 <?php
-// $Id: config_manage_4.php,v 1.1 2011/12/29 14:32:56 ohwada Exp $
+// $Id: config_manage_4.php,v 1.2 2012/04/10 03:54:50 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// weblinks_webmap.php
 
 // 2007-11-11 K.OHWADA
 // move form_locate from config_manage_4.php
@@ -44,6 +47,9 @@
 
 include_once 'admin_header.php';
 include_once 'admin_header_config.php';
+
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_block_webmap.php';
+include_once WEBLINKS_ROOT_PATH.'/class/weblinks_webmap.php';
 
 // class
 $config_form  =& admin_config_form::getInstance();

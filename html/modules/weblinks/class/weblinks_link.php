@@ -1,5 +1,5 @@
 <?php
-// $Id: weblinks_link.php,v 1.2 2012/04/09 10:20:05 ohwada Exp $
+// $Id: weblinks_link.php,v 1.3 2012/04/10 03:54:50 ohwada Exp $
 
 // 2012-04-02 K.OHWADA
 // gm_icon
@@ -274,7 +274,7 @@ function weblinks_link()
 	$this->initVar('uid',    XOBJ_DTYPE_INT, 0, false);
 	$this->initVar('cids',   XOBJ_DTYPE_TXTBOX, null, false, 255);
 	$this->initVar('title',  XOBJ_DTYPE_TXTBOX, null, false, 255);
-	$this->initVar('url',    XOBJ_DTYPE_URL,    null, false, 255);
+	$this->initVar('url',    XOBJ_DTYPE_URL_AREA );
 	$this->initVar('banner', XOBJ_DTYPE_URL,    null, false, 255);
 	$this->initVar('description',  XOBJ_DTYPE_TXTAREA);
 	$this->initVar('name',     XOBJ_DTYPE_TXTBOX, null, false, 255);
