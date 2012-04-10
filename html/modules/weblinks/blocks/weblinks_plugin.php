@@ -1,5 +1,8 @@
 <?php
-// $Id: weblinks_plugin.php,v 1.1 2011/12/29 14:32:32 ohwada Exp $
+// $Id: weblinks_plugin.php,v 1.2 2012/04/10 04:42:04 ohwada Exp $
+
+// 2012-04-02 K.OHWADA
+// BUG: not show photo
 
 // 2007-11-28 K.OHWADA
 // BUG : not work cat_album_dirname
@@ -113,7 +116,9 @@ function b_weblinks_photo_show($options)
 	$photos =& $plugin->exec_plugin( $filename, $func, $opts );
 
 	$block['album_dirname'] = $cat_album_dirname;
-	$block['photos']        = $photos['photo'];
+
+// BUG: not show photo
+	$block['photos']        = $photos;
 
 	return $block;
 }
