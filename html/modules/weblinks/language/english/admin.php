@@ -1,5 +1,5 @@
 <?php
-// $Id: admin.php,v 1.3 2012/04/10 18:52:29 ohwada Exp $
+// $Id: admin.php,v 1.4 2012/04/11 06:00:09 ohwada Exp $
 
 // 2008-02-17 K.OHWADA
 // htmlout
@@ -755,9 +755,9 @@ define('_AM_WEBLINKS_VIEW_URL_SUMMARY_DSC','apply when select summary in categor
 define('_AM_WEBLINKS_VIEW_URL_SUMMARY_0','url of original site');
 define('_AM_WEBLINKS_VIEW_URL_SUMMARY_1','singlelink of Weblinks');
 
-define('_AM_WEBLINKS_RSSC_MANAGE','RSSC Manage');
-define('_AM_WEBLINKS_RSSC_ARCHIVE','RSSC Archive Manage');
-define('_AM_WEBLINKS_RSSC_ADD','Add RSS URL in Link');
+define('_AM_WEBLINKS_TITLE_RSSC_MANAGE','RSSC Manage');
+define('_AM_WEBLINKS_TITLE_RSSC_ARCHIVE','RSSC Archive Manage');
+define('_AM_WEBLINKS_TITLE_RSSC_ADD','Add RSS URL in Link');
 define('_AM_WEBLINKS_TITLE_RSSC_ADD_DSC','<b>Caution</b> It takes time, in order to search the url of rss using internet');
 
 define('_AM_WEBLINKS_BULK_COMMENT','Bulk Registation of Comment');
