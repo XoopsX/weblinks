@@ -1,4 +1,4 @@
-$Id: readme.txt,v 1.4 2012/04/09 10:20:04 ohwada Exp $
+$Id: readme.txt,v 1.5 2012/04/11 12:23:20 ohwada Exp $
 
 =================================================
 Version: 2.10
@@ -12,14 +12,19 @@ Email:  webmaster@ohwada.net
 1. Supprt Google Maps API V3
 http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1271&forum=5
 
-(1) Require WEBMAP3 module
+1.1 Require WEBMAP3 module
 
-(2) The admin can set the icon of a marker in eahc category and each link. 
+1,2 The admin can set the icon of a marker in eahc category and each link. 
 http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1150
 
-The admin can set the icon of a marker in eahc category and each link. 
+The rule which determines the icon to display 
+(1) Use it if set the icon in the link. 
+(2) Use it if set the icon in the category which belongs. 
+(3) Use it if set the icon in the parent category. 
+    Search parent categories to the top. 
+(4) Use either when the link belongs to two or more categories. 
 
-(3) The admin can set favorite icon.
+1.3 The admin can set favorite icon.
 This is feature of WEBMAP3 module.
 http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=848
 

@@ -1,4 +1,4 @@
-$Id: readme_jp.txt,v 1.5 2012/04/09 10:20:04 ohwada Exp $
+$Id: readme_jp.txt,v 1.6 2012/04/11 12:23:20 ohwada Exp $
 
 =================================================
 Version: 2.10
@@ -12,12 +12,19 @@ Email:  webmaster@ohwada.jp
 1. Google Maps API V3 対応
 http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1271&forum=5
 
-(1) WEBMAP3 モジュールが必要です。
+1.1 WEBMAP3 モジュールが必要です。
 
-(2) カテゴリ単位、リンク単位にマーカーのアイコンが指定できます。
+1.2 カテゴリ単位、リンク単位にマーカーのアイコンが指定できます。
 http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=1150
 
-(3) 任意のアイコンを設定できます。
+表示するアイコンを決めるルール
+(1) リンクに設定されていれば、それを使用する
+(2) 属するカテゴリに設定されていれば、それを使用する
+(3) 親のカテゴリに設定されていれば、それを使用する
+　　親は一番上まで対象となる。
+(4) 複数のカテゴリに属する場合は、いずれかに設定されていれば、それを使用する
+
+1.3 任意のアイコンを設定できます。
 WEBMAP3 モジュールの機能です。
 http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=5&topic_id=848
 
