@@ -1,5 +1,5 @@
 <?php
-// $Id: weblinks_category_basic_handler.php,v 1.3 2012/04/10 18:52:29 ohwada Exp $
+// $Id: weblinks_category_basic_handler.php,v 1.4 2012/04/11 12:00:10 ohwada Exp $
 
 // 2012-04-02 K.OHWADA
 // gm_icon gm_location
@@ -866,10 +866,6 @@ function find_gm_icon_in_parent_by_cid( $cid )
 
 // from bottom to top 
 	$pid_reverse_arr = array_reverse( $pid_arr );
-
-// remove myselef
-	array_pop( $pid_reverse_arr );
-
 	foreach ($pid_reverse_arr as $pid) {
 
 // find in parent category
