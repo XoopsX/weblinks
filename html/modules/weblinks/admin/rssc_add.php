@@ -1,5 +1,5 @@
 <?php
-// $Id: rssc_add.php,v 1.2 2012/04/10 18:52:29 ohwada Exp $
+// $Id: rssc_add.php,v 1.3 2012/04/11 06:10:31 ohwada Exp $
 
 //=========================================================
 // WebLinks Module
@@ -113,7 +113,7 @@ function print_title()
 		'url'  => 'rssc_manage.php',
 	);
 	$paths[] = array(
-		'name' => _AM_WEBLINKS_TITLE_LINK_GEOCODING
+		'name' => _AM_WEBLINKS_TITLE_RSSC_ADD
 	);
 
 	echo $this->_html_class->build_html_bread_crumb( $paths );
