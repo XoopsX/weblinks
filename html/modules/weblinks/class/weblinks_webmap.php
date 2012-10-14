@@ -1,10 +1,15 @@
 <?php
-// $Id: weblinks_webmap.php,v 1.1 2012/04/09 10:23:37 ohwada Exp $
+// $Id: weblinks_webmap.php,v 1.2 2012/10/14 00:38:10 ohwada Exp $
 
 //=========================================================
 // WebLinks Module
 // 2012-04-02 K.OHWADA
 //=========================================================
+
+//---------------------------------------------------------
+// 2012-10-14 K.OHWADA
+// typo $mas -> $msg
+//---------------------------------------------------------
 
 // === class begin ===
 if( !class_exists('weblinks_webmap') ) 
@@ -161,7 +166,9 @@ function init_map()
 function get_init_error()
 {
 	$msg = sprintf( _WEBLINKS_WEBMAP3_REQUIRE, WEBLINKS_WEBMAP3_VERSION );
-	return $mas;
+
+// typo $mas -> $msg
+	return $msg;
 }
 
 //---------------------------------------------------------
