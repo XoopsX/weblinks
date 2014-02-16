@@ -170,15 +170,7 @@ function _set_link_categories()
 //---------------------------------------------------------
 function set_catpaths_by_cid_array( $cid_arr )
 {
-	$show_catpaths = false;
-	$catpaths      = null;
-
-	if ( is_array($cid_arr) && count($cid_arr) ) {
-		$catpaths =& $this->_category_handler->build_parent_path_multi($cid_arr);
-		if ( is_array($catpaths) && count($catpaths) ){
-			$show_catpaths = true;
-		}
-	}
+	list($show_catpaths, $catpaths) = $this->build_catpaths_by_cid_array($cid_arr);
 
 	$this->set('show_catpaths', $show_catpaths);
 	$this->set('catpaths',      $catpaths);
@@ -342,6 +334,21 @@ function build_link_mail_by_lid($lid)
 	$body    = rawurlencode($body);
 
 	return array($subject, $body);
+}
+
+function build_catpaths_by_cid_array($cid_arr)
+{
+	$show_catpaths = false;
+	$catpaths      = null;
+	
+	if ( is_array($cid_arr) && count($cid_arr) ) {
+		$catpaths =& $this->_category_handler->build_parent_path_multi($cid_arr);
+		if ( is_array($catpaths) && count($catpaths) ){
+			$show_catpaths = true;
+		}
+	}
+	
+	return array($show_catpaths, $catpaths);
 }
 
 //---------------------------------------------------------
