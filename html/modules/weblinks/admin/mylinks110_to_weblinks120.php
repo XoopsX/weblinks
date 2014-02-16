@@ -418,7 +418,7 @@ function import_link()
 		$passwd = md5( xoops_makepass() );
 
 // new object
-		$obj =& new weblinks_link_save( WEBLINKS_DIRNAME );
+		$obj = new weblinks_link_save( WEBLINKS_DIRNAME );
 
 		$obj->set('lid',         $lid);
 		$obj->set('uid',         $uid);

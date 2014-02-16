@@ -159,7 +159,7 @@ function build_submit_preview()
 
 function build_preview_by_post()
 {
-	$save_obj =& new weblinks_link_save( $this->_DIRNAME );
+	$save_obj = new weblinks_link_save( $this->_DIRNAME );
 	$save_obj->assign_add_object( $_POST );
 	$this->set_vars( $save_obj->getVarAll('f') );
 	$this->set('cid_arr',  $save_obj->get_cid_array() );
