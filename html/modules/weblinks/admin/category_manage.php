@@ -1200,7 +1200,8 @@ function _build_cat_desc( &$obj )
 	$rows       = 10;
 	$cols       = 50;
 
-	$text = $this->build_form_dhtml_textarea( $name_dhtml, $value, $rows, $cols );
+	$dohtml = (bool)$obj->getVar('dohtml', 'n');
+	$text = $this->build_form_dhtml_textarea( $name_dhtml, $value, $rows, $cols, $dohtml );
 	return $text;
 }
 

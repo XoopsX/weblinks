@@ -840,8 +840,8 @@ function add_dhtml_by_id($id)
 	$ext = $this->parse_tail_figure( $name );
 	$name_dhtml = $this->build_link_dhtml_name( $name );
 	list($row, $col) = $this->get_link_dhtml_size( $name );
-
-	$text1 = $this->build_form_dhtml_textarea( $name_dhtml, $value, $row, $col );
+	$dohtml = (bool)$this->get_obj_var( 'dohtml' . $ext );
+	$text1 = $this->build_form_dhtml_textarea( $name_dhtml, $value, $row, $col, '', $dohtml );
 	$this->add_buff( $cap, $text1 );
 
 	$text2 = $this->build_link_dhtml_options( $ext );
