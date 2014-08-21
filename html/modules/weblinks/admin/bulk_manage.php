@@ -638,7 +638,7 @@ function _proc_link($line_arr)
 		{
 			$category_title = $line;
 
-			if ( !$this->_check_cat($category_title) )
+			if ( !$this->_check_cat(array('title' => $category_title)) )
 			{
 				return false;
 			}
@@ -826,7 +826,7 @@ function _proc_link_optinal($line_arr)
 		{
 			$category_title = $line;
 
-			if ( !$this->_check_cat($category_title) )
+			if ( !$this->_check_cat(array('title' => $category_title)) )
 			{
 				return false;
 			}
