@@ -53,7 +53,7 @@ function weblinks_search_base( $DIRNAME, $queryarray, $andor, $limit, $offset, $
 {
 	global $xoopsDB;
 
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 // hack for multi site
 	$table_link = weblinks_multi_get_table_name( $DIRNAME, 'link');

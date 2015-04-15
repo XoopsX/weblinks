@@ -138,7 +138,7 @@ function weblinks_submit( $dirname )
 	$this->_header   =& weblinks_header::getInstance(   $dirname );
 
 	$this->_post        =& happy_linux_post::getInstance();
-	$this->_myts        =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $this->_myts =& MyTextSanitizer::sGetInstance()) || $this->_myts        =& MyTextSanitizer::getInstance();
 
 	$this->_conf =& $this->_config_handler->get_conf();
 

@@ -33,7 +33,7 @@ function &weblinks_plugin_forums_newbbex_162()
 function &weblinks_plugin_threads_newbbex_162( $opts )
 {
 	global $xoopsDB;
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 	$DEBUG = false;
 	if( defined('WEBLINKS_DEBUG_ERROR') ) 
 	{	$DEBUG = WEBLINKS_DEBUG_ERROR;	}

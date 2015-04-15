@@ -476,7 +476,7 @@ function b_weblinks_generic_show($options)
 	include_once XOOPS_ROOT_PATH.'/class/xoopstree.php';
 
 	global $xoopsDB;
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	$DIRNAME = empty( $options[0] ) ? basename( dirname( dirname( __FILE__ ) ) ) : $options[0];
 	$limit            = intval($options[1]);
@@ -1148,7 +1148,7 @@ function b_weblinks_get_title_in_category( $table_category, $cid )
 //---------------------------------------------------------
 function &b_weblinks_build_link( &$row, &$param ) 
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	$order            = $param['order'];
 	$title_length     = $param['title_length'];

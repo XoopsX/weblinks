@@ -46,7 +46,7 @@ function weblinks_build_kml_handler( $dirname )
 	$this->_link_view      =& weblinks_link_view_basic::getInstance( $dirname );
 	$this->_htmlout        =& weblinks_htmlout::getInstance(         $dirname );
 
-	$this->_myts           =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $this->_myts =& MyTextSanitizer::sGetInstance()) || $this->_myts           =& MyTextSanitizer::getInstance();
 	$this->_strings        =& happy_linux_strings::getInstance();
 
 	$this->_conf = $this->_config_handler->get_conf();

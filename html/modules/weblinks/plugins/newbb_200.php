@@ -55,7 +55,7 @@ function &weblinks_plugin_forums_newbb_200()
 function &weblinks_plugin_threads_newbb_200( $opts )
 {
 	global $xoopsDB;
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	$DEBUG = false;
 	if( defined('WEBLINKS_DEBUG_ERROR') ) 

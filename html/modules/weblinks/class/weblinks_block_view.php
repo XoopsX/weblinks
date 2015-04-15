@@ -25,7 +25,7 @@ class weblinks_block_view extends happy_linux_basic
 function weblinks_block_view()
 {
 	$this->happy_linux_basic();
-	$this->_myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $this->_myts =& MyTextSanitizer::sGetInstance()) || $this->_myts =& MyTextSanitizer::getInstance();
 }
 
 public static function &getInstance()

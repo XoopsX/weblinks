@@ -16,7 +16,7 @@ class weblinksD3commentContent extends D3commentAbstract
 function fetchSummary( $external_link_id )
 {
 	$db =& Database::getInstance() ;
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 	
 	$module_handler =& xoops_gethandler( 'module' ) ;
 	$module =& $module_handler->getByDirname( $this->mydirname ) ;

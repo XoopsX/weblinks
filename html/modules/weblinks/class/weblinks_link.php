@@ -122,7 +122,7 @@ function name_mail_disp_common( $value, $flag )
 
 function description_disp( $flag_dohtml=true )
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	$context  = $this->get('description');
 	$dosmiley = $this->get('dosmiley');
@@ -140,7 +140,7 @@ function description_disp( $flag_dohtml=true )
 
 function textarea1_disp( $flag_dohtml=true )
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	$context  = $this->get('textarea1');
 	$dosmiley = $this->get('dosmiley1');
@@ -158,7 +158,7 @@ function textarea1_disp( $flag_dohtml=true )
 
 function textarea2_disp( $flag_dohtml=true )
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	$context  = $this->get('textarea2');
 	$dosmiley = 1;
@@ -177,7 +177,7 @@ function textarea2_disp( $flag_dohtml=true )
 // BUG: cannot use bbcode in admincomment
 function admincomment_disp()
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	$context  = $this->get('admincomment');
 	$dohtml   = 0;

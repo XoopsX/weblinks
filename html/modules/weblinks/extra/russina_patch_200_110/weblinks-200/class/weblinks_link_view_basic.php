@@ -46,7 +46,7 @@ function weblinks_link_view_basic( $dirname )
 	$this->_config_handler       =& weblinks_get_handler('config2_basic',      $dirname );
 	$this->_link_handler         =& weblinks_get_handler('link_basic',         $dirname );
 
-	$this->_myts         =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $this->_myts =& MyTextSanitizer::sGetInstance()) || $this->_myts         =& MyTextSanitizer::getInstance();
 	$this->_system       =& happy_linux_system::getInstance();
 
 	$this->_conf = $this->_config_handler->get_conf();

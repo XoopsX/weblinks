@@ -331,7 +331,7 @@ function get_desc_disp( $cid )
 
 		if ( $desc )
 		{
-			$myts =& MyTextSanitizer::getInstance();
+			(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 			$val  =  $myts->displayTarea($desc, $dohtml, $dosmiley, $doxcode, $doimage, $dobr);
 		}
 	}
