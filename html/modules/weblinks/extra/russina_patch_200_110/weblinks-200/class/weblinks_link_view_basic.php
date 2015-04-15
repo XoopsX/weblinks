@@ -55,7 +55,7 @@ function weblinks_link_view_basic( $dirname )
 	$this->set_is_japanese( $this->_system->is_japanese() );
 }
 
-function &getInstance($dirname)
+public static function &getInstance($dirname)
 {
 	static $instance;
 	if (!isset($instance)) 

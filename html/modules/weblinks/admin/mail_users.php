@@ -81,7 +81,7 @@ function admin_mail_users()
 	$this->_system    =& happy_linux_system::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -381,7 +381,7 @@ function admin_mail_form()
 	$this->_link_handler =& weblinks_get_handler('link', WEBLINKS_DIRNAME);
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

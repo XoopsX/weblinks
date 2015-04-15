@@ -66,7 +66,7 @@ function admin_manage_link_broken_check()
 	$this->_post =& happy_linux_post::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -189,7 +189,7 @@ function admin_form_link_broken_check()
 	$this->happy_linux_form_lib();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

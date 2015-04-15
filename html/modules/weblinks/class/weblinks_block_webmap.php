@@ -29,7 +29,7 @@ function weblinks_block_webmap( $dirname )
 	$this->_url_singlelink = XOOPS_URL .'/modules/'. $dirname .'/singlelink.php';
 }
 
-function &getSingleton( $dirname )
+public static function &getSingleton( $dirname )
 {
 	static $singletons;
 	if ( !isset( $singletons[ $dirname ] ) ) {

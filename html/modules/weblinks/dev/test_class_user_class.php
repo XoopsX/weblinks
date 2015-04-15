@@ -46,7 +46,7 @@ function weblinks_test_class_user()
 	$this->_config_handler =& weblinks_get_handler( 'config2_basic', WEBLINKS_DIRNAME );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

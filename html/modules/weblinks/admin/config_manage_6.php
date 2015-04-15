@@ -45,7 +45,7 @@ function admin_config_form_6()
 	$this->_webmap_class =& weblinks_webmap::getInstance( WEBLINKS_DIRNAME );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) {

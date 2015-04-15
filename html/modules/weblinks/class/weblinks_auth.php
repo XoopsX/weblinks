@@ -44,7 +44,7 @@ function weblinks_auth( $dirname )
 	$this->_system         =& happy_linux_system::getInstance();
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

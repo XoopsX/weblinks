@@ -34,7 +34,7 @@ function weblinks_test_form_admin()
 	$this->_admin_link_url  = WEBLINKS_URL.'/admin/link_manage.php';
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

@@ -47,7 +47,7 @@ function weblinks_notification( $dirname )
 	$this->_notification_handler =& xoops_gethandler('notification');
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

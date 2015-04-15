@@ -87,7 +87,7 @@ function weblinks_singlelink( $dirname )
 	$this->_link_view_handler->init();
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

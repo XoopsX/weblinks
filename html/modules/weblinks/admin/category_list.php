@@ -82,7 +82,7 @@ function admin_category_list()
 	}
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

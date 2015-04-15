@@ -88,7 +88,7 @@ function admin_user_list()
 	$this->_logo_img = $this->build_html_img_tag($logo_url, 0, 0, 0, 'mailto');
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

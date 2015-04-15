@@ -42,7 +42,7 @@ function admin_column_manage()
 	$this->_post     =& happy_linux_post::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -199,7 +199,7 @@ function admin_column_form()
 	$this->_post         =& happy_linux_post::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

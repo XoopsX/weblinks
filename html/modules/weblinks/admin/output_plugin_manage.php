@@ -29,7 +29,7 @@ function admin_output_plugin_manage()
 	$this->set_plugin_class( weblinks_htmlout::getInstance( WEBLINKS_DIRNAME ) );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

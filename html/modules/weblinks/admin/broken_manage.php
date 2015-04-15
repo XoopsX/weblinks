@@ -66,7 +66,7 @@ function admin_broken_manage()
 	$this->_handler->set_debug_delete(      false );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -311,7 +311,7 @@ function admin_form_broken()
 	$this->_system =& happy_linux_system::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

@@ -39,7 +39,7 @@ function weblinks_test_class()
 	$this->weblinks_gen_record();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

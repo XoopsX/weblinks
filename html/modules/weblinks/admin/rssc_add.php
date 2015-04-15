@@ -56,7 +56,7 @@ function rssc_add( $dirname )
 	$this->_rssc_edit_handler =& weblinks_get_handler( 'rssc_edit', $dirname );
 }
 
-function &getInstance($dirname)
+public static function &getInstance($dirname)
 {
 	static $instance;
 	if (!isset($instance)) {

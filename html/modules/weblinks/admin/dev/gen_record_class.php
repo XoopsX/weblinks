@@ -82,7 +82,7 @@ function weblinks_gen_record()
 	$this->_SLASHED_TEXT = ' <h1>h1</h1> '.addslashes( addslashes( ' \ " '." ' " ) );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

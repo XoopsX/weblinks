@@ -27,7 +27,7 @@ function weblinks_test_form_approve()
 	$this->_admin_approve_del_url = WEBLINKS_URL.'/admin/link_manage.php?op=list_del&mid=';
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

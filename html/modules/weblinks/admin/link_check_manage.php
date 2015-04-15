@@ -83,7 +83,7 @@ function admin_link_check_manage()
 	$this->_conf = $this->_config_handler->get_conf();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -233,7 +233,7 @@ function admin_form_pagerank()
 	$this->happy_linux_form_lib();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

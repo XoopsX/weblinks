@@ -76,7 +76,7 @@ function weblinks_test_form()
 	$this->update_config_by_name( 'use_pagerank', 0 );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

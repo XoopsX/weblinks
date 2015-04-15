@@ -50,7 +50,7 @@ function weblinks_header( $dirname )
 	$this->_header_mode = $this->_conf['header_mode'];
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

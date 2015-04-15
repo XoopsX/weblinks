@@ -99,7 +99,7 @@ function admin_link_list()
 	$this->_conf =& $config_handler->get_conf();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

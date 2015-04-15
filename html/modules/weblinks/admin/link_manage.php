@@ -142,7 +142,7 @@ function admin_link_menu()
 	$this->_category_handler =& weblinks_get_handler( 'category', WEBLINKS_DIRNAME );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

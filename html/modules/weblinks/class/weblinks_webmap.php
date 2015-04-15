@@ -62,7 +62,7 @@ function weblinks_webmap( $dirname )
 	$this->_map_func   = $dirname.'_google_map_load';
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) {

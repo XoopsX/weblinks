@@ -25,7 +25,7 @@ function admin_modify_notify()
 	$this->set_edit_handler( 'link_edit_base' );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

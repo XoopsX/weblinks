@@ -120,7 +120,7 @@ function weblinks_viewfeed()
 	$this->_rssc_handler =& weblinks_get_handler( 'rssc_view', WEBLINKS_DIRNAME );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

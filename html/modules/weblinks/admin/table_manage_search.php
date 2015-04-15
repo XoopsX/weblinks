@@ -48,7 +48,7 @@ function admin_table_manage_search()
 	$this->_init();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

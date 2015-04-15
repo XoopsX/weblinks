@@ -93,7 +93,7 @@ function admin_export_rssc()
 
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

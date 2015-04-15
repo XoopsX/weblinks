@@ -118,7 +118,7 @@ function admin_bulk_manage()
 	$this->_init();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -1125,7 +1125,7 @@ function admin_bulk_form()
 	$this->happy_linux_form();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

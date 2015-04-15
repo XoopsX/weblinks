@@ -45,7 +45,7 @@ function weblinks_config2_form( $dirname )
 	$this->_plugin =& weblinks_plugin::getInstance( $dirname );
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

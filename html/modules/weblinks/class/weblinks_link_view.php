@@ -94,7 +94,7 @@ function weblinks_link_view( $dirname )
 
 }
 
-function &getInstance($dirname)
+public static function &getInstance($dirname)
 {
 	static $instance;
 	if (!isset($instance)) 

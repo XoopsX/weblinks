@@ -67,7 +67,7 @@ function weblinks_menu( $dirname )
 	$this->load();
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

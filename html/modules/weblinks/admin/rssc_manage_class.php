@@ -46,7 +46,7 @@ function admin_rssc_manage()
 
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

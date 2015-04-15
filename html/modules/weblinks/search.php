@@ -102,7 +102,7 @@ function weblinks_search( $dirname )
 	$this->set_min_keyword( $this->_conf['search_min'] );
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

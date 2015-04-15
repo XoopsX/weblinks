@@ -127,7 +127,7 @@ function admin_category_manage()
 	}
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -970,7 +970,7 @@ function admin_form_category()
 
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

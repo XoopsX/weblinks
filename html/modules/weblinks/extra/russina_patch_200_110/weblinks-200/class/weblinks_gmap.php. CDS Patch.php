@@ -76,7 +76,7 @@ function weblinks_gmap( $dirname )
 /* CDS Patch. Weblinks. 2.00. 1. EOF */
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

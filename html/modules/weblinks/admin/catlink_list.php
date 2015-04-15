@@ -38,7 +38,7 @@ function admin_catlink_list()
 	$this->_link_handler     =& weblinks_get_handler( 'link',     WEBLINKS_DIRNAME );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

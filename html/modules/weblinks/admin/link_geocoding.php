@@ -36,7 +36,7 @@ function admin_manage_geocoding( $dirname )
 	$this->set_flag_execute_time( true );
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) {
@@ -137,7 +137,7 @@ function admin_list_geocoding( $dirname )
 	$this->_conf = $config_handler->get_conf();
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) {

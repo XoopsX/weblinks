@@ -74,7 +74,7 @@ function admin_config_form()
 	$this->load();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

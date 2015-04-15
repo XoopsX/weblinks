@@ -65,7 +65,7 @@ function admin_table_manage_rssc()
 	}
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

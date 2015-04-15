@@ -64,7 +64,7 @@ function admin_link_base()
 	$this->_conf = $this->_config_handler->get_conf();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

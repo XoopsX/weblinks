@@ -53,7 +53,7 @@ function weblinks_map_jp( $dirname )
 	$this->_template = XOOPS_ROOT_PATH.'/modules/'.$dirname.'/templates/parts/weblinks_map_jp.html';
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

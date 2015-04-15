@@ -79,7 +79,7 @@ function weblinks_topten( $dirname )
 	$this->_conf = $config_basic_handler->get_conf();
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

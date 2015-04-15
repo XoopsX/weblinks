@@ -24,7 +24,7 @@ function admin_link_clone()
 	$this->set_edit_handler( 'link_add' );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

@@ -42,7 +42,7 @@ function admin_catlink_manage()
 
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -101,7 +101,7 @@ function admin_form_catlink()
 
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

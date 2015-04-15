@@ -52,7 +52,7 @@ function weblinks_pagenavi_menu()
 	$this->set_flag_sortid(1);
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

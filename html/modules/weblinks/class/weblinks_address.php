@@ -41,7 +41,7 @@ function weblinks_address( $dirname )
 	$this->_county_code = $conf['country_code'];
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) {

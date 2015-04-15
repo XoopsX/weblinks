@@ -51,7 +51,7 @@ function weblinks_plugin($dirname)
 	$this->_conf    =& $config_handler->get_conf();
 }
 
-function &getInstance($dirname)
+public static function &getInstance($dirname)
 {
 	static $instance;
 	if (!isset($instance)) 

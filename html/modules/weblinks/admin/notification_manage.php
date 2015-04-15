@@ -31,7 +31,7 @@ function admin_notification_manage()
 	$this->_admin =& happy_linux_admin::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

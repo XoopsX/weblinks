@@ -24,7 +24,7 @@ function weblinks_test_form_guest()
 	$this->weblinks_test_form();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

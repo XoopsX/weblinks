@@ -95,7 +95,7 @@ function weblinks_linkitem_define( $dirname )
 	}
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -847,7 +847,7 @@ function weblinks_linkitem_define_handler( $dirname )
 	$this->_is_module_admin = $system->is_module_admin();
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

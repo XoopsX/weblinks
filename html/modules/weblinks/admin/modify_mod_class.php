@@ -29,7 +29,7 @@ function admin_modify_mod()
 	$this->set_edit_handler( 'link_mod' );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

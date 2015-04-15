@@ -28,7 +28,7 @@ function weblinks_block_view()
 	$this->_myts =& MyTextSanitizer::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) {

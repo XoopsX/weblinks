@@ -39,7 +39,7 @@ function admin_config_store()
 
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

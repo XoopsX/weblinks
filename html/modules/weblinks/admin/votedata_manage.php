@@ -40,7 +40,7 @@ function admin_votedata_manage()
 
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -170,7 +170,7 @@ function admin_form_votedata()
 	$this->_system =& happy_linux_system::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

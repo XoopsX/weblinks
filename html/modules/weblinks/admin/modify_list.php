@@ -50,7 +50,7 @@ function admin_modify_list()
 	$this->_strings    =& happy_linux_strings::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

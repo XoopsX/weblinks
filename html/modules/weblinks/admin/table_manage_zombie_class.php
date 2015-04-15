@@ -78,7 +78,7 @@ function admin_table_manage_zombie()
 
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -836,7 +836,7 @@ function admin_table_manage_zombie_form()
 	$this->happy_linux_form_lib();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

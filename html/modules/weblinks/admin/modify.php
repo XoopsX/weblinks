@@ -69,7 +69,7 @@ function admin_modify_manage()
 
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -444,7 +444,7 @@ function admin_list_new_links()
 	$this->set_perpage( $this->WEBLINKS_MAX_LINK_IN_PAGE );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

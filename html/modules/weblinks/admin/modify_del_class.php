@@ -25,7 +25,7 @@ function admin_modify_del()
 	$this->set_edit_handler( 'link_del' );
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

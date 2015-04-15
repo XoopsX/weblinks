@@ -73,7 +73,7 @@ function weblinks_dev_handler()
 	$this->_xoopscomments_table = $this->db_prefix("xoopscomments");
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

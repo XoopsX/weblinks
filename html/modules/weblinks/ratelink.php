@@ -94,7 +94,7 @@ function weblinks_ratelink( $dirname )
 	$this->_form   =& happy_linux_form::getInstance();
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

@@ -149,7 +149,7 @@ function weblinks_submit( $dirname )
 	$this->_system_uid             = $system->get_uid();
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

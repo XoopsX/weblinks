@@ -663,7 +663,7 @@ function weblinks_link_validate( $dirname )
 	$this->_is_xoops_guest        = $this->_system->is_guest();
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 

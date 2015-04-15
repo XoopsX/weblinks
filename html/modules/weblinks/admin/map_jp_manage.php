@@ -52,7 +52,7 @@ function admin_map_jp_manage()
 	$this->_post     =& happy_linux_post::getInstance();
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 
@@ -181,7 +181,7 @@ function admin_map_jp_form()
 	$this->_category_handler =& weblinks_get_handler('category_basic', WEBLINKS_DIRNAME);
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

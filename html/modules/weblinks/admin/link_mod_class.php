@@ -33,7 +33,7 @@ function admin_link_mod()
 	$this->_votedata_handler =& weblinks_get_handler('votedata',  WEBLINKS_DIRNAME);
 }
 
-function &getInstance()
+public static function &getInstance()
 {
 	static $instance;
 	if (!isset($instance)) 

@@ -48,7 +48,7 @@ function weblinks_linkitem_form( $dirname )
 
 }
 
-function &getInstance( $dirname )
+public static function &getInstance( $dirname )
 {
 	static $instance;
 	if (!isset($instance)) 
