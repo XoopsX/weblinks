@@ -16,10 +16,10 @@
 // --- define version begin ---
 if( !defined('WEBLINKS_VERSION') ) 
 {
-	define('WEBLINKS_VERSION',             '2.11');
-	define('WEBLINKS_HAPPY_LINUX_VERSION', '1.70');
-	define('WEBLINKS_RSSC_VERSION',        '1.20');
-	define('WEBLINKS_WEBMAP3_VERSION',     '1.10');
+	define('WEBLINKS_VERSION',             '2.12');
+	define('WEBLINKS_HAPPY_LINUX_VERSION', '1.82');
+	define('WEBLINKS_RSSC_VERSION',        '1.31');
+	define('WEBLINKS_WEBMAP3_VERSION',     '1.12');
 }
 
 // --- define version end ---
